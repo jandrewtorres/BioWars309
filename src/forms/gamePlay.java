@@ -1,4 +1,4 @@
-package bioWars;
+package forms;
 
 public class gamePlay extends javax.swing.JFrame {
 
