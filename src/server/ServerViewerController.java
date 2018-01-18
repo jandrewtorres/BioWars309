@@ -1,34 +1,35 @@
 package server;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import server.model.ServerModel;
+import server.model.GameModel;
 
-public class ServerViewerController {
+public class ServerViewerController implements Observer {
+	
 	@FXML
 	private Label numClientsLabel;
 	
-	private ServerModel model;
+	private GameModel game;
 	
 	public ServerViewerController() {
-		model = new ServerModel();
+		
 	}
 	
 	@FXML
 	private void initialize() {
-		updateUI();
+		
 	}
 	
-	public void setModel(ServerModel model) {
-		this.model = model;
+	public void setModel(GameModel game) {
+		this.game = game;
 	}
-	
-	public void addClient() {
-		model.numClients += 1;
-		updateUI();
-	}
-	
-	public void updateUI() {
-		numClientsLabel.setText(Integer.toString(model.numClients));
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		System.out.println("out");
+		this.numClientsLabel.setText(Integer.toString(game.players.size()));
 	}
 }
