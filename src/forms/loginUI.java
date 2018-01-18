@@ -3,12 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bioWars;
+package forms;
+import javax.swing.ImageIcon;
 
-/**
- *
- * @author Sharon
- */
 public class loginUI extends javax.swing.JFrame {
 
     /**
@@ -115,8 +112,7 @@ public class loginUI extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
-        bioSym.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bioWars/assets/biohazard.png"))); // NOI18N
-        bioSym.setText("jLabel2");
+        bioSym.setIcon(new ImageIcon(loginUI.class.getResource("/forms/assets/biohazard.png")));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(240, 240, 240));
