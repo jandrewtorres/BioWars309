@@ -1,4 +1,4 @@
-package server;
+package server.viewer;
 
 import java.util.Observable;
 import java.util.Observer;

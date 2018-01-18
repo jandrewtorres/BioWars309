@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import server.model.GameModel;
+import server.viewer.ServerViewerController;
 
 public class ServerApp extends Application {
 	
@@ -54,7 +55,7 @@ public class ServerApp extends Application {
 	public void start(Stage stage) throws Exception {
 		
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("ServerViewer.fxml"));
+		loader.setLocation(getClass().getResource("/server/viewer/ServerViewer.fxml"));
 		Parent root = (Parent) loader.load();
 		stage.setTitle("Biowars Server");
 		Scene scene = new Scene(root);
