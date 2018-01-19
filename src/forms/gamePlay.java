@@ -1,4 +1,7 @@
-package bioWars;
+package forms;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class gamePlay extends javax.swing.JFrame {
 
@@ -18,18 +21,18 @@ public class gamePlay extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel3 = new javax.swing.JPanel();
+        menuBar = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        infoMenu = new javax.swing.JPanel();
+        popLbl = new javax.swing.JLabel();
+        goldLbl = new javax.swing.JLabel();
+        growLbl = new javax.swing.JLabel();
+        gRateLbl = new javax.swing.JLabel();
+        popNum = new javax.swing.JLabel();
+        goldNum = new javax.swing.JLabel();
+        gRateNum = new javax.swing.JLabel();
+        growNum = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,127 +62,127 @@ public class gamePlay extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        jPanel4.setBackground(new java.awt.Color(0, 0, 0));
+        infoMenu.setBackground(new java.awt.Color(0, 0, 0));
 
-        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setFont(new java.awt.Font("Gungsuh", 0, 11)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 204, 0));
-        jLabel1.setText("Population:");
+        popLbl.setBackground(new java.awt.Color(0, 0, 0));
+        popLbl.setFont(new java.awt.Font("Gungsuh", 0, 11)); // NOI18N
+        popLbl.setForeground(new java.awt.Color(0, 204, 0));
+        popLbl.setText("Population:");
 
-        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel2.setFont(new java.awt.Font("Gungsuh", 0, 11)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 204, 0));
-        jLabel2.setText("Gold:");
+        goldLbl.setBackground(new java.awt.Color(0, 0, 0));
+        goldLbl.setFont(new java.awt.Font("Gungsuh", 0, 11)); // NOI18N
+        goldLbl.setForeground(new java.awt.Color(0, 204, 0));
+        goldLbl.setText("Gold:");
 
-        jLabel3.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel3.setFont(new java.awt.Font("Gungsuh", 0, 11)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 204, 0));
-        jLabel3.setText("Growth Rate:");
+        growLbl.setBackground(new java.awt.Color(0, 0, 0));
+        growLbl.setFont(new java.awt.Font("Gungsuh", 0, 11)); // NOI18N
+        growLbl.setForeground(new java.awt.Color(0, 204, 0));
+        growLbl.setText("Growth Rate:");
 
-        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel4.setFont(new java.awt.Font("Gungsuh", 0, 11)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 204, 0));
-        jLabel4.setText("Gold Rate:");
+        gRateLbl.setBackground(new java.awt.Color(0, 0, 0));
+        gRateLbl.setFont(new java.awt.Font("Gungsuh", 0, 11)); // NOI18N
+        gRateLbl.setForeground(new java.awt.Color(0, 204, 0));
+        gRateLbl.setText("Gold Rate:");
 
-        jLabel5.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel5.setFont(new java.awt.Font("Gungsuh", 0, 11)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 240, 0));
-        jLabel5.setText("MockData Here");
+        popNum.setBackground(new java.awt.Color(0, 0, 0));
+        popNum.setFont(new java.awt.Font("Gungsuh", 0, 11)); // NOI18N
+        popNum.setForeground(new java.awt.Color(0, 204, 0));
+        popNum.setText("MockData Here");
 
-        jLabel6.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel6.setFont(new java.awt.Font("Gungsuh", 0, 11)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 240, 0));
-        jLabel6.setText("MockData Here");
+        goldNum.setBackground(new java.awt.Color(0, 0, 0));
+        goldNum.setFont(new java.awt.Font("Gungsuh", 0, 11)); // NOI18N
+        goldNum.setForeground(new java.awt.Color(0, 204, 0));
+        goldNum.setText("MockData Here");
 
-        jLabel7.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel7.setFont(new java.awt.Font("Gungsuh", 0, 11)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 240, 0));
-        jLabel7.setText("MockData Here");
+        gRateNum.setBackground(new java.awt.Color(0, 0, 0));
+        gRateNum.setFont(new java.awt.Font("Gungsuh", 0, 11)); // NOI18N
+        gRateNum.setForeground(new java.awt.Color(0, 204, 0));
+        gRateNum.setText("MockData Here");
 
-        jLabel8.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel8.setFont(new java.awt.Font("Gungsuh", 0, 11)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 240, 0));
-        jLabel8.setText("MockData Here");
+        growNum.setBackground(new java.awt.Color(0, 0, 0));
+        growNum.setFont(new java.awt.Font("Gungsuh", 0, 11)); // NOI18N
+        growNum.setForeground(new java.awt.Color(0, 204, 0));
+        growNum.setText("MockData Here");
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout gl_infoMenu = new javax.swing.GroupLayout(infoMenu);
+        infoMenu.setLayout(gl_infoMenu);
+        gl_infoMenu.setHorizontalGroup(
+            gl_infoMenu.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gl_infoMenu.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(gl_infoMenu.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(gl_infoMenu.createSequentialGroup()
+                        .addGroup(gl_infoMenu.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(popLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                            .addComponent(goldLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(2, 2, 2)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(gl_infoMenu.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(goldNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(popNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gl_infoMenu.createSequentialGroup()
+                        .addGroup(gl_infoMenu.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(gRateLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(growLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(gl_infoMenu.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(growNum, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(gRateNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        gl_infoMenu.setVerticalGroup(
+            gl_infoMenu.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gl_infoMenu.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel5))
+                .addGroup(gl_infoMenu.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(popLbl)
+                    .addComponent(popNum))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel6))
+                .addGroup(gl_infoMenu.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(goldLbl)
+                    .addComponent(goldNum))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel8))
+                .addGroup(gl_infoMenu.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(growLbl)
+                    .addComponent(growNum))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel7))
+                .addGroup(gl_infoMenu.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(gRateLbl)
+                    .addComponent(gRateNum))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        javax.swing.GroupLayout gl_menuBar = new javax.swing.GroupLayout(menuBar);
+        gl_menuBar.setHorizontalGroup(
+        	gl_menuBar.createParallelGroup(Alignment.TRAILING)
+        		.addGroup(gl_menuBar.createSequentialGroup()
+        			.addComponent(infoMenu, GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jPanel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        gl_menuBar.setVerticalGroup(
+        	gl_menuBar.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_menuBar.createSequentialGroup()
+        			.addGap(0, 0, Short.MAX_VALUE)
+        			.addGroup(gl_menuBar.createParallelGroup(Alignment.LEADING)
+        				.addComponent(jPanel2, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jPanel1, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(infoMenu, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
         );
+        menuBar.setLayout(gl_menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(menuBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 300, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(menuBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -221,17 +224,16 @@ public class gamePlay extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel popLbl;
+    private javax.swing.JLabel goldLbl;
+    private javax.swing.JLabel growLbl;
+    private javax.swing.JLabel gRateLbl;
+    private javax.swing.JLabel popNum;
+    private javax.swing.JLabel goldNum;
+    private javax.swing.JLabel gRateNum;
+    private javax.swing.JLabel growNum;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    // End of variables declaration//GEN-END:variables
+    private javax.swing.JPanel menuBar;
+    private javax.swing.JPanel infoMenu;
 }
