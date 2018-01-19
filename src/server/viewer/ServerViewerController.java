@@ -1,9 +1,5 @@
 package server.viewer;
 
-import java.util.Observable;
-import java.util.Observer;
-
-import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -20,6 +16,8 @@ public class ServerViewerController {
 	@FXML
 	private TableColumn<Player, Integer> goldColumn;
 	@FXML
+	private TableColumn<Player, Integer> populationColumn;
+	@FXML
 	private Label gameStatusLabel;
 	@FXML
 	private Label gameTimeLabel;
@@ -34,6 +32,7 @@ public class ServerViewerController {
 	private void initialize() {
 		playerNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
 		goldColumn.setCellValueFactory(cellData -> cellData.getValue().goldProperty().asObject());
+		populationColumn.setCellValueFactory(cellData -> cellData.getValue().populationProperty().asObject());
 	}
 	
 	public void setModel(GameModel game) {

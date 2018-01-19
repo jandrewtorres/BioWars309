@@ -16,6 +16,7 @@
             <TableView fx:id="playerTable" prefHeight="190.0" prefWidth="600.0">
               <columns>
                 <TableColumn fx:id="playerNameColumn" editable="false" prefWidth="75.0" text="Player" />
+                  <TableColumn fx:id="populationColumn" prefWidth="75.0" text="Population" />
                 <TableColumn fx:id="goldColumn" prefWidth="75.0" text="Gold" />
               </columns>
             </TableView>

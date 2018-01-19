@@ -18,7 +18,7 @@ public class GameModel {
 	public Timer gameTimer;
 	public ObjectProperty<GAME_STATUS> gameStatusProperty;
 	public IntegerProperty currentTimeProperty;
-	
+		
 	public static enum GAME_STATUS {
 		WAITING("Waiting"),
 		RUNNING("Running"),
@@ -40,9 +40,8 @@ public class GameModel {
 		public void run() {
 			Platform.runLater(() -> {
 				currentTimeProperty.set(currentTimeProperty.get() + 1);
-				System.out.println(currentTimeProperty.getValue().toString());
+				tick();
 			});
-			tick();
 		}
 	}
 	
@@ -77,6 +76,8 @@ public class GameModel {
 	}
 	
 	public void tick() {
-		System.out.println("Tick");
+		for(Player player : players) {
+			player.tick();
+		}
 	}
 }
