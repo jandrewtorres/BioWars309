@@ -65,7 +65,6 @@ public class ServerApp extends Application {
 		
 		ServerViewerController controller = loader.getController();
 		controller.setModel(game);
-		game.addObserver(controller);
 		
 		loadProperties(getPropFile());
 		startListening(game);

@@ -3,14 +3,26 @@ package server.viewer;
 import java.util.Observable;
 import java.util.Observer;
 
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import server.model.GameModel;
+import server.model.Player;
 
-public class ServerViewerController implements Observer {
+public class ServerViewerController {
 	
 	@FXML
-	private Label numClientsLabel;
+	private TableView<Player> playerTable;
+	@FXML
+	private TableColumn<Player, String> playerNameColumn;
+	@FXML
+	private TableColumn<Player, Integer> goldColumn;
+	@FXML
+	private Label gameStatusLabel;
+	@FXML
+	private Label gameTimeLabel;
 	
 	private GameModel game;
 	
@@ -20,16 +32,14 @@ public class ServerViewerController implements Observer {
 	
 	@FXML
 	private void initialize() {
-		
+		playerNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+		goldColumn.setCellValueFactory(cellData -> cellData.getValue().goldProperty().asObject());
 	}
 	
 	public void setModel(GameModel game) {
 		this.game = game;
-	}
-
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		System.out.println("out");
-		this.numClientsLabel.setText(Integer.toString(game.players.size()));
+		playerTable.setItems(game.getPlayers());
+		gameStatusLabel.textProperty().bind(game.statusProperty().asString());
+		gameTimeLabel.textProperty().bind(game.currentTimeProperty().asString());
 	}
 }
