@@ -5,13 +5,16 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 
+import server.model.GameModel;
+
 public class ServerSocketHandler extends Thread {
 	
 	private ServerSocket serverSocket;
-	private ServerViewerController controller;
+	private GameModel game;
 	
-	public ServerSocketHandler(ServerViewerController controller, Integer port) {
-		this.controller = controller;
+	public ServerSocketHandler(GameModel game, Integer port) {
+		this.game = game;
+		
 		
 		try {
 			serverSocket = new ServerSocket(port);
@@ -29,8 +32,9 @@ public class ServerSocketHandler extends Thread {
 			try {
 				clientSocket = serverSocket.accept();
 				
-				ClientConnector gameClient = new ClientConnector(controller, clientSocket);
+				ClientConnector gameClient = new ClientConnector(game, clientSocket);
 				gameClient.start();
+				
 			} catch (SocketTimeoutException ste) { 
 				// DO NOTHING
 			} catch(Exception e) {

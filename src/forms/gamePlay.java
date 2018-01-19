@@ -1,7 +1,9 @@
 package forms;
+
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
 
 public class gamePlay extends javax.swing.JFrame {
 

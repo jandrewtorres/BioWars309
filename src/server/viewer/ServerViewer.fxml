@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="602.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.viewer.ServerViewerController">
+   <children>
+      <VBox layoutX="144.0" layoutY="49.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="109.0" prefWidth="600.0">
+               <children>
+                  <Label fx:id="gameTimeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="45.0" text="00:00:00" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="72.0" />
+                     </font></Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="49.0" prefWidth="600.0">
+               <children>
+                  <Label fx:id="gameStatusLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="245.0" layoutY="15.0" text="Waiting for Players..." AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <TableView fx:id="playerTable" prefHeight="190.0" prefWidth="600.0">
+              <columns>
+                <TableColumn fx:id="playerNameColumn" editable="false" prefWidth="75.0" text="Player" />
+                  <TableColumn fx:id="populationColumn" prefWidth="75.0" text="Population" />
+                <TableColumn fx:id="goldColumn" prefWidth="75.0" text="Gold" />
+              </columns>
+            </TableView>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

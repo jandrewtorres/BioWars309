@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.Properties;
 
+import forms.loginUI;
+
 public class Client {
     private static final String CONFIG_FILE_NAME = "client_config.properties";
     

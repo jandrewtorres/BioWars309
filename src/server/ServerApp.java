@@ -9,7 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import server.model.ServerModel;
+import server.model.GameModel;
+import server.viewer.ServerViewerController;
 
 public class ServerApp extends Application {
 	
@@ -45,8 +46,8 @@ public class ServerApp extends Application {
 		}
 	}
 	
-	private void startListening(ServerViewerController controller) {
-		ServerSocketHandler sockHandler = new ServerSocketHandler(controller, Integer.parseInt(serverProperties.getProperty(SERVER_PROPERTIES.CLIENT_PORT.name)));
+	private void startListening(GameModel game) {
+		ServerSocketHandler sockHandler = new ServerSocketHandler(game, Integer.parseInt(serverProperties.getProperty(SERVER_PROPERTIES.CLIENT_PORT.name)));
 		sockHandler.start();
 	}
 	
@@ -54,17 +55,20 @@ public class ServerApp extends Application {
 	public void start(Stage stage) throws Exception {
 		
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("ServerViewer.fxml"));
+		loader.setLocation(getClass().getResource("/server/viewer/ServerViewer.fxml"));
 		Parent root = (Parent) loader.load();
 		stage.setTitle("Biowars Server");
 		Scene scene = new Scene(root);
+		GameModel game = new GameModel();
 		stage.setScene(scene);
 		stage.show();
 		
 		ServerViewerController controller = loader.getController();
-				
+		controller.setModel(game);
+		
 		loadProperties(getPropFile());
-		startListening(controller);
+		startListening(game);
+		
 	}
 	
 	public static void main(String[] args) {
