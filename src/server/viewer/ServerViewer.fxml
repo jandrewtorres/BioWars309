@@ -4,15 +4,30 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="352.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.viewer.ServerViewerController">
+<AnchorPane prefHeight="602.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.viewer.ServerViewerController">
    <children>
       <VBox layoutX="144.0" layoutY="49.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <AnchorPane prefHeight="109.0" prefWidth="600.0">
+               <children>
+                  <Label fx:id="gameTimeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="45.0" text="00:00:00" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="72.0" />
+                     </font></Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="49.0" prefWidth="600.0">
+               <children>
+                  <Label fx:id="gameStatusLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="245.0" layoutY="15.0" text="Waiting for Players..." AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
             <TableView fx:id="playerTable" prefHeight="190.0" prefWidth="600.0">
               <columns>
                 <TableColumn fx:id="playerNameColumn" editable="false" prefWidth="75.0" text="Player" />
@@ -20,23 +35,6 @@
                 <TableColumn fx:id="goldColumn" prefWidth="75.0" text="Gold" />
               </columns>
             </TableView>
-            <GridPane prefHeight="182.0" prefWidth="600.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Label text="Game Status:" />
-                  <Label fx:id="gameStatusLabel" text="GameStatusLabel" GridPane.columnIndex="1" />
-                  <Label text="Game Time:" GridPane.rowIndex="1" />
-                  <Label fx:id="gameTimeLabel" text="GameTimeLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-               </children>
-            </GridPane>
          </children>
       </VBox>
    </children>

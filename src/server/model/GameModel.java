@@ -20,9 +20,9 @@ public class GameModel {
 	public LongProperty currentTimeProperty;
 		
 	public static enum GAME_STATUS {
-		WAITING("Waiting"),
-		RUNNING("Running"),
-		OVER("Over");
+		WAITING("Waiting for players..."),
+		IN_PROGRESS("Game in progress..."),
+		OVER("Game Over!");
 		
 		private String name;
 		
@@ -70,7 +70,7 @@ public class GameModel {
 	}
 	
 	public void startGame() {
-		gameStatusProperty.setValue(GAME_STATUS.RUNNING);
+		gameStatusProperty.setValue(GAME_STATUS.IN_PROGRESS);
 		gameTimer = new Timer();
 		gameTimer.scheduleAtFixedRate(new ClockTask(), 0, 1000);
 	}
