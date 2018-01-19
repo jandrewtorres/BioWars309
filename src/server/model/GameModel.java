@@ -17,7 +17,7 @@ public class GameModel {
 	private ObservableList<Player> players;
 	public Timer gameTimer;
 	public ObjectProperty<GAME_STATUS> gameStatusProperty;
-	public IntegerProperty currentTimeProperty;
+	public LongProperty currentTimeProperty;
 		
 	public static enum GAME_STATUS {
 		WAITING("Waiting"),
@@ -49,7 +49,7 @@ public class GameModel {
 		this.players = FXCollections.observableArrayList();
 		gameStatusProperty = new SimpleObjectProperty<>(GAME_STATUS.WAITING);
 		gameTimer = null;
-		currentTimeProperty = new SimpleIntegerProperty(0);
+		currentTimeProperty = new SimpleLongProperty(0);
 		startGame();
 	}
 	
@@ -57,7 +57,7 @@ public class GameModel {
 		return gameStatusProperty;
 	}
 	
-	public IntegerProperty currentTimeProperty() {
+	public LongProperty currentTimeProperty() {
 		return currentTimeProperty;
 	}
 	
