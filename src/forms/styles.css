@@ -1,0 +1,13 @@
+.banner{
+	-fx-background-color: #000000;
+}
+.hide{
+	visibility: hidden;
+}
+.loginScrn{
+	-fx-background-color: #ffffff;
+	-fx-border-color: black;
+}
+.subBanner{
+	-fx-background-color: gray;
+}
