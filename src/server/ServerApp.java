@@ -3,6 +3,8 @@ package server;
 import java.io.FileInputStream;
 import java.util.Properties;
 
+import client.ClientModel;
+import client.login.LoginController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -55,18 +57,19 @@ public class ServerApp extends Application {
 	public void start(Stage stage) throws Exception {
 		loadProperties(getPropFile());
 		
+		GameModel game = new GameModel();
+		ServerViewerController controller = new ServerViewerController(game);
+		
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/server/viewer/ServerViewer.fxml"));
+		loader.setController(controller);
 		Parent root = (Parent) loader.load();
 		stage.setTitle("Biowars Server");
 		Scene scene = new Scene(root);
-		GameModel game = new GameModel();
+		
 		stage.setScene(scene);
 		stage.show();
-		
-		ServerViewerController controller = loader.getController();
-		controller.setModel(game);
-		
+				
 		startListening(game);
 		
 	}
