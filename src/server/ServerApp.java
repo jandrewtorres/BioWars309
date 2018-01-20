@@ -53,6 +53,7 @@ public class ServerApp extends Application {
 	
 	@Override
 	public void start(Stage stage) throws Exception {
+		loadProperties(getPropFile());
 		
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/server/viewer/ServerViewer.fxml"));
@@ -66,7 +67,6 @@ public class ServerApp extends Application {
 		ServerViewerController controller = loader.getController();
 		controller.setModel(game);
 		
-		loadProperties(getPropFile());
 		startListening(game);
 		
 	}

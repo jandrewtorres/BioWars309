@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane stylesheets="@styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
+<AnchorPane stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane prefHeight="400.0" prefWidth="650.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -49,9 +48,9 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Button layoutX="204.0" layoutY="112.0" mnemonicParsing="false" text="Enter Game" />
+                                    <Button fx:id="enterButton" layoutX="204.0" layoutY="112.0" mnemonicParsing="false" onAction="#onEnterButtonClicked" text="Enter Game" />
                                     <Label layoutX="41.0" layoutY="59.0" text="Screen name:" />
-                                    <TextField layoutX="122.0" layoutY="55.0" prefHeight="25.0" prefWidth="259.0" />
+                                    <TextField fx:id="screenNameTextField" layoutX="122.0" layoutY="55.0" prefHeight="25.0" prefWidth="259.0" />
                                  </children>
                               </AnchorPane>
                            </children>

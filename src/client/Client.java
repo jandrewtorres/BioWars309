@@ -1,13 +1,16 @@
 package client;
 
 import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.Properties;
 
-import forms.loginUI;
+import client.login.LoginController;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class Client {
+public class Client extends Application {
     private static final String CONFIG_FILE_NAME = "client_config.properties";
     
     private ClientSocket clientSocket;
@@ -24,19 +27,6 @@ public class Client {
     			name = n;
     		}
     }
-    
-	public Client(String propertiesFile) throws IOException {
-		loadProperties(propertiesFile);
-		
-		clientSocket = new ClientSocket(clientProperties.getProperty(CLIENT_PROPERTIES.HOST.name).trim(),
-				Integer.parseInt(clientProperties.getProperty(CLIENT_PROPERTIES.SOCKET_PORT.name).trim()));
-		
-		ClientModel clientModel = new ClientModel(clientSocket.getOutputStream(), clientSocket.getInputStream());
-		
-		Thread clientThread = new Thread(clientModel);
-		clientThread.start();
-		clientModel.transmitCommand("THIS IS ME");
-	}
 	
 	private void loadProperties(String propertiesFile) {
 		try 
@@ -45,21 +35,44 @@ public class Client {
 			clientProperties.load(new FileInputStream(propertiesFile));
 		} catch (Exception e) 
 		{
-			e.printStackTrace();
-		}
-	}
-	
-	public static void main(String[] args) {
-		if(System.getProperty("CONFIG_DIR") == null) {
-			System.setProperty("CONFIG_DIR", "config");
-		}
-		
-		try {
-			new Client(System.getProperty("CONFIG_DIR") + System.getProperty("file.separator") + CONFIG_FILE_NAME);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Exception in reading properties file.");
 		}
 	}
 
+	private String getPropFile() {
+		if(System.getProperty("CONFIG_DIR") == null) {
+			System.setProperty("CONFIG_DIR", "config");
+		}
+		return System.getProperty("CONFIG_DIR") 
+				+ System.getProperty("file.separator") 
+				+ CONFIG_FILE_NAME;
+	}
+	
+	@Override
+	public void start(Stage stage) throws Exception {
+		loadProperties(getPropFile());
+		
+		clientSocket = new ClientSocket(clientProperties.getProperty(CLIENT_PROPERTIES.HOST.name).trim(),
+				Integer.parseInt(clientProperties.getProperty(CLIENT_PROPERTIES.SOCKET_PORT.name).trim()));
+		ClientModel clientModel = new ClientModel(clientSocket.getOutputStream(), clientSocket.getInputStream());
+		LoginController controller = new LoginController(clientModel);
+		
+		stage.setTitle("Biowars");
+		
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/client/login/Login.fxml"));
+		loader.setController(controller);
+		Parent root = (Parent) loader.load();
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+		
+		Thread clientThread = new Thread(clientModel);
+		clientThread.start();
+		
+	}
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
 }
