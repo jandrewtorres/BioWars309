@@ -27,8 +27,8 @@ public class ServerViewerController {
 	
 	private GameModel game;
 	
-	public ServerViewerController() {
-		
+	public ServerViewerController(GameModel game) {
+		this.game = game;
 	}
 	
 	@FXML
@@ -36,10 +36,7 @@ public class ServerViewerController {
 		playerNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
 		goldColumn.setCellValueFactory(cellData -> cellData.getValue().goldProperty().asObject());
 		populationColumn.setCellValueFactory(cellData -> cellData.getValue().populationProperty().asObject());
-	}
-	
-	public void setModel(GameModel game) {
-		this.game = game;
+		
 		playerTable.setItems(game.getPlayers());
 		gameStatusLabel.textProperty().bind(game.statusProperty().asString());
 		gameTimeLabel.textProperty().bind(
