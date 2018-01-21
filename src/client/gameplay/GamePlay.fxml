@@ -17,7 +17,23 @@
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane fx:id="gameScrn" prefHeight="275.0" prefWidth="200.0" styleClass="backgnd" VBox.vgrow="ALWAYS" />
+            <AnchorPane fx:id="logBar" prefHeight="50.0" prefWidth="200.0" VBox.vgrow="NEVER">
+               <children>
+                  <Label fx:id="latestLog" alignment="CENTER" text="Latest Game Event to be displayed here" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+               <styleClass>
+                  <String fx:value="HUD" />
+                  <String fx:value="banner" />
+               </styleClass>
+            </AnchorPane>
+            <AnchorPane fx:id="gameScrn" prefHeight="275.0" prefWidth="200.0" styleClass="backgnd" VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox fx:id="opponents" layoutX="-42.0" layoutY="7.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+               </children></AnchorPane>
             <AnchorPane fx:id="menuBar" prefHeight="126.0" prefWidth="686.0" VBox.vgrow="NEVER">
                <children>
                   <HBox fx:id="menuBox" prefHeight="150.0" prefWidth="200.0" styleClass="gameBar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
