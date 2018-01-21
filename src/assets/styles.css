@@ -15,7 +15,11 @@
 	-fx-background-color: #000000;
 }
 .items{
-	-fx-background-color: #000000;
+	-fx-background-color: black;
+	
+}
+.inventory Label{
+	-fx-border-color: white;
 }
 .HUD Label{
 	-fx-text-fill: rgb(0,204,0);
