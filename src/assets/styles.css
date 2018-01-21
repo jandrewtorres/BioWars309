@@ -11,3 +11,13 @@
 .subBanner{
 	-fx-background-color: gray;
 }
+.gameBar{
+	-fx-background-color: #000000;
+}
+.items{
+	-fx-background-color: #000000;
+}
+.HUD Label{
+	-fx-text-fill: rgb(0,204,0);
+	-fx-font-size: 1.25em;
+}
