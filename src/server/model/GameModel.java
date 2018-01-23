@@ -50,7 +50,6 @@ public class GameModel {
 		gameStatusProperty = new SimpleObjectProperty<>(GAME_STATUS.WAITING);
 		gameTimer = null;
 		currentTimeProperty = new SimpleLongProperty(0);
-		startGame();
 	}
 	
 	public ObjectProperty<GAME_STATUS> statusProperty() {

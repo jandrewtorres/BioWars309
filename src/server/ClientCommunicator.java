@@ -5,6 +5,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import javafx.application.Platform;
 import server.model.GameModel;
 import server.model.Player;
@@ -34,10 +37,13 @@ public class ClientCommunicator extends Thread {
 	
 	private void receiveObject(Object rxData) 
 	{
-		String receivedMsg = (String) rxData;
-		Platform.runLater(() -> {
-			game.addPlayer(new Player(receivedMsg));
-		});
+		Element root = ((Document)rxData).getDocumentElement();
+		if(root.getNodeName().equals("REGISTER")) {
+			Platform.runLater(() -> {
+				game.addPlayer(new Player(root.getChildNodes().item(0).getTextContent()));
+			});
+		}
+
 	}
 	
 	private void transmitCommand(String data) {

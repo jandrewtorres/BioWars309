@@ -6,6 +6,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 public class ServerCommunicator implements Runnable {
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
@@ -25,9 +28,9 @@ public class ServerCommunicator implements Runnable {
 
 	}
 	
-	public void transmitCommand(String command) {
+	public void transmitMessage(Object message) {
 		try {
-			out.writeObject(command);
+			out.writeObject(message);
 			out.flush();
 		} catch(IOException ioe) {
 			running = false;
@@ -35,9 +38,8 @@ public class ServerCommunicator implements Runnable {
 		}
 	}
 	
-	private void receiveObject(Object rxData) {
-		String receivedMsg = (String) rxData;
-		System.out.println(rxData);
+	private void receiveMessage(Object rxData) {
+
 	}
 	
 	@Override
@@ -47,7 +49,7 @@ public class ServerCommunicator implements Runnable {
 
 			try {
 				Thread.sleep(250);
-				receiveObject(in.readObject());
+				receiveMessage(in.readObject());
 			} catch (ClassNotFoundException e) {
 				closeStreams();
 				// TODO Auto-generated catch block

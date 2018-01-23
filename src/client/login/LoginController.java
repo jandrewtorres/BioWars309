@@ -1,5 +1,13 @@
 package client.login;
 
+import java.io.Serializable;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import client.ServerCommunicator;
 import client.lobby.LobbyController;
 import javafx.event.ActionEvent;
@@ -13,14 +21,14 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class LoginController {
-	ServerCommunicator model;
+	ServerCommunicator communicator;
 	@FXML
 	Button enterButton;
 	@FXML
 	TextField screenNameTextField;
 	
-	public LoginController(ServerCommunicator model) {
-		this.model = model;
+	public LoginController(ServerCommunicator communicator) {
+		this.communicator = communicator;
 	}
 	
 	@FXML
@@ -30,16 +38,37 @@ public class LoginController {
 	
 	@FXML
 	private void onEnterButtonClicked(ActionEvent event) throws Exception {
-		model.transmitCommand(screenNameTextField.getText());
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		
-		LobbyController controller = new LobbyController(model);
-		
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/client/lobby/Lobby.fxml"));
-		loader.setController(controller);
-		Parent root = (Parent) loader.load();
-		Scene scene = new Scene(root);
-		stage.setScene(scene);
+		if(registerClient(screenNameTextField.getText())) {
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			
+			LobbyController controller = new LobbyController(communicator);
+			
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/client/lobby/Lobby.fxml"));
+			loader.setController(controller);
+			Parent root = (Parent) loader.load();
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+		}
+	}
+	
+	private Boolean registerClient(String clientName) {
+		Boolean registered = false;
+		try {
+			Document rgstrDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+			Element cmdElem = rgstrDoc.createElement("REGISTER");
+			
+			Element nameElem = rgstrDoc.createElement("NAME");
+			nameElem.appendChild(rgstrDoc.createTextNode(clientName));
+			cmdElem.appendChild(nameElem);
+			
+			rgstrDoc.appendChild(cmdElem);
+			
+			communicator.transmitMessage(rgstrDoc);
+			registered = true;
+		} catch (ParserConfigurationException e) {
+			System.out.println("Exception in registering client");
+		}
+		return registered;
 	}
 }
