@@ -52,14 +52,10 @@ public class ClientModel implements Runnable {
 				closeStreams();
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (IOException e) {
+			} catch (Exception e) {
+				System.out.println("Exception in reading object from input stream");
+				running = false;
 				closeStreams();
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				closeStreams();
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		}
 	}
