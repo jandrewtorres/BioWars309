@@ -32,7 +32,7 @@ public class ServerSocketHandler extends Thread {
 			try {
 				clientSocket = serverSocket.accept();
 				
-				ClientConnector gameClient = new ClientConnector(game, clientSocket);
+				ClientCommunicator gameClient = new ClientCommunicator(game, clientSocket);
 				gameClient.start();
 				
 			} catch (SocketTimeoutException ste) { 

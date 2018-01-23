@@ -6,13 +6,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 
-public class ClientModel implements Runnable {
+public class ServerCommunicator implements Runnable {
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
 	
 	private Boolean running;
 	
-	public ClientModel(OutputStream out, InputStream in) {
+	public ServerCommunicator(OutputStream out, InputStream in) {
 		running = true;
 		
 		try {

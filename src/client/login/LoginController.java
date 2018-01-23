@@ -1,6 +1,6 @@
 package client.login;
 
-import client.ClientModel;
+import client.ServerCommunicator;
 import client.lobby.LobbyController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,13 +13,13 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class LoginController {
-	ClientModel model;
+	ServerCommunicator model;
 	@FXML
 	Button enterButton;
 	@FXML
 	TextField screenNameTextField;
 	
-	public LoginController(ClientModel model) {
+	public LoginController(ServerCommunicator model) {
 		this.model = model;
 	}
 	

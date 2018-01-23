@@ -3,7 +3,7 @@ package server;
 import java.io.FileInputStream;
 import java.util.Properties;
 
-import client.ClientModel;
+import client.ServerCommunicator;
 import client.login.LoginController;
 import javafx.application.Application;
 import javafx.application.Platform;

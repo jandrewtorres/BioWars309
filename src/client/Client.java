@@ -54,7 +54,7 @@ public class Client extends Application {
 		
 		clientSocket = new ClientSocket(clientProperties.getProperty(CLIENT_PROPERTIES.HOST.name).trim(),
 				Integer.parseInt(clientProperties.getProperty(CLIENT_PROPERTIES.SOCKET_PORT.name).trim()));
-		ClientModel clientModel = new ClientModel(clientSocket.getOutputStream(), clientSocket.getInputStream());
+		ServerCommunicator clientModel = new ServerCommunicator(clientSocket.getOutputStream(), clientSocket.getInputStream());
 		LoginController controller = new LoginController(clientModel);
 		
 		stage.setTitle("Biowars");

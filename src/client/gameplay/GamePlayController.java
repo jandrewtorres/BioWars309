@@ -1,17 +1,17 @@
 package client.gameplay;
 
-import client.ClientModel;
+import client.ServerCommunicator;
 import javafx.fxml.FXML;
 import javafx.scene.control.ProgressBar;
 
 public class GamePlayController {
-	ClientModel model;
+	ServerCommunicator model;
 	@FXML
 	private ProgressBar virusProg;
 	@FXML 
 	private ProgressBar cureProg;
 	
-	public GamePlayController(ClientModel model) {
+	public GamePlayController(ServerCommunicator model) {
 		this.model = model;
 	}
 	

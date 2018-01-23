@@ -1,12 +1,12 @@
 package client.lobby;
 
-import client.ClientModel;
+import client.ServerCommunicator;
 import javafx.fxml.FXML;
 
 public class LobbyController {
-	ClientModel model;
+	ServerCommunicator model;
 	
-	public LobbyController(ClientModel model) {
+	public LobbyController(ServerCommunicator model) {
 		this.model = model;
 	}
 	

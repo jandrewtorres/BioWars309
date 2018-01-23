@@ -9,13 +9,13 @@ import javafx.application.Platform;
 import server.model.GameModel;
 import server.model.Player;
 
-public class ClientConnector extends Thread {
+public class ClientCommunicator extends Thread {
 	private Socket clientSocket;
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
 	GameModel game;
 		
-	public ClientConnector(GameModel game, Socket clientSocket) throws IOException {
+	public ClientCommunicator(GameModel game, Socket clientSocket) throws IOException {
 		this.clientSocket = clientSocket;
 		this.game = game;
 		this.out = new ObjectOutputStream(clientSocket.getOutputStream());
