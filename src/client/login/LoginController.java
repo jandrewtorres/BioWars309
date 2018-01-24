@@ -55,16 +55,21 @@ public class LoginController {
 	private Boolean registerClient(String clientName) {
 		Boolean registered = false;
 		try {
-			Document rgstrDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-			Element cmdElem = rgstrDoc.createElement("REGISTER");
+			// Create a new document
+			// <REGISTER>
+			//    <NAME>David</NAME>
+			// </REGISTER>
+			Document messageDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+
+			Element registerElem = messageDoc.createElement("REGISTER");
 			
-			Element nameElem = rgstrDoc.createElement("NAME");
-			nameElem.appendChild(rgstrDoc.createTextNode(clientName));
-			cmdElem.appendChild(nameElem);
+			Element nameElem = messageDoc.createElement("NAME");
+			nameElem.appendChild(messageDoc.createTextNode(clientName));
+			registerElem.appendChild(nameElem);
 			
-			rgstrDoc.appendChild(cmdElem);
+			messageDoc.appendChild(registerElem);
 			
-			communicator.transmitMessage(rgstrDoc);
+			communicator.transmitMessage(messageDoc);
 			registered = true;
 		} catch (ParserConfigurationException e) {
 			System.out.println("Exception in registering client");

@@ -43,6 +43,9 @@ public class ClientCommunicator extends Thread {
 				game.addPlayer(new Player(root.getChildNodes().item(0).getTextContent()));
 			});
 		}
+		else if(root.getNodeName().equals("PLAYER_READY")) {
+			
+		}
 
 	}
 	
