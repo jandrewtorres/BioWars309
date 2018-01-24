@@ -15,8 +15,14 @@
 	-fx-background-color: #000000;
 }
 .items{
-	-fx-background-color: black;
+	-fx-background-color: gray;
 	
+}
+.items:hover{
+	-fx-background-color: green;
+}
+.add{
+	-fx-background-color: black;
 }
 .inventory Label{
 	-fx-border-color: white;
