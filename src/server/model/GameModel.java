@@ -93,12 +93,12 @@ public class GameModel extends Observable {
 	public void setPlayerStatusReady(String playerName) {
 		getPlayerByName(playerName).statusProperty.set(PLAYER_STATUS.READY);
 		
+		setChanged();
+		notifyObservers("UPDATE_PLAYERS");
+		
 		if(shouldGameStart()) {
 			startGame();
 		}
-
-		setChanged();
-		notifyObservers("UPDATE_PLAYERS");
 	}
 	
 	private Player getPlayerByName(String playerName) {

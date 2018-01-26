@@ -1,12 +1,7 @@
 package client.lobby;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import client.Client;
 import client.model.ClientModel;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
