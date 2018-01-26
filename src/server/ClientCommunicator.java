@@ -100,17 +100,26 @@ public class ClientCommunicator extends Thread implements Observer {
 	}
 	
 	private void gameStarted() {
-		
+		Document messageDoc;
+		try {
+			messageDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+			Element startGameElem = messageDoc.createElement("GAME_STARTED");
+			messageDoc.appendChild(startGameElem);
+			
+			transmitCommand(messageDoc);
+		} catch (ParserConfigurationException e) {
+			System.out.println("Exception in notifying server of ready status");
+		}
 	}
 	
 	private void tickUpdate() {
-		
+		// TO DO
 	}
 	
 	@Override
 	public void update(Observable o, Object arg) {
 		String cmd = (String) arg;
-		if(cmd.equals("PLAYER_ADDED")) {
+		if(cmd.equals("UPDATE_PLAYERS")) {
 			updateLobby();
 		}
 		else if(cmd.equals("GAME_STARTED")) {
@@ -118,9 +127,6 @@ public class ClientCommunicator extends Thread implements Observer {
 		}
 		else if(cmd.equals("TICK")) {
 			tickUpdate();
-		}
-		else if(cmd.equals("PLAYER_READY")) {
-			updateLobby();
 		}
 	}
 }

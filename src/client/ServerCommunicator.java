@@ -68,11 +68,15 @@ public class ServerCommunicator implements Runnable {
 				}
 			});
 		}
+		else if(messageType.equals("GAME_STARTED")) {
+			Platform.runLater(() -> {
+				model.gameStarted.setValue(true);
+			});
+		}
 	}
 	
 	@Override
 	public void run() {
-		System.out.println(this.running);
 		while(running) {
 
 			try {

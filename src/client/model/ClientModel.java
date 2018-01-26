@@ -1,7 +1,5 @@
 package client.model;
 
-import java.util.List;
-
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -9,6 +7,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import client.ServerCommunicator;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import server.model.Player;
@@ -17,10 +17,12 @@ public class ClientModel {
 	private ServerCommunicator communicator;
 	private String clientName;
 	public ObservableList<Player> players;
+	public BooleanProperty gameStarted;
 	
 	public ClientModel(ServerCommunicator communicator) {
 		this.communicator = communicator;
 		this.players = FXCollections.observableArrayList();
+		this.gameStarted = new SimpleBooleanProperty(false);
 	}
 	
 	public Boolean registerClient(String clientName) {

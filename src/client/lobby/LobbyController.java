@@ -1,6 +1,12 @@
 package client.lobby;
 
+import java.util.Observable;
+import java.util.Observer;
+
+import client.Client;
 import client.model.ClientModel;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -9,6 +15,7 @@ import server.model.Player;
 
 public class LobbyController {
 	ClientModel model;
+	Client clientApp;
 	@FXML
 	Button readyButton;
 	@FXML
@@ -33,5 +40,9 @@ public class LobbyController {
 	@FXML
 	private void onReadyButtonClicked() {
 		model.setClientStatusReady();
+	}
+	
+	public void setClientApp(Client app) {
+		this.clientApp = app;
 	}
 }

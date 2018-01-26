@@ -8,6 +8,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import client.Client;
 import client.ServerCommunicator;
 import client.lobby.LobbyController;
 import client.model.ClientModel;
@@ -28,6 +29,8 @@ public class LoginController {
 	@FXML
 	TextField screenNameTextField;
 	
+	Client clientApp;
+	
 	public LoginController(ClientModel model) {
 		this.model = model;
 	}
@@ -38,18 +41,17 @@ public class LoginController {
 	}
 	
 	@FXML
-	private void onEnterButtonClicked(ActionEvent event) throws Exception {
-		if(model.registerClient(screenNameTextField.getText())) {
-			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			
-			LobbyController controller = new LobbyController(model);
-			
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("/client/lobby/Lobby.fxml"));
-			loader.setController(controller);
-			Parent root = (Parent) loader.load();
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
+	private void onEnterButtonClicked(ActionEvent event) {
+		if(model.registerClient(screenNameTextField.getText())) {			
+			try {
+				clientApp.switchToLobby();
+			} catch (Exception e) {
+				System.out.println("Exception in switching to Lobby scene");
+			}
 		}
+	}
+	
+	public void setClientApp(Client app) {
+		this.clientApp = app;
 	}
 }

@@ -11,6 +11,7 @@ import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import server.model.Player.PLAYER_STATUS;
 
 public class GameModel extends Observable {
 	private ObservableList<Player> players;
@@ -68,7 +69,7 @@ public class GameModel extends Observable {
 		players.add(player);
 		
 		setChanged();
-		notifyObservers("PLAYER_ADDED");
+		notifyObservers("UPDATE_PLAYERS");
 	}
 	
 	public void startGame() {
@@ -90,8 +91,37 @@ public class GameModel extends Observable {
 	}
 	
 	public void setPlayerStatusReady(String playerName) {
+		getPlayerByName(playerName).statusProperty.set(PLAYER_STATUS.READY);
 		
+		if(shouldGameStart()) {
+			startGame();
+		}
+
 		setChanged();
-		notifyObservers("PLAYER_READY");
+		notifyObservers("UPDATE_PLAYERS");
+	}
+	
+	private Player getPlayerByName(String playerName) {
+		for(Player p : players) {
+			if(p.nameProperty.get().equals(playerName)) {
+				return p;
+			}
+		}
+		return null;
+	}
+	
+	private Boolean shouldGameStart() {
+		Boolean shouldStart = true;
+		for(Player p : players) {
+			if(!p.statusProperty.get().equals(PLAYER_STATUS.READY)) {
+				shouldStart = false;
+			}
+		}
+		
+		if(players.size() < 2) {
+			shouldStart = false;
+		}
+		
+		return shouldStart;
 	}
 }
