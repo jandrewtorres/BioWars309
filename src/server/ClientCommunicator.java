@@ -1,5 +1,6 @@
 package server;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -26,6 +27,7 @@ public class ClientCommunicator extends Thread implements Observer {
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
 	GameModel game;
+	Player associatedPlayer;
 		
 	public ClientCommunicator(GameModel game, Socket clientSocket) throws IOException {
 		this.clientSocket = clientSocket;
@@ -40,6 +42,11 @@ public class ClientCommunicator extends Thread implements Observer {
 			while(!isInterrupted()) {
 				receiveObject(in.readObject());
 			}
+		} 
+		catch(EOFException e) {  
+			System.out.println("Client connection closed");
+			game.deleteObserver(this);
+			game.removePlayer(associatedPlayer);
 		} catch (Exception e) {
 			System.out.println("Exception receiving object from client");
 		}
@@ -52,7 +59,8 @@ public class ClientCommunicator extends Thread implements Observer {
 		String messageType = root.getNodeName();
 		if(messageType.equals("REGISTER")) {
 			Platform.runLater(() -> {
-				game.addPlayer(new Player(playerName));
+				associatedPlayer = new Player(playerName);
+				game.addPlayer(associatedPlayer);
 			});
 		}
 		else if(messageType.equals("PLAYER_READY")) {

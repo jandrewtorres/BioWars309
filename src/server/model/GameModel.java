@@ -64,6 +64,12 @@ public class GameModel extends Observable {
 		return players;
 	}
 	
+	public void removePlayer(Player player) {
+		players.remove(player);
+		
+		setChanged();
+		notifyObservers("UPDATE_PLAYERS");
+	}
 	
 	public void addPlayer(Player player) {
 		players.add(player);

@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -55,6 +56,16 @@ public class ServerCommunicator implements Runnable {
 		
 		if(messageType.equals("LOBBY_UPDATE")) {
 			Platform.runLater(() -> {
+				model.players.clear();
+				for(int player_index = 0; player_index < playerList.getLength(); player_index++) {
+					Node player = playerList.item(player_index);
+					String playerName = player.getChildNodes().item(0).getTextContent();
+					String playerStatus = player.getChildNodes().item(1).getTextContent();
+					model.players.add(new Player(playerName));
+					model.getPlayerByName(playerName).statusProperty.set(PLAYER_STATUS.fromString(playerStatus));
+				}
+				/*
+				ArrayList<String> pNames = new ArrayList<>();
 				for(int player_index = 0; player_index < playerList.getLength(); player_index++) {
 					Node player = playerList.item(player_index);
 					String playerName = player.getChildNodes().item(0).getTextContent();
@@ -62,11 +73,13 @@ public class ServerCommunicator implements Runnable {
 					Player p = model.getPlayerByName(playerName);
 					if(p == null) {
 						model.addPlayer(new Player(playerName));
+						pNames.add(playerName);
 					}
 					else {
 						model.getPlayerByName(playerName).statusProperty.set(PLAYER_STATUS.fromString(playerStatus));
 					}
 				}
+				*/
 			});
 		}
 		else if(messageType.equals("GAME_STARTED")) {
@@ -93,7 +106,7 @@ public class ServerCommunicator implements Runnable {
 				Platform.exit();
 				System.exit(0);
 			} catch (Exception e) {
-				System.out.println("Exception in reading object from input stream");
+				System.out.println("Shutting down client");
 				running = false;
 				closeStreams();
 			}

@@ -47,7 +47,7 @@ public class ClientModel {
 		}
 		return registered;
 	}
-
+	
 	public void setClientStatusReady() {
 		Document messageDoc;
 		try {
