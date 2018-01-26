@@ -8,12 +8,15 @@ import client.lobby.LobbyController;
 import client.login.LoginController;
 import client.model.ClientModel;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class Client extends Application {
     private static final String CONFIG_FILE_NAME = "client_config.properties";
@@ -95,6 +98,14 @@ public class Client extends Application {
                 }
             }
         });
+		
+		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+		    @Override
+		    public void handle(WindowEvent t) {
+		        Platform.exit();
+		        System.exit(0);
+		    }
+		});
 	}
 	
 	public Stage getPrimaryStage() {

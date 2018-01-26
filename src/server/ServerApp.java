@@ -7,10 +7,12 @@ import client.ServerCommunicator;
 import client.login.LoginController;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import server.model.GameModel;
 import server.viewer.ServerViewerController;
 
@@ -71,6 +73,14 @@ public class ServerApp extends Application {
 		stage.show();
 				
 		startListening(game);
+		
+		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+		    @Override
+		    public void handle(WindowEvent t) {
+		        Platform.exit();
+		        System.exit(0);
+		    }
+		});
 	}
 	
 	public static void main(String[] args) {
