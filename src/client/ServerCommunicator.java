@@ -1,5 +1,6 @@
 package client;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -86,6 +87,11 @@ public class ServerCommunicator implements Runnable {
 				closeStreams();
 				// TODO Auto-generated catch block
 				System.out.println("Class Not Found - Exception in reading object from input stream");
+			} catch(EOFException e) {
+				System.out.println("Lost connection to server. Goodbye.");
+				closeStreams();
+				Platform.exit();
+				System.exit(0);
 			} catch (Exception e) {
 				System.out.println("Exception in reading object from input stream");
 				running = false;
