@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 import client.login.LoginController;
+import client.model.ClientModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -55,7 +56,9 @@ public class Client extends Application {
 		clientSocket = new ClientSocket(clientProperties.getProperty(CLIENT_PROPERTIES.HOST.name).trim(),
 				Integer.parseInt(clientProperties.getProperty(CLIENT_PROPERTIES.SOCKET_PORT.name).trim()));
 		ServerCommunicator communicator = new ServerCommunicator(clientSocket.getOutputStream(), clientSocket.getInputStream());
-		LoginController controller = new LoginController(communicator);
+		ClientModel clientModel = new ClientModel(communicator);
+		communicator.setModel(clientModel);
+		LoginController controller = new LoginController(clientModel);
 		
 		stage.setTitle("Biowars");
 		

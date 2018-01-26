@@ -8,8 +8,9 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane styleClass="banner" stylesheets="@../../assets/styles.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane prefHeight="400.0" prefWidth="650.0">
         <columnConstraints>
@@ -23,16 +24,23 @@
          <children>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Label alignment="CENTER" layoutX="308.0" layoutY="28.0" prefHeight="72.0" prefWidth="650.0" text="Lobby" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Label alignment="CENTER" layoutX="308.0" layoutY="28.0" prefHeight="72.0" prefWidth="650.0" text="Lobby" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font name="Impact" size="60.0" />
+                     </font></Label>
                </children>
             </AnchorPane>
-            <TableView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+            <TableView fx:id="lobbyTable" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
               <columns>
-                <TableColumn prefWidth="75.0" text="Name" />
-                <TableColumn prefWidth="75.0" text="Status" />
+                <TableColumn fx:id="playerNameColumn" prefWidth="75.0" text="Name" />
+                <TableColumn fx:id="playerStatusColumn" prefWidth="75.0" text="Status" />
               </columns>
             </TableView>
-            <Button mnemonicParsing="false" text="Ready" GridPane.rowIndex="2" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+               <children>
+                  <Button fx:id="readyButton" layoutX="284.0" layoutY="21.0" mnemonicParsing="false" onAction="#onReadyButtonClicked" text="I'm Ready!" />
+               </children>
+            </AnchorPane>
          </children>
       </GridPane>
    </children>

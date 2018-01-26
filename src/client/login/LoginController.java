@@ -10,6 +10,7 @@ import org.w3c.dom.Element;
 
 import client.ServerCommunicator;
 import client.lobby.LobbyController;
+import client.model.ClientModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,14 +22,14 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class LoginController {
-	ServerCommunicator communicator;
+	ClientModel model;
 	@FXML
 	Button enterButton;
 	@FXML
 	TextField screenNameTextField;
 	
-	public LoginController(ServerCommunicator communicator) {
-		this.communicator = communicator;
+	public LoginController(ClientModel model) {
+		this.model = model;
 	}
 	
 	@FXML
@@ -38,10 +39,10 @@ public class LoginController {
 	
 	@FXML
 	private void onEnterButtonClicked(ActionEvent event) throws Exception {
-		if(registerClient(screenNameTextField.getText())) {
+		if(model.registerClient(screenNameTextField.getText())) {
 			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			
-			LobbyController controller = new LobbyController(communicator);
+			LobbyController controller = new LobbyController(model);
 			
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/client/lobby/Lobby.fxml"));
@@ -50,30 +51,5 @@ public class LoginController {
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 		}
-	}
-	
-	private Boolean registerClient(String clientName) {
-		Boolean registered = false;
-		try {
-			// Create a new document
-			// <REGISTER>
-			//    <NAME>David</NAME>
-			// </REGISTER>
-			Document messageDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-
-			Element registerElem = messageDoc.createElement("REGISTER");
-			
-			Element nameElem = messageDoc.createElement("NAME");
-			nameElem.appendChild(messageDoc.createTextNode(clientName));
-			registerElem.appendChild(nameElem);
-			
-			messageDoc.appendChild(registerElem);
-			
-			communicator.transmitMessage(messageDoc);
-			registered = true;
-		} catch (ParserConfigurationException e) {
-			System.out.println("Exception in registering client");
-		}
-		return registered;
 	}
 }

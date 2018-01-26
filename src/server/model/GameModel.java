@@ -1,19 +1,18 @@
 package server.model;
 
+import java.util.Observable;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import javafx.application.Platform;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class GameModel {
+public class GameModel extends Observable {
 	private ObservableList<Player> players;
 	public Timer gameTimer;
 	public ObjectProperty<GAME_STATUS> gameStatusProperty;
@@ -64,19 +63,35 @@ public class GameModel {
 		return players;
 	}
 	
+	
 	public void addPlayer(Player player) {
 		players.add(player);
+		
+		setChanged();
+		notifyObservers("PLAYER_ADDED");
 	}
 	
 	public void startGame() {
 		gameStatusProperty.setValue(GAME_STATUS.IN_PROGRESS);
 		gameTimer = new Timer();
 		gameTimer.scheduleAtFixedRate(new ClockTask(), 0, 1000);
+		
+		setChanged();
+		notifyObservers("GAME_STARTED");
 	}
 	
 	public void tick() {
 		for(Player player : players) {
 			player.tick();
+			
+			setChanged();
+			notifyObservers("TICK");
 		}
+	}
+	
+	public void setPlayerStatusReady(String playerName) {
+		
+		setChanged();
+		notifyObservers("PLAYER_READY");
 	}
 }

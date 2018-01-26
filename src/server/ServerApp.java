@@ -71,7 +71,6 @@ public class ServerApp extends Application {
 		stage.show();
 				
 		startListening(game);
-		
 	}
 	
 	public static void main(String[] args) {
