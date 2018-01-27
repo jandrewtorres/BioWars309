@@ -177,7 +177,7 @@
                                                    </image>
                                                 </ImageView>
                                              </graphic></Button>
-                                          <Button layoutX="20.0" layoutY="20.0" mnemonicParsing="false" styleClass="items" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <Button fx:id="virusIcon" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#openVirusMenu" styleClass="items" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <graphic>
                                                 <ImageView fx:id="virusUse" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" style="visibility: visible;">
                                                    <image>

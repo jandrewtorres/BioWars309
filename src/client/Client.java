@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 import client.gameplay.GamePlayController;
+import client.gameplay.VirusMenuController;
 import client.lobby.LobbyController;
 import client.login.LoginController;
 import client.model.ClientModel;
@@ -15,6 +16,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -129,7 +132,7 @@ public class Client extends Application {
 	
 	public void switchToGamePlay() throws Exception {
 		GamePlayController controller = new GamePlayController(clientModel);
-		
+		controller.setClientApp(this);
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/views/GamePlay.fxml"));
 		loader.setController(controller);
@@ -138,7 +141,25 @@ public class Client extends Application {
 		
 		primaryStage.setScene(scene);
 	}
-	
+	public void openVirusMenu() throws Exception{
+		VirusMenuController controller = new VirusMenuController(clientModel);
+		controller.setClientApp(this);
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/views/VirusMenu.fxml"));
+		loader.setController(controller);
+		Parent root = (Parent) loader.load();
+		Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(primaryStage);
+        stage.setTitle("Virus Menu");
+        stage.setScene(new Scene(root));
+        stage.show();
+
+	}
+	public void closeVirusMenu(Button source) throws Exception{
+		Stage stage = (Stage)source.getScene().getWindow();
+		stage.hide();
+	}
 	public static void main(String[] args) {
 		launch(args);
 	}
