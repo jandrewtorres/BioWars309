@@ -1,15 +1,19 @@
 package client.gameplay;
 
+import client.Client;
 import client.model.ClientModel;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.control.Button;
+
 
 public class GamePlayController {
-	ClientModel model;
 	@FXML
-	private ProgressBar virusProg;
-	@FXML 
-	private ProgressBar cureProg;
+	Button virusIcon;
+	
+	ClientModel model;
+
+	Client clientApp;
 	
 	public GamePlayController(ClientModel model) {
 		this.model = model;
@@ -17,7 +21,19 @@ public class GamePlayController {
 	
 	@FXML
 	private void initialize() {
-		virusProg.getStyleClass().add("hide");
-		cureProg.getStyleClass().add("hide");
+
+	}
+	@FXML
+	private void openVirusMenu(ActionEvent event) {
+		try {
+			clientApp.openVirusMenu();
+		}catch(Exception e) {
+			System.out.println("error opening submenu");
+		}
+
+	}
+	public void setClientApp(Client app) {
+		this.clientApp = app;
 	}
 }
+
