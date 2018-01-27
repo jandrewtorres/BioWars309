@@ -34,7 +34,7 @@ public class ServerViewerController {
 	@FXML
 	private void initialize() {
 		playerNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty);
-		goldColumn.setCellValueFactory(cellData -> cellData.getValue().populationProperty().asObject());
+		goldColumn.setCellValueFactory(cellData -> cellData.getValue().goldProperty().asObject());
 		populationColumn.setCellValueFactory(cellData -> cellData.getValue().populationProperty().asObject());
 		
 		playerTable.setItems(game.getPlayers());
