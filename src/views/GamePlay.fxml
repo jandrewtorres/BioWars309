@@ -155,7 +155,7 @@
                                     <AnchorPane prefHeight="72.0" prefWidth="250.0">
                                        <children>
                                           <Label fx:id="virusCt" layoutX="74.0" layoutY="21.0" prefHeight="23.0" prefWidth="103.0" scaleZ="2.0" text="Virus Count" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="66.0" AnchorPane.rightAnchor="56.0" />
-                                          <Button layoutX="192.0" layoutY="23.0" mnemonicParsing="false" styleClass="add" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <Button fx:id="virusBuy" layoutX="192.0" layoutY="23.0" mnemonicParsing="false" onAction="#openVirusMkt" styleClass="add" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <graphic>
                                                 <ImageView fx:id="virusAdd" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
