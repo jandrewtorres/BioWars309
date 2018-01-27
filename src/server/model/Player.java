@@ -59,6 +59,14 @@ public class Player {
 		populationIncreaseIncrement = 5;
 	}
 	
+	public IntegerProperty goldProperty() {
+		return gold;
+	}
+	
+	public IntegerProperty populationProperty() {
+		return population;
+	}
+	
 	public void tick() {
 		updateGold();
 		updatePopulation();

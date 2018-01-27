@@ -16,7 +16,7 @@ import server.model.Player.PLAYER_STATUS;
 public class GameModel extends Observable {
 	private ObservableList<Player> players;
 	public Timer gameTimer;
-	public ObjectProperty<GAME_STATUS> gameStatusProperty;
+	public ObjectProperty<GAME_STATUS> statusProperty;
 	public LongProperty currentTimeProperty;
 		
 	public enum GAME_STATUS {
@@ -47,7 +47,7 @@ public class GameModel extends Observable {
 	
 	public GameModel() {
 		this.players = FXCollections.observableArrayList();
-		gameStatusProperty = new SimpleObjectProperty<>(GAME_STATUS.WAITING);
+		statusProperty = new SimpleObjectProperty<>(GAME_STATUS.WAITING);
 		gameTimer = null;
 		currentTimeProperty = new SimpleLongProperty(0);
 	}
@@ -71,7 +71,7 @@ public class GameModel extends Observable {
 	}
 	
 	public void startGame() {
-		gameStatusProperty.setValue(GAME_STATUS.IN_PROGRESS);
+		statusProperty.setValue(GAME_STATUS.IN_PROGRESS);
 		gameTimer = new Timer();
 		gameTimer.scheduleAtFixedRate(new ClockTask(), 0, 1000);
 		

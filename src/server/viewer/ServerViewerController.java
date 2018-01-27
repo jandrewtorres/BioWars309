@@ -34,15 +34,15 @@ public class ServerViewerController {
 	@FXML
 	private void initialize() {
 		playerNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty);
-		goldColumn.setCellValueFactory(cellData -> cellData.getValue().goldProperty().asObject());
+		goldColumn.setCellValueFactory(cellData -> cellData.getValue().populationProperty().asObject());
 		populationColumn.setCellValueFactory(cellData -> cellData.getValue().populationProperty().asObject());
 		
 		playerTable.setItems(game.getPlayers());
-		gameStatusLabel.textProperty().bind(game.statusProperty().asString());
+		gameStatusLabel.textProperty().bind(game.statusProperty.asString());
 		gameTimeLabel.textProperty().bind(
 			Bindings.createStringBinding(() -> 
-				formatInterval(game.currentTimeProperty().get())
-				, game.currentTimeProperty()));
+				formatInterval(game.currentTimeProperty.get())
+				, game.currentTimeProperty));
 	}
 	
     private String formatInterval(final long l)
