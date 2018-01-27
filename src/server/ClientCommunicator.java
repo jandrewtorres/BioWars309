@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -20,23 +18,21 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import server.model.GameModel;
 import server.model.Player;
-import server.model.Player.PLAYER_STATUS;
 
 public class ClientCommunicator extends Thread implements Observer {
-	private Socket clientSocket;
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
 	GameModel game;
 	Player associatedPlayer;
 		
 	public ClientCommunicator(GameModel game, Socket clientSocket) throws IOException {
-		this.clientSocket = clientSocket;
 		this.game = game;
 		this.out = new ObjectOutputStream(clientSocket.getOutputStream());
 		this.in = new ObjectInputStream(clientSocket.getInputStream());
 		game.addObserver(this);
 	}
 	
+	@Override
 	public void run() {
 		try {
 			while(!isInterrupted()) {
@@ -64,9 +60,9 @@ public class ClientCommunicator extends Thread implements Observer {
 			});
 		}
 		else if(messageType.equals("PLAYER_READY")) {
-			Platform.runLater(() -> {
-				game.setPlayerStatusReady(playerName);
-			});
+			Platform.runLater(() -> 
+				game.setPlayerStatusReady(playerName)
+			);
 		}
 	}
 	

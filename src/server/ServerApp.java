@@ -16,16 +16,18 @@ import server.viewer.ServerViewerController;
 
 public class ServerApp extends Application {
 	
-	private static String CONFIG_FILE_NAME = "server_config.properties";
+	final private static String CONFIG_FILE_NAME = "server_config.properties";
+    final private static String CONFIG_DIR_SYSTEM_PROPERTY_NAME = "CONFIG_DIR";
+
 	private Properties serverProperties;
 	
-	private static enum SERVER_PROPERTIES {
+	private enum SERVER_PROPERTIES {
 		CLIENT_PORT("ClientPort");
 		
-		public String name;
+		public String text;
 		
 		private SERVER_PROPERTIES(String n) {
-			name = n;
+			text = n;
 		}
 	}
 	
@@ -49,7 +51,7 @@ public class ServerApp extends Application {
 	}
 	
 	private void startListening(GameModel game) {
-		ServerSocketHandler sockHandler = new ServerSocketHandler(game, Integer.parseInt(serverProperties.getProperty(SERVER_PROPERTIES.CLIENT_PORT.name)));
+		ServerSocketHandler sockHandler = new ServerSocketHandler(game, Integer.parseInt(serverProperties.getProperty(SERVER_PROPERTIES.CLIENT_PORT.text)));
 		sockHandler.start();
 	}
 	

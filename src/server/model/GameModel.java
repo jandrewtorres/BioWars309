@@ -19,7 +19,7 @@ public class GameModel extends Observable {
 	public ObjectProperty<GAME_STATUS> gameStatusProperty;
 	public LongProperty currentTimeProperty;
 		
-	public static enum GAME_STATUS {
+	public enum GAME_STATUS {
 		WAITING("Waiting for players..."),
 		IN_PROGRESS("Game in progress..."),
 		OVER("Game Over!");
@@ -50,14 +50,6 @@ public class GameModel extends Observable {
 		gameStatusProperty = new SimpleObjectProperty<>(GAME_STATUS.WAITING);
 		gameTimer = null;
 		currentTimeProperty = new SimpleLongProperty(0);
-	}
-	
-	public ObjectProperty<GAME_STATUS> statusProperty() {
-		return gameStatusProperty;
-	}
-	
-	public LongProperty currentTimeProperty() {
-		return currentTimeProperty;
 	}
 	
 	public ObservableList<Player> getPlayers() {
@@ -97,7 +89,12 @@ public class GameModel extends Observable {
 	}
 	
 	public void setPlayerStatusReady(String playerName) {
-		getPlayerByName(playerName).statusProperty.set(PLAYER_STATUS.READY);
+		Player p = getPlayerByName(playerName);
+		
+		if(p == null)
+			return;
+		
+		p.statusProperty.set(PLAYER_STATUS.READY);
 		
 		setChanged();
 		notifyObservers("UPDATE_PLAYERS");

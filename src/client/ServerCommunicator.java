@@ -32,7 +32,6 @@ public class ServerCommunicator implements Runnable {
 			this.out = new ObjectOutputStream(out);
 			this.in = new ObjectInputStream(in);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -83,9 +82,9 @@ public class ServerCommunicator implements Runnable {
 			});
 		}
 		else if(messageType.equals("GAME_STARTED")) {
-			Platform.runLater(() -> {
-				model.gameStarted.setValue(true);
-			});
+			Platform.runLater(() -> 
+				model.gameStarted.setValue(true)
+			);
 		}
 	}
 	
@@ -98,7 +97,6 @@ public class ServerCommunicator implements Runnable {
 				receiveMessage(in.readObject());
 			} catch (ClassNotFoundException e) {
 				closeStreams();
-				// TODO Auto-generated catch block
 				System.out.println("Class Not Found - Exception in reading object from input stream");
 			} catch(EOFException e) {
 				System.out.println("Lost connection to server. Goodbye.");

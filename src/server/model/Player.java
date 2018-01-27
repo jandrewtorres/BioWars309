@@ -1,6 +1,5 @@
 package server.model;
 
-import java.lang.invoke.MethodHandles.Lookup;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,33 +18,34 @@ public class Player {
 	private IntegerProperty population;
 	
 
-	private Integer GOLD_INCREASE_VALUE;
-	private Integer POPULATION_INCREASE_VALUE;
+	private Integer goldIncreaseIncrement;
+	private Integer populationIncreaseIncrement;
 	
-	public static enum PLAYER_STATUS {
+	public enum PLAYER_STATUS {
 		IN_LOBBY("IN_LOBBY"),
 		READY("READY"),
 		PLAYING("PLAYING");
 		
-		String name;
+		String text;
 	    private static Map map = new HashMap<>();
 
 		static {
 	        for (PLAYER_STATUS status : PLAYER_STATUS.values()) {
-	            map.put(status.name, status);
+	            map.put(status.text, status);
 	        }
 	    }
+		
 		@Override
 		public String toString() {
-			return name;
+			return text;
 		}
 		
 	    public static PLAYER_STATUS fromString(String status) {
 	        return (PLAYER_STATUS) map.get(status);
 	    }
 		
-		private PLAYER_STATUS(String n) {
-			name = n;
+		private PLAYER_STATUS(String t) {
+			text = t;
 		}
 	}
 	
@@ -55,16 +55,8 @@ public class Player {
 		this.population = new SimpleIntegerProperty(10000);
 		this.statusProperty = new SimpleObjectProperty<PLAYER_STATUS>(PLAYER_STATUS.IN_LOBBY);
 		
-		GOLD_INCREASE_VALUE = 10;
-		POPULATION_INCREASE_VALUE = 5;
-	}
-	
-	public IntegerProperty goldProperty() {
-		return gold;
-	}
-	
-	public IntegerProperty populationProperty() {
-		return population;
+		goldIncreaseIncrement = 10;
+		populationIncreaseIncrement = 5;
 	}
 	
 	public void tick() {
@@ -73,10 +65,10 @@ public class Player {
 	}
 	
 	private void updateGold() {
-		gold.set(gold.get() + GOLD_INCREASE_VALUE);
+		gold.set(gold.get() + goldIncreaseIncrement);
 	}
 	
 	private void updatePopulation() {
-		population.set(population.get() + POPULATION_INCREASE_VALUE);
+		population.set(population.get() + populationIncreaseIncrement);
 	}
 }

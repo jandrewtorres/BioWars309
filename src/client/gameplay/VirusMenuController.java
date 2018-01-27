@@ -9,26 +9,22 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 public class VirusMenuController {
-	@FXML
-	private Button exitButton;
 	ClientModel model;
-	
 	Client clientApp;
 	public BooleanProperty actionTaken = new SimpleBooleanProperty();
+
+	@FXML
+	private Button exitButton;
 	
 	public VirusMenuController(ClientModel model) {
 		this.model = model;
 	}
-	public BooleanProperty actionTakenProperty() {
-		return actionTaken;
-	}
-	public boolean ifActionTaken() {
-		return actionTakenProperty().get();
-	}
+	
 	@FXML
 	private void initialize() {
-
+		// Nothing here ... yet
 	}
+	
 	@FXML
 	private void exitMenu(ActionEvent event) {
 		try {
@@ -37,6 +33,7 @@ public class VirusMenuController {
 			System.out.println("can't close submenu");
 		}
 	}
+	
 	public void setClientApp(Client app) {
 		this.clientApp = app;
 	}

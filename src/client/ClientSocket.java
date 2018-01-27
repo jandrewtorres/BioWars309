@@ -7,31 +7,29 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 
 public class ClientSocket {
-	private Socket clientSocket;
+	private Socket theSocket;
 	
 	public ClientSocket(String host, Integer port) {
 			try {
-				clientSocket = new Socket();
-				clientSocket.connect(new InetSocketAddress(host, port), 5000);
+				theSocket = new Socket();
+				theSocket.connect(new InetSocketAddress(host, port), 5000);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	}
 	
 	public InputStream getInputStream() throws IOException {
-		return clientSocket.getInputStream();
+		return theSocket.getInputStream();
 	}
 	
 	public OutputStream getOutputStream() throws IOException {
-		return clientSocket.getOutputStream();
+		return theSocket.getOutputStream();
 	}
 	
 	public void closeSocket() {
 		try {
-			clientSocket.close();
+			theSocket.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

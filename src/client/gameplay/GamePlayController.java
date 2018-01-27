@@ -21,8 +21,9 @@ public class GamePlayController {
 	
 	@FXML
 	private void initialize() {
-
+		// Nothing here... yet
 	}
+	
 	@FXML
 	private void openVirusMenu(ActionEvent event) {
 		try {
@@ -32,6 +33,7 @@ public class GamePlayController {
 		}
 
 	}
+	
 	public void setClientApp(Client app) {
 		this.clientApp = app;
 	}

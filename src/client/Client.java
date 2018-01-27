@@ -22,21 +22,22 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class Client extends Application {
-    private static final String CONFIG_FILE_NAME = "client_config.properties";
+    final private static String CONFIG_FILE_NAME = "client_config.properties";
+    final private static String CONFIG_DIR_SYSTEM_PROPERTY_NAME = "CONFIG_DIR";
     
     private ClientSocket clientSocket;
     private Properties clientProperties;
     private Stage primaryStage;
     private ClientModel clientModel;
     
-    private static enum CLIENT_PROPERTIES {
+    private enum CLIENT_PROPERTIES {
     		HOST("Host"),
     		SOCKET_PORT("SocketPort");
     	
-    		public String name;
+    		public String text;
     		
     		private CLIENT_PROPERTIES(String n) {
-    			name = n;
+    			text = n;
     		}
     }
 	
@@ -52,10 +53,10 @@ public class Client extends Application {
 	}
 
 	private String getPropFile() {
-		if(System.getProperty("CONFIG_DIR") == null) {
-			System.setProperty("CONFIG_DIR", "config");
+		if(System.getProperty(CONFIG_DIR_SYSTEM_PROPERTY_NAME) == null) {
+			System.setProperty(CONFIG_DIR_SYSTEM_PROPERTY_NAME, "config");
 		}
-		return System.getProperty("CONFIG_DIR") 
+		return System.getProperty(CONFIG_DIR_SYSTEM_PROPERTY_NAME) 
 				+ System.getProperty("file.separator") 
 				+ CONFIG_FILE_NAME;
 	}
@@ -66,8 +67,8 @@ public class Client extends Application {
 		
 		loadProperties(getPropFile());
 		
-		clientSocket = new ClientSocket(clientProperties.getProperty(CLIENT_PROPERTIES.HOST.name).trim(),
-				Integer.parseInt(clientProperties.getProperty(CLIENT_PROPERTIES.SOCKET_PORT.name).trim()));
+		clientSocket = new ClientSocket(clientProperties.getProperty(CLIENT_PROPERTIES.HOST.text).trim(),
+				Integer.parseInt(clientProperties.getProperty(CLIENT_PROPERTIES.SOCKET_PORT.text).trim()));
 		ServerCommunicator communicator = new ServerCommunicator(clientSocket.getOutputStream(), clientSocket.getInputStream());
 		clientModel = new ClientModel(communicator);
 		communicator.setModel(clientModel);
@@ -141,6 +142,7 @@ public class Client extends Application {
 		
 		primaryStage.setScene(scene);
 	}
+	
 	public void openVirusMenu() throws Exception{
 		VirusMenuController controller = new VirusMenuController(clientModel);
 		controller.setClientApp(this);
@@ -154,12 +156,13 @@ public class Client extends Application {
         stage.setTitle("Virus Menu");
         stage.setScene(new Scene(root));
         stage.show();
-
 	}
+	
 	public void closeVirusMenu(Button source) throws Exception{
 		Stage stage = (Stage)source.getScene().getWindow();
 		stage.hide();
 	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
