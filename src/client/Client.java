@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 public class Client extends Application {
@@ -139,7 +140,7 @@ public class Client extends Application {
 		loader.setController(controller);
 		Parent root = (Parent) loader.load();
 		Scene scene = new Scene(root);
-		
+		primaryStage.setResizable(false);
 		primaryStage.setScene(scene);
 	}
 	
@@ -152,6 +153,7 @@ public class Client extends Application {
 		Parent root = (Parent) loader.load();
 		Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.initOwner(primaryStage);
         stage.setTitle("Virus Menu");
         stage.setScene(new Scene(root));
