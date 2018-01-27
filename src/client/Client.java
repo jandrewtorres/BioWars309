@@ -75,7 +75,7 @@ public class Client extends Application {
 		stage.setTitle("Biowars");
 		
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/client/login/Login.fxml"));
+		loader.setLocation(getClass().getResource("/views/Login.fxml"));
 		loader.setController(controller);
 		Parent root = (Parent) loader.load();
 		Scene scene = new Scene(root);
@@ -119,7 +119,7 @@ public class Client extends Application {
 		controller.setClientApp(this);
 		
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/client/lobby/Lobby.fxml"));
+		loader.setLocation(getClass().getResource("/views/Lobby.fxml"));
 		loader.setController(controller);
 		Parent root = (Parent) loader.load();
 		Scene scene = new Scene(root);
@@ -131,7 +131,7 @@ public class Client extends Application {
 		GamePlayController controller = new GamePlayController(clientModel);
 		
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/client/gameplay/GamePlay.fxml"));
+		loader.setLocation(getClass().getResource("/views/GamePlay.fxml"));
 		loader.setController(controller);
 		Parent root = (Parent) loader.load();
 		Scene scene = new Scene(root);

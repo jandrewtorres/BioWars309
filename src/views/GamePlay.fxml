@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="686.0" stylesheets="@../../assets/styles.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="600.0" prefWidth="686.0" stylesheets="@../assets/styles.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -94,7 +94,7 @@
                                        <graphic>
                                           <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true">
                                              <image>
-                                                <Image url="@../../assets/people.png" />
+                                                <Image url="@../assets/people.png" />
                                              </image>
                                           </ImageView>
                                        </graphic></Label>
@@ -102,7 +102,7 @@
                                        <graphic>
                                           <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../assets/gold.png" />
+                                                <Image url="@../assets/gold.png" />
                                              </image>
                                           </ImageView>
                                        </graphic></Label>
@@ -116,7 +116,7 @@
                                              <graphic>
                                                 <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
-                                                      <Image url="@../../assets/baby.png" />
+                                                      <Image url="@../assets/baby.png" />
                                                    </image>
                                                 </ImageView>
                                              </graphic>
@@ -126,7 +126,7 @@
                                              <graphic>
                                                 <ImageView fx:id="popAdd" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="items">
                                                    <image>
-                                                      <Image url="@../../assets/add.png" />
+                                                      <Image url="@../assets/add.png" />
                                                    </image>
                                                 </ImageView>
                                              </graphic></Button>
@@ -142,7 +142,7 @@
                                              <graphic>
                                                 <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
-                                                      <Image url="@../../assets/mining.png" />
+                                                      <Image url="@../assets/mining.png" />
                                                    </image>
                                                 </ImageView>
                                              </graphic>
@@ -152,7 +152,7 @@
                                              <graphic>
                                                 <ImageView fx:id="goldAdd" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
-                                                      <Image url="@../../assets/add.png" />
+                                                      <Image url="@../assets/add.png" />
                                                    </image>
                                                 </ImageView>
                                              </graphic></Button>
@@ -173,7 +173,7 @@
                                              <graphic>
                                                 <ImageView fx:id="virusAdd" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
-                                                      <Image url="@../../assets/add.png" />
+                                                      <Image url="@../assets/add.png" />
                                                    </image>
                                                 </ImageView>
                                              </graphic></Button>
@@ -181,7 +181,7 @@
                                              <graphic>
                                                 <ImageView fx:id="virusUse" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" style="visibility: visible;">
                                                    <image>
-                                                      <Image url="@../../assets/virus.png" />
+                                                      <Image url="@../assets/virus.png" />
                                                    </image>
                                                 </ImageView>
                                              </graphic>
@@ -196,7 +196,7 @@
                                              <graphic>
                                                 <ImageView fx:id="cureAdd" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
-                                                      <Image url="@../../assets/add.png" />
+                                                      <Image url="@../assets/add.png" />
                                                    </image>
                                                 </ImageView>
                                              </graphic></Button>
@@ -204,7 +204,7 @@
                                              <graphic>
                                                 <ImageView fx:id="cureUse" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
-                                                      <Image url="@../../assets/cure.png" />
+                                                      <Image url="@../assets/cure.png" />
                                                    </image>
                                                 </ImageView>
                                              </graphic></Button>

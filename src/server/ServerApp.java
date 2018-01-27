@@ -61,7 +61,7 @@ public class ServerApp extends Application {
 		ServerViewerController controller = new ServerViewerController(game);
 		
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/server/viewer/ServerViewer.fxml"));
+		loader.setLocation(getClass().getResource("/views/ServerViewer.fxml"));
 		loader.setController(controller);
 		Parent root = (Parent) loader.load();
 		stage.setTitle("Biowars Server");
