@@ -164,7 +164,21 @@ public class Client extends Application {
 		Stage stage = (Stage)source.getScene().getWindow();
 		stage.hide();
 	}
-	
+	public void openVirusMkt() throws Exception{
+		VirusMenuController controller = new VirusMenuController(clientModel);
+		controller.setClientApp(this);
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/views/virusBuy.fxml"));
+		loader.setController(controller);
+		Parent root = (Parent) loader.load();
+		Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initOwner(primaryStage);
+        stage.setTitle("Virus Menu");
+        stage.setScene(new Scene(root));
+        stage.show();
+	}
 	public static void main(String[] args) {
 		launch(args);
 	}

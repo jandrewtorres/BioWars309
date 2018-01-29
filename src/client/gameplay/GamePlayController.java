@@ -10,6 +10,10 @@ import javafx.scene.control.Button;
 public class GamePlayController {
 	@FXML
 	Button virusIcon;
+	@FXML
+	Button cureIcon;
+	@FXML
+	Button virusBuy;
 	
 	ClientModel model;
 
@@ -21,7 +25,7 @@ public class GamePlayController {
 	
 	@FXML
 	private void initialize() {
-		// Nothing here... yet
+		
 	}
 	
 	@FXML
@@ -33,7 +37,15 @@ public class GamePlayController {
 		}
 
 	}
-	
+	@FXML
+	private void openVirusMkt(ActionEvent event) {
+		try {
+			clientApp.openVirusMkt();
+		}catch(Exception e) {
+			System.out.println("error opening submenu");
+		}
+
+	}
 	public void setClientApp(Client app) {
 		this.clientApp = app;
 	}
