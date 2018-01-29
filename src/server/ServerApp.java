@@ -16,8 +16,8 @@ import server.viewer.ServerViewerController;
 
 public class ServerApp extends Application {
 	
-	final private static String CONFIG_FILE_NAME = "server_config.properties";
-    final private static String CONFIG_DIR_SYSTEM_PROPERTY_NAME = "CONFIG_DIR";
+	private static final String CONFIG_FILE_NAME = "server_config.properties";
+    private static final String CONFIG_DIR_SYSTEM_PROPERTY_NAME = "CONFIG_DIR";
 
 	private Properties serverProperties;
 	
@@ -32,10 +32,10 @@ public class ServerApp extends Application {
 	}
 	
 	private String getPropFile() {
-        if (System.getProperty("CONFIG_DIR") == null) {
-            System.setProperty("CONFIG_DIR", "config");
+        if (System.getProperty(CONFIG_DIR_SYSTEM_PROPERTY_NAME) == null) {
+            System.setProperty(CONFIG_DIR_SYSTEM_PROPERTY_NAME, "config");
         }
-		return System.getProperty("CONFIG_DIR")
+		return System.getProperty(CONFIG_DIR_SYSTEM_PROPERTY_NAME)
 				+ System.getProperty("file.separator")
 				+ CONFIG_FILE_NAME;
 	}

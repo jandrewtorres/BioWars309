@@ -23,8 +23,8 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 public class Client extends Application {
-    final private static String CONFIG_FILE_NAME = "client_config.properties";
-    final private static String CONFIG_DIR_SYSTEM_PROPERTY_NAME = "CONFIG_DIR";
+    private static final String CONFIG_FILE_NAME = "client_config.properties";
+    private static final String CONFIG_DIR_SYSTEM_PROPERTY_NAME = "CONFIG_DIR";
     
     private ClientSocket clientSocket;
     private Properties clientProperties;
@@ -35,10 +35,14 @@ public class Client extends Application {
     		HOST("Host"),
     		SOCKET_PORT("SocketPort");
     	
-    		public String text;
+    		private String text;
     		
     		private CLIENT_PROPERTIES(String n) {
     			text = n;
+    		}
+    		
+    		public String getText() {
+    			return text;
     		}
     }
 	
