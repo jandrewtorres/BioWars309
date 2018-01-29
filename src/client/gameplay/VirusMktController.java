@@ -6,14 +6,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class VirusMenuController {
+public class VirusMktController {
 	ClientModel model;
 	Client clientApp;
 
 	@FXML
 	private Button exitButton;
 	
-	public VirusMenuController(ClientModel model) {
+	public VirusMktController(ClientModel model) {
 		this.model = model;
 	}
 	
@@ -34,5 +34,4 @@ public class VirusMenuController {
 	public void setClientApp(Client app) {
 		this.clientApp = app;
 	}
-	
 }

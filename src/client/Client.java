@@ -5,6 +5,7 @@ import java.util.Properties;
 
 import client.gameplay.GamePlayController;
 import client.gameplay.VirusMenuController;
+import client.gameplay.VirusMktController;
 import client.lobby.LobbyController;
 import client.login.LoginController;
 import client.model.ClientModel;
@@ -167,12 +168,8 @@ public class Client extends Application {
         stage.show();
 	}
 	
-	public void closeVirusMenu(Button source) throws Exception{
-		Stage stage = (Stage)source.getScene().getWindow();
-		stage.hide();
-	}
 	public void openVirusMkt() throws Exception{
-		VirusMenuController controller = new VirusMenuController(clientModel);
+		VirusMktController controller = new VirusMktController(clientModel);
 		controller.setClientApp(this);
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/views/virusBuy.fxml"));
@@ -188,6 +185,12 @@ public class Client extends Application {
         stage.setY(primaryStage.getY()+Math.abs(primaryStage.getHeight()-scene.getHeight())/4);
         stage.show();
 	}
+	
+	public void closeVirusMenu(Button source) throws Exception{
+		Stage stage = (Stage)source.getScene().getWindow();
+		stage.hide();
+	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
