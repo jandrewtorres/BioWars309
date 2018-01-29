@@ -146,6 +146,7 @@ public class Client extends Application {
 		Scene scene = new Scene(root);
 		primaryStage.setResizable(false);
 		primaryStage.setScene(scene);
+		primaryStage.centerOnScreen();
 	}
 	
 	public void openVirusMenu() throws Exception{
@@ -159,8 +160,10 @@ public class Client extends Application {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.initOwner(primaryStage);
-        stage.setTitle("Virus Menu");
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setX(primaryStage.getX()+Math.abs(primaryStage.getWidth()-scene.getWidth())/4);
+        stage.setY(primaryStage.getY()+Math.abs(primaryStage.getHeight()-scene.getHeight())/4);
         stage.show();
 	}
 	
@@ -179,8 +182,10 @@ public class Client extends Application {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.initOwner(primaryStage);
-        stage.setTitle("Virus Menu");
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setX(primaryStage.getX()+Math.abs(primaryStage.getWidth()-scene.getWidth())/4);
+        stage.setY(primaryStage.getY()+Math.abs(primaryStage.getHeight()-scene.getHeight())/4);
         stage.show();
 	}
 	public static void main(String[] args) {
