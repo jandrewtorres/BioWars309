@@ -7,6 +7,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -20,6 +22,7 @@ import server.model.GameModel;
 import server.model.Player;
 
 public class ClientCommunicator extends Thread implements Observer {
+	private static Logger serverLogger = Logger.getLogger(ServerApp.class.getName());
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
 	GameModel game;
@@ -44,7 +47,7 @@ public class ClientCommunicator extends Thread implements Observer {
 			game.deleteObserver(this);
 			game.removePlayer(associatedPlayer);
 		} catch (Exception e) {
-			System.out.println("Exception receiving object from client");
+			serverLogger.logp(Level.SEVERE, ClientCommunicator.class.getName(), "run", "Exception receiving object from client");
 		}
 	}
 	
@@ -71,7 +74,7 @@ public class ClientCommunicator extends Thread implements Observer {
 				out.writeObject(data);
 				out.flush();
 			} catch (IOException e) {
-				System.out.println("Exception transmitting command from server");
+				serverLogger.logp(Level.SEVERE, ClientCommunicator.class.getName(), "transmitCommand", "Exception transmitting command from server");
 			}
 	}
 	
@@ -99,7 +102,7 @@ public class ClientCommunicator extends Thread implements Observer {
 			
 			transmitCommand(messageDoc);
 		} catch (ParserConfigurationException e) {
-			System.out.println("Exception in notifying server of ready status");
+			serverLogger.logp(Level.SEVERE, ClientCommunicator.class.getName(), "updateLobby", "Exception in notifying server of ready status");
 		}
 	}
 	
@@ -112,7 +115,7 @@ public class ClientCommunicator extends Thread implements Observer {
 			
 			transmitCommand(messageDoc);
 		} catch (ParserConfigurationException e) {
-			System.out.println("Exception in notifying server of ready status");
+			serverLogger.logp(Level.SEVERE, ClientCommunicator.class.getName(), "gameStarted", "Exception in notifying server of ready status");
 		}
 	}
 	

@@ -2,6 +2,8 @@ package server;
 
 import java.io.FileInputStream;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -18,6 +20,7 @@ public class ServerApp extends Application {
 	
 	private static final String CONFIG_FILE_NAME = "server_config.properties";
     private static final String CONFIG_DIR_SYSTEM_PROPERTY_NAME = "CONFIG_DIR";
+    private static final Logger serverLogger = Logger.getLogger(ServerApp.class.getName());
 
 	private Properties serverProperties;
 	
@@ -46,7 +49,7 @@ public class ServerApp extends Application {
 			serverProperties.load(new FileInputStream(propertiesFile));
 		} catch (Exception e) 
 		{
-			System.out.println("Exception in reading properties file");
+			serverLogger.logp(Level.SEVERE, ServerApp.class.getName(), "loadProperties", "Exception loading properties file");
 		}
 	}
 	
