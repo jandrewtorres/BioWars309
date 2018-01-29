@@ -53,7 +53,7 @@ public class Player {
 		this.nameProperty = new SimpleStringProperty(name);
 		this.gold = new SimpleIntegerProperty(0);
 		this.population = new SimpleIntegerProperty(10000);
-		this.statusProperty = new SimpleObjectProperty<PLAYER_STATUS>(PLAYER_STATUS.IN_LOBBY);
+		this.statusProperty = new SimpleObjectProperty<>(PLAYER_STATUS.IN_LOBBY);
 		
 		goldIncreaseIncrement = 10;
 		populationIncreaseIncrement = 5;
