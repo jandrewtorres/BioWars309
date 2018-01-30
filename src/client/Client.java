@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import client.gameplay.GamePlayController;
 import client.gameplay.VirusMenuController;
+import client.gameplay.VirusMktController;
 import client.lobby.LobbyController;
 import client.login.LoginController;
 import client.model.ClientModel;
@@ -150,6 +151,7 @@ public class Client extends Application {
 		Scene scene = new Scene(root);
 		primaryStage.setResizable(false);
 		primaryStage.setScene(scene);
+		primaryStage.centerOnScreen();
 	}
 	
 	public void openVirusMenu() throws Exception{
@@ -163,17 +165,15 @@ public class Client extends Application {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.initOwner(primaryStage);
-        stage.setTitle("Virus Menu");
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setX(primaryStage.getX()+Math.abs(primaryStage.getWidth()-scene.getWidth())/4);
+        stage.setY(primaryStage.getY()+Math.abs(primaryStage.getHeight()-scene.getHeight())/4);
         stage.show();
 	}
 	
-	public void closeVirusMenu(Button source) throws Exception{
-		Stage stage = (Stage)source.getScene().getWindow();
-		stage.hide();
-	}
 	public void openVirusMkt() throws Exception{
-		VirusMenuController controller = new VirusMenuController(clientModel);
+		VirusMktController controller = new VirusMktController(clientModel);
 		controller.setClientApp(this);
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/views/virusBuy.fxml"));
@@ -183,10 +183,18 @@ public class Client extends Application {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.initOwner(primaryStage);
-        stage.setTitle("Virus Menu");
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setX(primaryStage.getX()+Math.abs(primaryStage.getWidth()-scene.getWidth())/4);
+        stage.setY(primaryStage.getY()+Math.abs(primaryStage.getHeight()-scene.getHeight())/4);
         stage.show();
 	}
+	
+	public void closeVirusMenu(Button source) throws Exception{
+		Stage stage = (Stage)source.getScene().getWindow();
+		stage.hide();
+	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
