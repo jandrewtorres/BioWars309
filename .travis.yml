@@ -5,6 +5,9 @@ jdk:
 addons:
   sonarcloud:
     organization: "jandrewtorres-github" # the key of the org you chose at step #3
+  branches:
+    - master
+    - logging
 script:
   # other script steps might be done before running the actual analysis
   - ant build
