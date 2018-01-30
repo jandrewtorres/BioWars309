@@ -87,10 +87,10 @@ public class ClientCommunicator extends Thread implements Observer {
 				Element playerElem = messageDoc.createElement("PLAYER");
 				
 				Element nameElem = messageDoc.createElement("NAME");
-				nameElem.appendChild(messageDoc.createTextNode(p.nameProperty.get()));
+				nameElem.appendChild(messageDoc.createTextNode(p.nameProperty().get()));
 				
 				Element statusElem = messageDoc.createElement("STATUS");
-				statusElem.appendChild(messageDoc.createTextNode(p.statusProperty.get().toString()));
+				statusElem.appendChild(messageDoc.createTextNode(p.statusProperty().get().toString()));
 				
 				playerElem.appendChild(nameElem);
 				playerElem.appendChild(statusElem);

@@ -27,10 +27,14 @@ public class ServerApp extends Application {
 	private enum SERVER_PROPERTIES {
 		CLIENT_PORT("ClientPort");
 		
-		public String text;
+		private String text;
 		
 		private SERVER_PROPERTIES(String n) {
 			text = n;
+		}
+		
+		public String getText() {
+			return text;
 		}
 	}
 	

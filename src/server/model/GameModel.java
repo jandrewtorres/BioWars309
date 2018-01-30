@@ -16,9 +16,9 @@ import server.model.Player.PLAYER_STATUS;
 
 public class GameModel extends Observable {
 	private ObservableList<Player> players;
-	public Timer gameTimer;
-	public ObjectProperty<GAME_STATUS> statusProperty;
-	public LongProperty currentTimeProperty;
+	private Timer gameTimer;
+	private ObjectProperty<GAME_STATUS> statusProperty;
+	private LongProperty currentTimeProperty;
 		
 	public enum GAME_STATUS {
 		WAITING("Waiting for players..."),
@@ -95,7 +95,7 @@ public class GameModel extends Observable {
 		if(p == null)
 			return;
 		
-		p.statusProperty.set(PLAYER_STATUS.READY);
+		p.statusProperty().set(PLAYER_STATUS.READY);
 		
 		setChanged();
 		notifyObservers(new ObserverMessage(MESSAGE_TYPE.UPDATE_LOBBY, null));
@@ -107,7 +107,7 @@ public class GameModel extends Observable {
 	
 	private Player getPlayerByName(String playerName) {
 		for(Player p : players) {
-			if(p.nameProperty.get().equals(playerName)) {
+			if(p.nameProperty().get().equals(playerName)) {
 				return p;
 			}
 		}
@@ -117,7 +117,7 @@ public class GameModel extends Observable {
 	private Boolean shouldGameStart() {
 		Boolean shouldStart = true;
 		for(Player p : players) {
-			if(!p.statusProperty.get().equals(PLAYER_STATUS.READY)) {
+			if(!p.statusProperty().get().equals(PLAYER_STATUS.READY)) {
 				shouldStart = false;
 			}
 		}
@@ -127,5 +127,13 @@ public class GameModel extends Observable {
 		}
 		
 		return shouldStart;
+	}
+	
+	public ObjectProperty<GAME_STATUS> getGameStatusProperty() {
+		return statusProperty;
+	}
+	
+	public LongProperty getCurrentTimeProperty() {
+		return currentTimeProperty;
 	}
 }

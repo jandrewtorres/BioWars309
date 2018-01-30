@@ -26,10 +26,10 @@ public class LobbyController {
 	
 	@FXML
 	private void initialize() {
-		playerNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty);
-		playerStatusColumn.setCellValueFactory(cellData -> cellData.getValue().statusProperty.asString());
+		playerNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+		playerStatusColumn.setCellValueFactory(cellData -> cellData.getValue().statusProperty().asString());
 		
-		lobbyTable.setItems(model.players);
+		lobbyTable.setItems(model.getPlayers());
 	}
 	
 	@FXML

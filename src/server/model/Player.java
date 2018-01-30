@@ -11,12 +11,11 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Player {
-	public StringProperty nameProperty;
-	public ObjectProperty<PLAYER_STATUS> statusProperty;
+	private StringProperty nameProperty;
+	private ObjectProperty<PLAYER_STATUS> statusProperty;
 	
 	private IntegerProperty gold;
 	private IntegerProperty population;
-	
 
 	private Integer goldIncreaseIncrement;
 	private Integer populationIncreaseIncrement;
@@ -65,6 +64,14 @@ public class Player {
 	
 	public IntegerProperty populationProperty() {
 		return population;
+	}
+	
+	public StringProperty nameProperty() {
+		return nameProperty;
+	}
+	
+	public ObjectProperty<PLAYER_STATUS> statusProperty() {
+		return statusProperty;
 	}
 	
 	public void tick() {

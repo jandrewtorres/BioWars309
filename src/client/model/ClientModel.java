@@ -22,8 +22,8 @@ public class ClientModel {
 
 	private ServerCommunicator communicator;
 	private String clientName;
-	public ObservableList<Player> players;
-	public BooleanProperty gameStarted;
+	private ObservableList<Player> players;
+	private BooleanProperty gameStarted;
 	
 	public ClientModel(ServerCommunicator communicator) {
 		this.communicator = communicator;
@@ -74,7 +74,7 @@ public class ClientModel {
 	
 	public Player getPlayerByName(String playerName) {
 		for(Player p : players) {
-			if(p.nameProperty.get().equals(playerName)) {
+			if(p.nameProperty().get().equals(playerName)) {
 				return p;
 			}
 		}
@@ -83,5 +83,17 @@ public class ClientModel {
 	
 	public void addPlayer(Player p) {
 		players.add(p);
+	}
+	
+	public ObservableList<Player> getPlayers() {
+		return players;
+	}
+	
+	public void startGame() {
+		gameStarted.set(true);
+	}
+	
+	public BooleanProperty getGameStartedProperty() {
+		return gameStarted;
 	}
 }

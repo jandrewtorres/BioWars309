@@ -33,16 +33,16 @@ public class ServerViewerController {
 	
 	@FXML
 	private void initialize() {
-		playerNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty);
+		playerNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
 		goldColumn.setCellValueFactory(cellData -> cellData.getValue().goldProperty().asObject());
 		populationColumn.setCellValueFactory(cellData -> cellData.getValue().populationProperty().asObject());
 		
 		playerTable.setItems(game.getPlayers());
-		gameStatusLabel.textProperty().bind(game.statusProperty.asString());
+		gameStatusLabel.textProperty().bind(game.getGameStatusProperty().asString());
 		gameTimeLabel.textProperty().bind(
 			Bindings.createStringBinding(() -> 
-				formatInterval(game.currentTimeProperty.get())
-				, game.currentTimeProperty));
+				formatInterval(game.getCurrentTimeProperty().get())
+				, game.getCurrentTimeProperty()));
 	}
 	
     private String formatInterval(final long l)

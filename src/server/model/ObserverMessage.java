@@ -16,4 +16,12 @@ public class ObserverMessage {
 		type = t;
 		value = v;
 	}
+	
+	public Object getValue() {
+		return value;
+	}
+	
+	public MESSAGE_TYPE getMessageType() {
+		return type;
+	}
 }

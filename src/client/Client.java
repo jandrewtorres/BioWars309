@@ -99,7 +99,7 @@ public class Client extends Application {
 		Thread clientThread = new Thread(communicator);
 		clientThread.start();
 		
-		clientModel.gameStarted.addListener(new ChangeListener<Boolean>() {
+		clientModel.getGameStartedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 // Only if completed

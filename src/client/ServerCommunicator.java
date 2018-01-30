@@ -58,19 +58,19 @@ public class ServerCommunicator implements Runnable {
 		
 		if(messageType.equals("LOBBY_UPDATE")) {
 			Platform.runLater(() -> {
-				model.players.clear();
+				model.getPlayers().clear();
 				for(int player_index = 0; player_index < playerList.getLength(); player_index++) {
 					Node player = playerList.item(player_index);
 					String playerName = player.getChildNodes().item(0).getTextContent();
 					String playerStatus = player.getChildNodes().item(1).getTextContent();
-					model.players.add(new Player(playerName));
-					model.getPlayerByName(playerName).statusProperty.set(PLAYER_STATUS.fromString(playerStatus));
+					model.addPlayer(new Player(playerName));
+					model.getPlayerByName(playerName).statusProperty().set(PLAYER_STATUS.fromString(playerStatus));
 				}
 			});
 		}
 		else if(messageType.equals("GAME_STARTED")) {
 			Platform.runLater(() -> 
-				model.gameStarted.setValue(true)
+				model.startGame()
 			);
 		}
 	}
