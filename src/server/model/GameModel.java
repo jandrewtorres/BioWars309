@@ -11,6 +11,7 @@ import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import server.model.ObserverMessage.MESSAGE_TYPE;
 import server.model.Player.PLAYER_STATUS;
 
 public class GameModel extends Observable {
@@ -60,14 +61,14 @@ public class GameModel extends Observable {
 		players.remove(player);
 		
 		setChanged();
-		notifyObservers("UPDATE_PLAYERS");
+		notifyObservers(new ObserverMessage(MESSAGE_TYPE.UPDATE_LOBBY, null));
 	}
 	
 	public void addPlayer(Player player) {
 		players.add(player);
 		
 		setChanged();
-		notifyObservers("UPDATE_PLAYERS");
+		notifyObservers(new ObserverMessage(MESSAGE_TYPE.UPDATE_LOBBY, null));
 	}
 	
 	public void startGame() {
@@ -76,7 +77,7 @@ public class GameModel extends Observable {
 		gameTimer.scheduleAtFixedRate(new ClockTask(), 0, 1000);
 		
 		setChanged();
-		notifyObservers("GAME_STARTED");
+		notifyObservers(new ObserverMessage(MESSAGE_TYPE.GAME_STARTED, null));
 	}
 	
 	public void tick() {
@@ -97,7 +98,7 @@ public class GameModel extends Observable {
 		p.statusProperty.set(PLAYER_STATUS.READY);
 		
 		setChanged();
-		notifyObservers("UPDATE_PLAYERS");
+		notifyObservers(new ObserverMessage(MESSAGE_TYPE.UPDATE_LOBBY, null));
 		
 		if(shouldGameStart()) {
 			startGame();

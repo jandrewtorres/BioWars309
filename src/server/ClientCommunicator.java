@@ -43,7 +43,6 @@ public class ClientCommunicator extends Thread implements Observer {
 			}
 		} 
 		catch(EOFException e) {  
-			System.out.println("Client connection closed");
 			game.deleteObserver(this);
 			game.removePlayer(associatedPlayer);
 		} catch (Exception e) {
