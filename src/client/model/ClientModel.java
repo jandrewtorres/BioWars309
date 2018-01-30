@@ -1,11 +1,15 @@
 package client.model;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import client.Client;
 import client.ServerCommunicator;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -14,6 +18,8 @@ import javafx.collections.ObservableList;
 import server.model.Player;
 
 public class ClientModel {
+    private static final Logger clientLogger = Logger.getLogger(Client.class.getName());
+
 	private ServerCommunicator communicator;
 	private String clientName;
 	public ObservableList<Player> players;
@@ -43,7 +49,7 @@ public class ClientModel {
 			communicator.transmitMessage(messageDoc);
 			registered = true;
 		} catch (ParserConfigurationException e) {
-			System.out.println("Exception in registering client");
+			clientLogger.logp(Level.SEVERE, ClientModel.class.getName(), "registerClient", "Exception in registering client");
 		}
 		return registered;
 	}
@@ -62,7 +68,7 @@ public class ClientModel {
 			
 			communicator.transmitMessage(messageDoc);
 		} catch (ParserConfigurationException e) {
-			System.out.println("Exception in notifying server of ready status");
+			clientLogger.logp(Level.SEVERE, ClientModel.class.getName(), "setClientStatusReady", "Exception in notifying server of client ready status");
 		}
 	}
 	

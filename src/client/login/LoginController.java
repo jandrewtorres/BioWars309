@@ -1,5 +1,8 @@
 package client.login;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import client.Client;
 import client.model.ClientModel;
 import javafx.event.ActionEvent;
@@ -8,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class LoginController {
+    private static final Logger clientLogger = Logger.getLogger(Client.class.getName());
+
 	ClientModel model;
 	@FXML
 	Button enterButton;
@@ -31,7 +36,7 @@ public class LoginController {
 			try {
 				clientApp.switchToLobby();
 			} catch (Exception e) {
-				System.out.println("Exception in switching to Lobby scene");
+				clientLogger.logp(Level.SEVERE, LoginController.class.getName(), "onEnterButtonClicked", "Exception switching to lobby scene");
 			}
 		}
 	}

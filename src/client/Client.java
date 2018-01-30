@@ -2,6 +2,8 @@ package client;
 
 import java.io.FileInputStream;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import client.gameplay.GamePlayController;
 import client.gameplay.VirusMenuController;
@@ -21,11 +23,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import server.ServerApp;
 
 public class Client extends Application {
     private static final String CONFIG_FILE_NAME = "client_config.properties";
     private static final String CONFIG_DIR_SYSTEM_PROPERTY_NAME = "CONFIG_DIR";
-    
+    private static final Logger clientLogger = Logger.getLogger(Client.class.getName());
+
     private ClientSocket clientSocket;
     private Properties clientProperties;
     private Stage primaryStage;
@@ -53,7 +57,7 @@ public class Client extends Application {
 			clientProperties.load(new FileInputStream(propertiesFile));
 		} catch (Exception e) 
 		{
-			System.out.println("Exception in reading properties file.");
+			clientLogger.logp(Level.SEVERE, Client.class.getName(), "loadProperties", "Exception in reading properties file.");
 		}
 	}
 
@@ -102,7 +106,7 @@ public class Client extends Application {
                 		try {
 						switchToGamePlay();
 					} catch (Exception e) {
-						e.printStackTrace();
+						clientLogger.logp(Level.SEVERE, Client.class.getName(), "start", "Exception switching to the gameplay screen.");
 					}
                 }
             }

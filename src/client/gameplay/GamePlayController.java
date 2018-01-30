@@ -1,5 +1,8 @@
 package client.gameplay;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import client.Client;
 import client.model.ClientModel;
 import javafx.event.ActionEvent;
@@ -8,6 +11,8 @@ import javafx.scene.control.Button;
 
 
 public class GamePlayController {
+    private static final Logger clientLogger = Logger.getLogger(Client.class.getName());
+
 	@FXML
 	Button virusIcon;
 	@FXML
@@ -33,7 +38,7 @@ public class GamePlayController {
 		try {
 			clientApp.openVirusMenu();
 		}catch(Exception e) {
-			System.out.println("error opening submenu");
+			clientLogger.logp(Level.SEVERE, GamePlayController.class.getName(), "openVirusMenu", "Exception opening virus menu");
 		}
 
 	}
@@ -42,7 +47,7 @@ public class GamePlayController {
 		try {
 			clientApp.openVirusMkt();
 		}catch(Exception e) {
-			System.out.println("error opening submenu");
+			clientLogger.logp(Level.SEVERE, GamePlayController.class.getName(), "openVirusMkt", "Exception opening virus market");
 		}
 
 	}

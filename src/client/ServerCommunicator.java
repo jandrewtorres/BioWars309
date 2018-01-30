@@ -6,7 +6,8 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -19,6 +20,8 @@ import server.model.Player;
 import server.model.Player.PLAYER_STATUS;
 
 public class ServerCommunicator implements Runnable {
+    private static final Logger clientLogger = Logger.getLogger(Client.class.getName());
+
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
 	
@@ -32,7 +35,7 @@ public class ServerCommunicator implements Runnable {
 			this.out = new ObjectOutputStream(out);
 			this.in = new ObjectInputStream(in);
 		} catch (IOException e) {
-			e.printStackTrace();
+			clientLogger.logp(Level.SEVERE, ServerCommunicator.class.getName(), "constructor", "Exception creating or getting the object output and input streams");
 		}
 
 	}
@@ -81,14 +84,14 @@ public class ServerCommunicator implements Runnable {
 				receiveMessage(in.readObject());
 			} catch (ClassNotFoundException e) {
 				closeStreams();
-				System.out.println("Class Not Found - Exception in reading object from input stream");
+				clientLogger.logp(Level.SEVERE, ServerCommunicator.class.getName(), "run", "Class Not Found - Exception in reading object from input stream");
 			} catch(EOFException e) {
-				System.out.println("Lost connection to server. Goodbye.");
+				clientLogger.logp(Level.SEVERE, ServerCommunicator.class.getName(), "run", "Lost connection to server. Goodbye.");
 				closeStreams();
 				Platform.exit();
 				System.exit(0);
 			} catch (Exception e) {
-				System.out.println("Shutting down client");
+				clientLogger.logp(Level.SEVERE, ServerCommunicator.class.getName(), "run", "Shutting down the client");
 				running = false;
 				closeStreams();
 			}
@@ -101,14 +104,14 @@ public class ServerCommunicator implements Runnable {
             out.close();
         }
         catch (Exception e) {
-        		System.out.println("Exception in closing the client output stream");
+        		clientLogger.logp(Level.SEVERE, ServerCommunicator.class.getName(), "closeStreams", "Exception closing the output stream");
         }
         
         try {
             in.close();
         }
         catch (Exception e) {
-        		System.out.println("Exception in closing the client input stream");
+        		clientLogger.logp(Level.SEVERE, ServerCommunicator.class.getName(), "closeStreams", "Exception closing the input stream");
         }
         
     }
