@@ -4,7 +4,7 @@ public class ObserverMessage {
 	
 	public enum MESSAGE_TYPE {
 		UPDATE_LOBBY,
-		TICK,
+		GAME_UPDATE,
 		GAME_STARTED;
 	}
 	

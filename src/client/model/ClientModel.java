@@ -13,6 +13,8 @@ import client.Client;
 import client.ServerCommunicator;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.ReadOnlyBooleanWrapper;
+import javafx.beans.property.ReadOnlyLongProperty;
+import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import server.model.Player;
@@ -25,12 +27,14 @@ public class ClientModel {
 	private ObservableList<Player> players;
 	private ObservableList<Player> readOnlyPlayers;
 	private ReadOnlyBooleanWrapper gameStarted;
+	private ReadOnlyLongWrapper gameTime;
 	
 	public ClientModel(ServerCommunicator communicator) {
 		this.communicator = communicator;
 		this.players = FXCollections.observableArrayList();
 		this.readOnlyPlayers = FXCollections.unmodifiableObservableList(this.players);
 		this.gameStarted = new ReadOnlyBooleanWrapper(false);
+		this.gameTime = new ReadOnlyLongWrapper(0);
 	}
 	
 	public Boolean registerClient(String clientName) {
@@ -101,5 +105,13 @@ public class ClientModel {
 	
 	public void clearPlayers() {
 		players.clear();
+	}
+	
+	public void updateGameTime(Long time) {
+		gameTime.set(time);
+	}
+	
+	public ReadOnlyLongProperty getGameTime() {
+		return gameTime.getReadOnlyProperty();
 	}
 }

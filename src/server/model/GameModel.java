@@ -85,10 +85,10 @@ public class GameModel extends Observable {
 	public void tick() {
 		for(Player player : players) {
 			player.tick();
-			
-			setChanged();
-			notifyObservers(new ObserverMessage(MESSAGE_TYPE.TICK, null));
 		}
+		
+		setChanged();
+		notifyObservers(new ObserverMessage(MESSAGE_TYPE.GAME_UPDATE, null));
 	}
 	
 	public void setPlayerStatusReady(String playerName) {

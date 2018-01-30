@@ -102,7 +102,7 @@ public class ClientCommunicator extends Thread implements Observer {
 			
 			transmitCommand(messageDoc);
 		} catch (ParserConfigurationException e) {
-			serverLogger.logp(Level.SEVERE, ClientCommunicator.class.getName(), "updateLobby", "Exception in notifying server of ready status");
+			serverLogger.logp(Level.SEVERE, ClientCommunicator.class.getName(), "updateLobby", "Exception creating player lobby update message");
 		}
 	}
 	
@@ -115,12 +115,46 @@ public class ClientCommunicator extends Thread implements Observer {
 			
 			transmitCommand(messageDoc);
 		} catch (ParserConfigurationException e) {
-			serverLogger.logp(Level.SEVERE, ClientCommunicator.class.getName(), "gameStarted", "Exception in notifying server of ready status");
+			serverLogger.logp(Level.SEVERE, ClientCommunicator.class.getName(), "gameStarted", "Exception creating game started update message");
 		}
 	}
 	
-	private void tickUpdate() {
-		// TO DO
+	private void gameUpdate() {
+		Document messageDoc;
+		try {
+			messageDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+			Element gameUpdateElem = messageDoc.createElement("GAME_UPDATE");
+			
+			Element gameTimeElem = messageDoc.createElement("GAME_TIME");
+			gameTimeElem.appendChild(messageDoc.createTextNode(Long.toString(game.getCurrentTimeProperty().get())));
+			
+			gameUpdateElem.appendChild(gameTimeElem);
+			
+			Element playersElem = messageDoc.createElement("PLAYERS");
+			for(Player p : game.getPlayers()) {
+				Element playerElem = messageDoc.createElement("PLAYER");
+				
+				Element nameElem = messageDoc.createElement("NAME");
+				nameElem.appendChild(messageDoc.createTextNode(p.nameProperty().get()));
+				
+				Element goldElem = messageDoc.createElement("GOLD");
+				goldElem.appendChild(messageDoc.createTextNode(Integer.toString(p.goldProperty().get())));
+				
+				Element populationElem = messageDoc.createElement("POPULATION");
+				populationElem.appendChild(messageDoc.createTextNode(Integer.toString(p.populationProperty().get())));
+				
+				playerElem.appendChild(nameElem);
+				playerElem.appendChild(goldElem);
+				playerElem.appendChild(populationElem);
+				
+				playersElem.appendChild(playerElem);
+			}
+			gameUpdateElem.appendChild(playersElem);
+			messageDoc.appendChild(gameUpdateElem);
+			transmitCommand(messageDoc);
+		} catch(ParserConfigurationException e) {
+			serverLogger.logp(Level.SEVERE, ClientCommunicator.class.getName(), "tickUpdate", "Exception creating tick game update message");
+		}
 	}
 	
 	@Override
@@ -133,8 +167,8 @@ public class ClientCommunicator extends Thread implements Observer {
 		case GAME_STARTED:
 			gameStarted();
 			break;
-		case TICK:
-			tickUpdate();
+		case GAME_UPDATE:
+			gameUpdate();
 			break;
 		}
 	}

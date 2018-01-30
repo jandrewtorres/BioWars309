@@ -1,6 +1,5 @@
 package client;
 
-import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -52,33 +51,52 @@ public class ServerCommunicator implements Runnable {
 	
 	private void receiveMessage(Object rxData) {
 		Element root = ((Document)rxData).getDocumentElement();
-		NodeList playerList = root.getChildNodes();
-		
 		String messageType = root.getNodeName();
 		
-		if(messageType.equals("LOBBY_UPDATE")) {
-			Platform.runLater(() -> {
-				model.clearPlayers();
-				for(int player_index = 0; player_index < playerList.getLength(); player_index++) {
-					Node player = playerList.item(player_index);
-					String playerName = player.getChildNodes().item(0).getTextContent();
-					String playerStatus = player.getChildNodes().item(1).getTextContent();
-					model.addPlayer(new Player(playerName));
-					model.getPlayerByName(playerName).setPlayerStatus(PLAYER_STATUS.fromString(playerStatus));
-				}
-			});
+		switch(messageType) {
+			case "LOBBY_UPDATE":
+				updateLobby(root);
+				break;
+			case "GAME_STARTED":
+				startGame();
+				break;
+			case "GAME_UPDATE":
+				gameUpdate(root);
+				break;
 		}
-		else if(messageType.equals("GAME_STARTED")) {
-			Platform.runLater(() -> 
-				model.startGame()
-			);
-		}
+	}
+	
+	private void startGame() {
+		Platform.runLater(() -> 
+			model.startGame()
+		);
+	}
+	
+	private void updateLobby(Element root) {
+		NodeList playerList = root.getChildNodes();
+		Platform.runLater(() -> {
+			model.clearPlayers();
+			for(int player_index = 0; player_index < playerList.getLength(); player_index++) {
+				Node player = playerList.item(player_index);
+				String playerName = player.getChildNodes().item(0).getTextContent();
+				String playerStatus = player.getChildNodes().item(1).getTextContent();
+				model.addPlayer(new Player(playerName));
+				model.getPlayerByName(playerName).setPlayerStatus(PLAYER_STATUS.fromString(playerStatus));
+			}
+		});
+	}
+	
+	private void gameUpdate(Element root) {
+		Node gameTimeNode = root.getFirstChild();
+		NodeList playerList = gameTimeNode.getNextSibling().getChildNodes();
+		Platform.runLater(() -> {
+			model.updateGameTime(Long.parseLong(gameTimeNode.getTextContent()));
+		});
 	}
 	
 	@Override
 	public void run() {
 		while(running) {
-
 			try {
 				Thread.sleep(250);
 				receiveMessage(in.readObject());
