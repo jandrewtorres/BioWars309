@@ -5,10 +5,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javafx.application.Platform;
-import javafx.beans.property.LongProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleLongProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.ReadOnlyLongProperty;
+import javafx.beans.property.ReadOnlyLongWrapper;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import server.model.ObserverMessage.MESSAGE_TYPE;
@@ -16,9 +16,10 @@ import server.model.Player.PLAYER_STATUS;
 
 public class GameModel extends Observable {
 	private ObservableList<Player> players;
+	private ObservableList<Player> readOnlyPlayers;
 	private Timer gameTimer;
-	private ObjectProperty<GAME_STATUS> statusProperty;
-	private LongProperty currentTimeProperty;
+	private ReadOnlyObjectWrapper<GAME_STATUS> statusProperty;
+	private ReadOnlyLongWrapper currentTimeProperty;
 		
 	public enum GAME_STATUS {
 		WAITING("Waiting for players..."),
@@ -48,13 +49,14 @@ public class GameModel extends Observable {
 	
 	public GameModel() {
 		this.players = FXCollections.observableArrayList();
-		statusProperty = new SimpleObjectProperty<>(GAME_STATUS.WAITING);
+		this.readOnlyPlayers = FXCollections.unmodifiableObservableList(this.players);
+		statusProperty = new ReadOnlyObjectWrapper<>(GAME_STATUS.WAITING);
 		gameTimer = null;
-		currentTimeProperty = new SimpleLongProperty(0);
+		currentTimeProperty = new ReadOnlyLongWrapper(0);
 	}
 	
 	public ObservableList<Player> getPlayers() {
-		return players;
+		return readOnlyPlayers;
 	}
 	
 	public void removePlayer(Player player) {
@@ -85,7 +87,7 @@ public class GameModel extends Observable {
 			player.tick();
 			
 			setChanged();
-			notifyObservers("TICK");
+			notifyObservers(new ObserverMessage(MESSAGE_TYPE.TICK, null));
 		}
 	}
 	
@@ -95,7 +97,7 @@ public class GameModel extends Observable {
 		if(p == null)
 			return;
 		
-		p.statusProperty().set(PLAYER_STATUS.READY);
+		p.setPlayerStatusReady();
 		
 		setChanged();
 		notifyObservers(new ObserverMessage(MESSAGE_TYPE.UPDATE_LOBBY, null));
@@ -129,11 +131,11 @@ public class GameModel extends Observable {
 		return shouldStart;
 	}
 	
-	public ObjectProperty<GAME_STATUS> getGameStatusProperty() {
-		return statusProperty;
+	public ReadOnlyObjectProperty<GAME_STATUS> getGameStatusProperty() {
+		return statusProperty.getReadOnlyProperty();
 	}
 	
-	public LongProperty getCurrentTimeProperty() {
-		return currentTimeProperty;
+	public ReadOnlyLongProperty getCurrentTimeProperty() {
+		return currentTimeProperty.getReadOnlyProperty();
 	}
 }

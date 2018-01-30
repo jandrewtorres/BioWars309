@@ -11,7 +11,6 @@ import java.util.logging.Logger;
 public class ClientSocket {
 	private Socket theSocket;
     private static final Logger clientLogger = Logger.getLogger(Client.class.getName());
-
 	
 	public ClientSocket(String host, Integer port) {
 			try {

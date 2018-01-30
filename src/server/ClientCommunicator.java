@@ -19,6 +19,7 @@ import org.w3c.dom.Element;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import server.model.GameModel;
+import server.model.ObserverMessage;
 import server.model.Player;
 
 public class ClientCommunicator extends Thread implements Observer {
@@ -124,15 +125,17 @@ public class ClientCommunicator extends Thread implements Observer {
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		String cmd = (String) arg;
-		if(cmd.equals("UPDATE_PLAYERS")) {
+		ObserverMessage msg = (ObserverMessage) arg;
+		switch(msg.getMessageType()) {
+		case UPDATE_LOBBY:
 			updateLobby();
-		}
-		else if(cmd.equals("GAME_STARTED")) {
+			break;
+		case GAME_STARTED:
 			gameStarted();
-		}
-		else if(cmd.equals("TICK")) {
+			break;
+		case TICK:
 			tickUpdate();
+			break;
 		}
 	}
 }

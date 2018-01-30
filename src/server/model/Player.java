@@ -3,19 +3,19 @@ package server.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.ReadOnlyIntegerProperty;
+import javafx.beans.property.ReadOnlyIntegerWrapper;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.ReadOnlyStringProperty;
+import javafx.beans.property.ReadOnlyStringWrapper;
 
 public class Player {
-	private StringProperty nameProperty;
-	private ObjectProperty<PLAYER_STATUS> statusProperty;
+	private ReadOnlyStringWrapper nameProperty;
+	private ReadOnlyObjectWrapper<PLAYER_STATUS> statusProperty;
 	
-	private IntegerProperty gold;
-	private IntegerProperty population;
+	private ReadOnlyIntegerWrapper gold;
+	private ReadOnlyIntegerWrapper population;
 
 	private Integer goldIncreaseIncrement;
 	private Integer populationIncreaseIncrement;
@@ -25,7 +25,7 @@ public class Player {
 		READY("READY"),
 		PLAYING("PLAYING");
 		
-		String text;
+		private String text;
 	    private static Map map = new HashMap<>();
 
 		static {
@@ -49,29 +49,37 @@ public class Player {
 	}
 	
 	public Player(String name) {
-		this.nameProperty = new SimpleStringProperty(name);
-		this.gold = new SimpleIntegerProperty(0);
-		this.population = new SimpleIntegerProperty(10000);
-		this.statusProperty = new SimpleObjectProperty<>(PLAYER_STATUS.IN_LOBBY);
+		this.nameProperty = new ReadOnlyStringWrapper(name);
+		this.gold = new ReadOnlyIntegerWrapper(0);
+		this.population = new ReadOnlyIntegerWrapper(10000);
+		this.statusProperty = new ReadOnlyObjectWrapper<>(PLAYER_STATUS.IN_LOBBY);
 		
 		goldIncreaseIncrement = 10;
 		populationIncreaseIncrement = 5;
 	}
 	
-	public IntegerProperty goldProperty() {
-		return gold;
+	public ReadOnlyIntegerProperty goldProperty() {
+		return gold.getReadOnlyProperty();
 	}
 	
-	public IntegerProperty populationProperty() {
-		return population;
+	public ReadOnlyIntegerProperty populationProperty() {
+		return population.getReadOnlyProperty();
 	}
 	
-	public StringProperty nameProperty() {
-		return nameProperty;
+	public ReadOnlyStringProperty nameProperty() {
+		return nameProperty.getReadOnlyProperty();
 	}
 	
-	public ObjectProperty<PLAYER_STATUS> statusProperty() {
-		return statusProperty;
+	public ReadOnlyObjectProperty<PLAYER_STATUS> statusProperty() {
+		return statusProperty.getReadOnlyProperty();
+	}
+	
+	public void setPlayerStatusReady() {
+		statusProperty.set(PLAYER_STATUS.READY);
+	}
+	
+	public void setPlayerStatus(PLAYER_STATUS status) {
+		statusProperty.set(status);
 	}
 	
 	public void tick() {

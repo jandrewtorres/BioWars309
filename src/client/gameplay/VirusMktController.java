@@ -1,5 +1,8 @@
 package client.gameplay;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import client.Client;
 import client.model.ClientModel;
 import javafx.event.ActionEvent;
@@ -7,8 +10,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 public class VirusMktController {
-	ClientModel model;
-	Client clientApp;
+    private static final Logger clientLogger = Logger.getLogger(Client.class.getName());
+
+	private ClientModel model;
+	private Client clientApp;
 
 	@FXML
 	private Button exitButton;
@@ -27,7 +32,7 @@ public class VirusMktController {
 		try {
 			clientApp.closeVirusMenu(exitButton);
 		}catch(Exception e) {
-			System.out.println("can't close submenu");
+			clientLogger.logp(Level.SEVERE, VirusMktController.class.getName(), "exitMenu", "Exception closing virus market menu");
 		}
 	}
 	

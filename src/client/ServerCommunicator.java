@@ -26,7 +26,7 @@ public class ServerCommunicator implements Runnable {
 	private ObjectInputStream in;
 	
 	private Boolean running;
-	ClientModel model;
+	private ClientModel model;
 	
 	public ServerCommunicator(OutputStream out, InputStream in) {
 		running = true;
@@ -58,13 +58,13 @@ public class ServerCommunicator implements Runnable {
 		
 		if(messageType.equals("LOBBY_UPDATE")) {
 			Platform.runLater(() -> {
-				model.getPlayers().clear();
+				model.clearPlayers();
 				for(int player_index = 0; player_index < playerList.getLength(); player_index++) {
 					Node player = playerList.item(player_index);
 					String playerName = player.getChildNodes().item(0).getTextContent();
 					String playerStatus = player.getChildNodes().item(1).getTextContent();
 					model.addPlayer(new Player(playerName));
-					model.getPlayerByName(playerName).statusProperty().set(PLAYER_STATUS.fromString(playerStatus));
+					model.getPlayerByName(playerName).setPlayerStatus(PLAYER_STATUS.fromString(playerStatus));
 				}
 			});
 		}
@@ -85,15 +85,11 @@ public class ServerCommunicator implements Runnable {
 			} catch (ClassNotFoundException e) {
 				closeStreams();
 				clientLogger.logp(Level.SEVERE, ServerCommunicator.class.getName(), "run", "Class Not Found - Exception in reading object from input stream");
-			} catch(EOFException e) {
+			} catch(Exception e) {
 				clientLogger.logp(Level.SEVERE, ServerCommunicator.class.getName(), "run", "Lost connection to server. Goodbye.");
 				closeStreams();
 				Platform.exit();
 				System.exit(0);
-			} catch (Exception e) {
-				clientLogger.logp(Level.SEVERE, ServerCommunicator.class.getName(), "run", "Shutting down the client");
-				running = false;
-				closeStreams();
 			}
 		}
 	}

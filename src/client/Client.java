@@ -24,7 +24,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
-import server.ServerApp;
 
 public class Client extends Application {
     private static final String CONFIG_FILE_NAME = "client_config.properties";

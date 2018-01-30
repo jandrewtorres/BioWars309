@@ -11,8 +11,8 @@ import org.w3c.dom.Element;
 
 import client.Client;
 import client.ServerCommunicator;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.ReadOnlyBooleanProperty;
+import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import server.model.Player;
@@ -23,12 +23,14 @@ public class ClientModel {
 	private ServerCommunicator communicator;
 	private String clientName;
 	private ObservableList<Player> players;
-	private BooleanProperty gameStarted;
+	private ObservableList<Player> readOnlyPlayers;
+	private ReadOnlyBooleanWrapper gameStarted;
 	
 	public ClientModel(ServerCommunicator communicator) {
 		this.communicator = communicator;
 		this.players = FXCollections.observableArrayList();
-		this.gameStarted = new SimpleBooleanProperty(false);
+		this.readOnlyPlayers = FXCollections.unmodifiableObservableList(this.players);
+		this.gameStarted = new ReadOnlyBooleanWrapper(false);
 	}
 	
 	public Boolean registerClient(String clientName) {
@@ -86,14 +88,18 @@ public class ClientModel {
 	}
 	
 	public ObservableList<Player> getPlayers() {
-		return players;
+		return readOnlyPlayers;
 	}
 	
 	public void startGame() {
 		gameStarted.set(true);
 	}
 	
-	public BooleanProperty getGameStartedProperty() {
-		return gameStarted;
+	public ReadOnlyBooleanProperty getGameStartedProperty() {
+		return gameStarted.getReadOnlyProperty();
+	}
+	
+	public void clearPlayers() {
+		players.clear();
 	}
 }
