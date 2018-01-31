@@ -14,7 +14,8 @@ public class GamePlayController {
 	Button cureIcon;
 	@FXML
 	Button virusBuy;
-	
+	@FXML
+	Button cureBuy;
 	ClientModel model;
 
 	Client clientApp;
@@ -29,18 +30,34 @@ public class GamePlayController {
 	}
 	
 	@FXML
+	private void openCureMenu(ActionEvent event) {
+		try {
+			clientApp.openCureMenu();
+		}catch(Exception e) {
+			System.out.println("error opening submenu");
+		}
+	}
+	@FXML
 	private void openVirusMenu(ActionEvent event) {
 		try {
 			clientApp.openVirusMenu();
 		}catch(Exception e) {
 			System.out.println("error opening submenu");
 		}
-
 	}
 	@FXML
 	private void openVirusMkt(ActionEvent event) {
 		try {
 			clientApp.openVirusMkt();
+		}catch(Exception e) {
+			System.out.println("error opening submenu");
+		}
+
+	}
+	@FXML
+	private void openCureMkt(ActionEvent event) {
+		try {
+			clientApp.openCureMkt();
 		}catch(Exception e) {
 			System.out.println("error opening submenu");
 		}

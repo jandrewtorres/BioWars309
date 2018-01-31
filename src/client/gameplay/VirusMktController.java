@@ -25,7 +25,7 @@ public class VirusMktController {
 	@FXML
 	private void exitMenu(ActionEvent event) {
 		try {
-			clientApp.closeVirusMenu(exitButton);
+			clientApp.closeMenu(exitButton);
 		}catch(Exception e) {
 			System.out.println("can't close submenu");
 		}

@@ -178,7 +178,7 @@
                                     <AnchorPane prefHeight="69.0" prefWidth="247.0">
                                        <children>
                                           <Label fx:id="cureCt" layoutX="75.0" layoutY="21.0" text="Cure Count" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="66.0" AnchorPane.rightAnchor="56.0" />
-                                          <Button layoutX="195.0" layoutY="16.0" mnemonicParsing="false" styleClass="add" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <Button fx:id="cureBuy" layoutX="195.0" layoutY="16.0" mnemonicParsing="false" onAction="#openCureMkt" styleClass="add" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <graphic>
                                                 <ImageView fx:id="cureAdd" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -186,7 +186,7 @@
                                                    </image>
                                                 </ImageView>
                                              </graphic></Button>
-                                          <Button layoutX="-6.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="66.0" styleClass="items" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <Button fx:id="cureIcon" layoutX="-6.0" mnemonicParsing="false" onAction="#openCureMenu" prefHeight="60.0" prefWidth="66.0" styleClass="items" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <graphic>
                                                 <ImageView fx:id="cureUse" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
