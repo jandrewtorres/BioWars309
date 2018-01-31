@@ -36,7 +36,10 @@ public class VirusMenuController {
 		poxTarget.setItems(model.players);
 		sarsTarget.setItems(model.players);
 	}
-	
+	@FXML
+	private void applyVirus() {
+		//nothing yet
+	}
 	@FXML
 	private void exitMenu(ActionEvent event) {
 		try {
