@@ -27,7 +27,7 @@
                            </image>
                         </ImageView>
                      </graphic></Label>
-                  <Button layoutX="487.0" layoutY="38.0" mnemonicParsing="false" text="Buy (1 min)" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="15.0" />
+                  <Button fx:id="buyCold" layoutX="487.0" layoutY="38.0" mnemonicParsing="false" text="Buy (1 min)" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="15.0" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="-Infinity" prefHeight="75.0" prefWidth="200.0">
@@ -46,7 +46,7 @@
                         </ImageView>
                      </graphic></Label>
                   <Label alignment="CENTER" layoutX="110.0" layoutY="42.0" prefHeight="100.0" prefWidth="100.0" text="Flu Virus" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="0.0" />
-                  <Button layoutX="490.0" layoutY="38.0" mnemonicParsing="false" text="Buy (1 min)" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="15.0" />
+                  <Button fx:id="buyFlu" layoutX="490.0" layoutY="38.0" mnemonicParsing="false" text="Buy (1 min)" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="15.0" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="-Infinity" prefHeight="75.0" prefWidth="200.0">
@@ -65,7 +65,7 @@
                         </ImageView>
                      </graphic></Label>
                   <Label alignment="CENTER" layoutX="129.0" layoutY="44.0" prefHeight="100.0" prefWidth="100.0" text="Pox Virus" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="0.0" />
-                  <Button layoutX="491.0" layoutY="46.0" mnemonicParsing="false" text="Buy (3 min)" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="15.0" />
+                  <Button fx:id="buyPox" layoutX="491.0" layoutY="46.0" mnemonicParsing="false" text="Buy (3 min)" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="15.0" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="-Infinity" prefHeight="75.0" prefWidth="200.0">
@@ -84,7 +84,7 @@
                         </ImageView>
                      </graphic></Label>
                   <Label alignment="CENTER" layoutX="122.0" layoutY="42.0" prefHeight="100.0" prefWidth="100.0" text="SARS virus" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="0.0" />
-                  <Button layoutX="492.0" layoutY="44.0" mnemonicParsing="false" text="Buy (5 min)" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="15.0" />
+                  <Button fx:id="buySARS" layoutX="492.0" layoutY="44.0" mnemonicParsing="false" text="Buy (5 min)" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="15.0" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">

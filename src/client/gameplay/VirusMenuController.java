@@ -5,6 +5,8 @@ import client.model.ClientModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import server.model.Player;
 
 public class VirusMenuController {
 	ClientModel model;
@@ -12,6 +14,16 @@ public class VirusMenuController {
 
 	@FXML
 	private Button exitButton;
+	@FXML
+	private Button useVirus;
+	@FXML
+	private ChoiceBox<Player> coldTarget;
+	@FXML
+	private ChoiceBox<Player> fluTarget;
+	@FXML
+	private ChoiceBox<Player> poxTarget;
+	@FXML
+	private ChoiceBox<Player> sarsTarget;
 	
 	public VirusMenuController(ClientModel model) {
 		this.model = model;
@@ -19,7 +31,10 @@ public class VirusMenuController {
 	
 	@FXML
 	private void initialize() {
-		// Nothing here ... yet
+		coldTarget.setItems(model.players);
+		fluTarget.setItems(model.players);
+		poxTarget.setItems(model.players);
+		sarsTarget.setItems(model.players);
 	}
 	
 	@FXML

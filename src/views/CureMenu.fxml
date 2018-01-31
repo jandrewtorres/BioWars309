@@ -19,8 +19,8 @@
                      </image>
                   </ImageView>
                   <Label alignment="CENTER" layoutX="110.0" layoutY="30.0" prefHeight="100.0" prefWidth="150.0" text="Vaccine" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="0.0" />
-                  <Label fx:id="coldCt" layoutX="300.0" layoutY="42.0" text="Vaccine Count" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="0.0" />
-                  <Button layoutX="411.0" layoutY="25.0" mnemonicParsing="false" text="Apply" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="25.0" />
+                  <Label fx:id="vaccineCt" layoutX="300.0" layoutY="42.0" text="Vaccine Count" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="0.0" />
+                  <Button fx:id="useVaccine" layoutX="411.0" layoutY="25.0" mnemonicParsing="false" text="Apply" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="25.0" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -30,9 +30,9 @@
                         <Image url="@../assets/pills.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="fluCt" layoutX="300.0" layoutY="42.0" text="Med Count" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="0.0" />
+                  <Label fx:id="medCt" layoutX="300.0" layoutY="42.0" text="Med Count" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="0.0" />
                   <Label alignment="CENTER" layoutX="110.0" layoutY="42.0" prefHeight="100.0" prefWidth="150.0" text="Medication" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="0.0" />
-                  <Button layoutX="407.0" layoutY="25.0" mnemonicParsing="false" text="Apply" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="25.0" />
+                  <Button fx:id="useMeds" layoutX="407.0" layoutY="25.0" mnemonicParsing="false" text="Apply" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="25.0" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -42,9 +42,9 @@
                         <Image url="@../assets/drip.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="poxCt" layoutX="300.0" layoutY="44.0" text="IV count" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="0.0" />
+                  <Label fx:id="IVCt" layoutX="300.0" layoutY="44.0" text="IV count" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="0.0" />
                   <Label alignment="CENTER" layoutX="129.0" layoutY="44.0" prefHeight="100.0" prefWidth="150.0" text="IV drip" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="0.0" />
-                  <Button layoutX="407.0" layoutY="25.0" mnemonicParsing="false" text="Apply" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="25.0" />
+                  <Button fx:id="useIV" layoutX="407.0" layoutY="25.0" mnemonicParsing="false" text="Apply" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="25.0" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -54,9 +54,9 @@
                         <Image url="@../assets/hospital.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="sarsCt" layoutX="300.0" layoutY="42.0" text="Hospital Count" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="0.0" />
+                  <Label fx:id="hospitalCt" layoutX="300.0" layoutY="42.0" text="Hospital Count" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="0.0" />
                   <Label alignment="CENTER" layoutX="122.0" layoutY="42.0" prefHeight="100.0" prefWidth="150.0" text="Hospitals" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="0.0" />
-                  <Button layoutX="408.0" layoutY="25.0" mnemonicParsing="false" text="Apply" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="25.0" />
+                  <Button fx:id="useHospital" layoutX="408.0" layoutY="25.0" mnemonicParsing="false" text="Apply" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="25.0" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">

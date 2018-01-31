@@ -62,7 +62,8 @@
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="exitButton" layoutX="268.0" mnemonicParsing="false" onAction="#exitMenu" text="Exit" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.0" />
+                  <Button fx:id="exitButton" layoutX="268.0" mnemonicParsing="false" onAction="#exitMenu" text="Exit" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="0.0" />
+                  <Button fx:id="useVirus" layoutX="304.0" mnemonicParsing="false" text="Apply" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
          </children>
