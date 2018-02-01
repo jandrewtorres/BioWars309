@@ -19,7 +19,7 @@
                      </image>
                   </ImageView>
                   <Label alignment="CENTER" layoutX="110.0" layoutY="30.0" prefHeight="100.0" prefWidth="100.0" text="Cold Virus" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="0.0" />
-                  <Label fx:id="coldCt" layoutX="300.0" layoutY="42.0" text="500" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="225.0" AnchorPane.topAnchor="10.0">
+                  <Label layoutX="300.0" layoutY="42.0" text="500" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="225.0" AnchorPane.topAnchor="10.0">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -27,7 +27,7 @@
                            </image>
                         </ImageView>
                      </graphic></Label>
-                  <Button layoutX="487.0" layoutY="38.0" mnemonicParsing="false" text="Buy (1 min)" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="15.0" />
+                  <Button fx:id="buyCold" layoutX="487.0" layoutY="38.0" mnemonicParsing="false" text="Buy (1 min)" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="15.0" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="-Infinity" prefHeight="75.0" prefWidth="200.0">
@@ -37,7 +37,7 @@
                         <Image url="@../assets/flu.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="fluCt" layoutX="300.0" layoutY="42.0" text="1000" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="225.0" AnchorPane.topAnchor="15.0">
+                  <Label layoutX="300.0" layoutY="42.0" text="1000" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="225.0" AnchorPane.topAnchor="15.0">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -46,7 +46,7 @@
                         </ImageView>
                      </graphic></Label>
                   <Label alignment="CENTER" layoutX="110.0" layoutY="42.0" prefHeight="100.0" prefWidth="100.0" text="Flu Virus" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="0.0" />
-                  <Button layoutX="490.0" layoutY="38.0" mnemonicParsing="false" text="Buy (1 min)" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="15.0" />
+                  <Button fx:id="buyFlu" layoutX="490.0" layoutY="38.0" mnemonicParsing="false" text="Buy (1 min)" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="15.0" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="-Infinity" prefHeight="75.0" prefWidth="200.0">
@@ -56,7 +56,7 @@
                         <Image url="@../assets/pox.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="poxCt" layoutX="300.0" layoutY="44.0" text="5000" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="225.0" AnchorPane.topAnchor="15.0">
+                  <Label layoutX="300.0" layoutY="44.0" text="5000" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="225.0" AnchorPane.topAnchor="15.0">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -65,7 +65,7 @@
                         </ImageView>
                      </graphic></Label>
                   <Label alignment="CENTER" layoutX="129.0" layoutY="44.0" prefHeight="100.0" prefWidth="100.0" text="Pox Virus" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="0.0" />
-                  <Button layoutX="491.0" layoutY="46.0" mnemonicParsing="false" text="Buy (3 min)" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="15.0" />
+                  <Button fx:id="buyPox" layoutX="491.0" layoutY="46.0" mnemonicParsing="false" text="Buy (3 min)" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="15.0" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="-Infinity" prefHeight="75.0" prefWidth="200.0">
@@ -75,7 +75,7 @@
                         <Image url="@../assets/sars.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="sarsCt" layoutX="300.0" layoutY="42.0" text="50000" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="225.0" AnchorPane.topAnchor="15.0">
+                  <Label layoutX="300.0" layoutY="42.0" text="50000" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="225.0" AnchorPane.topAnchor="15.0">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -84,7 +84,7 @@
                         </ImageView>
                      </graphic></Label>
                   <Label alignment="CENTER" layoutX="122.0" layoutY="42.0" prefHeight="100.0" prefWidth="100.0" text="SARS virus" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="0.0" />
-                  <Button layoutX="492.0" layoutY="44.0" mnemonicParsing="false" text="Buy (5 min)" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="15.0" />
+                  <Button fx:id="buySARS" layoutX="492.0" layoutY="44.0" mnemonicParsing="false" text="Buy (5 min)" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="15.0" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">

@@ -5,6 +5,8 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import client.gameplay.CureMenuController;
+import client.gameplay.CureMktController;
 import client.gameplay.GamePlayController;
 import client.gameplay.VirusMenuController;
 import client.gameplay.VirusMktController;
@@ -175,7 +177,24 @@ public class Client extends Application {
 		VirusMktController controller = new VirusMktController(clientModel);
 		controller.setClientApp(this);
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/views/virusBuy.fxml"));
+		loader.setLocation(getClass().getResource("/views/VirusBuy.fxml"));
+		loader.setController(controller);
+		Parent root = (Parent) loader.load();
+		Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initOwner(primaryStage);
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setX(primaryStage.getX()+Math.abs(primaryStage.getWidth()-scene.getWidth())/4);
+        stage.setY(primaryStage.getY()+Math.abs(primaryStage.getHeight()-scene.getHeight())/4);
+        stage.show();
+	}
+	public void openCureMenu() throws Exception{
+		CureMenuController controller = new CureMenuController(clientModel);
+		controller.setClientApp(this);
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/views/CureMenu.fxml"));
 		loader.setController(controller);
 		Parent root = (Parent) loader.load();
 		Stage stage = new Stage();
@@ -189,7 +208,25 @@ public class Client extends Application {
         stage.show();
 	}
 	
-	public void closeVirusMenu(Button source) throws Exception{
+	public void openCureMkt() throws Exception{
+		CureMktController controller = new CureMktController(clientModel);
+		controller.setClientApp(this);
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/views/CureBuy.fxml"));
+		loader.setController(controller);
+		Parent root = (Parent) loader.load();
+		Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initOwner(primaryStage);
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setX(primaryStage.getX()+Math.abs(primaryStage.getWidth()-scene.getWidth())/4);
+        stage.setY(primaryStage.getY()+Math.abs(primaryStage.getHeight()-scene.getHeight())/4);
+        stage.show();
+	}
+	
+	public void closeMenu(Button source) throws Exception{
 		Stage stage = (Stage)source.getScene().getWindow();
 		stage.hide();
 	}
