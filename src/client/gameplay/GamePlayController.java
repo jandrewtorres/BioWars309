@@ -1,5 +1,8 @@
 package client.gameplay;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,8 +12,11 @@ import client.model.ClientModel;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import server.model.Player;
 
 
 public class GamePlayController {
@@ -27,9 +33,38 @@ public class GamePlayController {
 	@FXML
 	private Label gameTimeLabel;
 	
+	@FXML
+	private AnchorPane playerOneAnchorPane;
+	@FXML
+	private AnchorPane playerTwoAnchorPane;
+	@FXML
+	private AnchorPane playerThreeAnchorPane;
+	@FXML
+	private AnchorPane playerFourAnchorPane;
+	
+	@FXML
+	private Label playerOneNameLabel;
+	@FXML
+	private Label playerTwoNameLabel;
+	@FXML
+	private Label playerThreeNameLabel;
+	@FXML
+	private Label playerFourNameLabel;
+	
+	@FXML
+	private Label playerOnePopLabel;
+	@FXML
+	private Label playerTwoPopLabel;
+	@FXML
+	private Label playerThreePopLabel;
+	@FXML
+	private Label playerFourPopLabel;
+		
 	private ClientModel model;
 
 	private Client clientApp;
+	
+	private Map<String, List<Node>> playerHUDMap;
 	
 	public GamePlayController(ClientModel model) {
 		this.model = model;
@@ -41,6 +76,17 @@ public class GamePlayController {
 				Bindings.createStringBinding(() -> 
 					formatInterval(model.getGameTime().get())
 					, model.getGameTime()));
+		
+		initPlayerPanes();
+	}
+	
+	private void initPlayerPanes() {
+		Integer numPlayers = model.getPlayers().size();
+		
+		Player pOne = model.getPlayers().get(0);
+		playerOneNameLabel.textProperty().bind(pOne.nameProperty());
+		playerOnePopLabel.textProperty().bind(Bindings.createStringBinding(() ->
+			Integer.toString(pOne.populationProperty().asObject().get()), pOne.populationProperty()));
 	}
 	
 	@FXML

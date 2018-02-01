@@ -94,4 +94,9 @@ public class Player {
 	private void updatePopulation() {
 		population.set(population.get() + populationIncreaseIncrement);
 	}
+	
+	public void updateStats(Integer newGold, Integer newPop) {
+		population.set(newPop);
+		gold.set(newGold);
+	}
 }

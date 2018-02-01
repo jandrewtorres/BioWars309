@@ -36,3 +36,7 @@
 	-fx-background-size: 800 500;
 	-fx-background-position: center center;
 }
+
+.player-box {
+	-fx-background-color: white;
+}

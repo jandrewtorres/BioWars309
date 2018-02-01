@@ -108,6 +108,7 @@ public class Client extends Application {
                 		try {
 						switchToGamePlay();
 					} catch (Exception e) {
+						e.printStackTrace();
 						clientLogger.logp(Level.SEVERE, Client.class.getName(), "start", "Exception switching to the gameplay screen.");
 					}
                 }

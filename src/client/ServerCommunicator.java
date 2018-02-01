@@ -93,6 +93,14 @@ public class ServerCommunicator implements Runnable {
 		NodeList playerList = gameTimeNode.getNextSibling().getChildNodes();
 		Platform.runLater(() -> {
 			model.updateGameTime(Long.parseLong(gameTimeNode.getTextContent()));
+			for(Integer i = 0; i < playerList.getLength(); i++) {
+				Node player = playerList.item(i);
+				String playerName = player.getChildNodes().item(0).getTextContent();
+				String playerGold = player.getChildNodes().item(1).getTextContent();
+				String playerPop = player.getChildNodes().item(2).getTextContent();
+				Player p = model.getPlayerByName(playerName);
+				p.updateStats(Integer.parseInt(playerGold), Integer.parseInt(playerPop));
+			}
 		});
 	}
 	
