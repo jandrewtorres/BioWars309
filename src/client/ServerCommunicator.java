@@ -63,6 +63,8 @@ public class ServerCommunicator implements Runnable {
 			case "GAME_UPDATE":
 				gameUpdate(root);
 				break;
+			default:
+				break;
 		}
 	}
 	
