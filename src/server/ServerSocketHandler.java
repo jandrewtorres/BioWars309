@@ -4,11 +4,14 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import server.model.GameModel;
 
 public class ServerSocketHandler extends Thread {
-	
+    private static final Logger serverLogger = Logger.getLogger(ServerApp.class.getName());
+
 	private ServerSocket serverSocket;
 	private GameModel game;
 	
@@ -20,7 +23,7 @@ public class ServerSocketHandler extends Thread {
 			serverSocket = new ServerSocket(port);
 			serverSocket.setSoTimeout(5000);
 		} catch (IOException e) {
-			System.out.println("Exception in binding socket");
+			serverLogger.logp(Level.SEVERE, ServerSocketHandler.class.getName(), "constructor", "Exception in binding socket");
 		}
 	}
 	
@@ -39,14 +42,14 @@ public class ServerSocketHandler extends Thread {
 			} catch (SocketTimeoutException ste) { 
 				// DO NOTHING
 			} catch(Exception e) {
-				System.out.println("Exception in creating a connection to client");
+				serverLogger.logp(Level.SEVERE, ServerSocketHandler.class.getName(), "run", "Exception in creating a connection to client");
 			}
 		}
 		
 		try {
 			serverSocket.close();
 		} catch (IOException e) {
-			System.out.println("Exception in closing socket.");
+			serverLogger.logp(Level.SEVERE, ServerSocketHandler.class.getName(), "run", "Exception in closing socket");
 		}
 	}
 }

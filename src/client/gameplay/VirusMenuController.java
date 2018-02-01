@@ -1,5 +1,8 @@
 package client.gameplay;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import client.Client;
 import client.model.ClientModel;
 import javafx.event.ActionEvent;
@@ -9,6 +12,8 @@ import javafx.scene.control.ChoiceBox;
 import server.model.Player;
 
 public class VirusMenuController {
+    private static final Logger clientLogger = Logger.getLogger(Client.class.getName());
+
 	ClientModel model;
 	Client clientApp;
 
@@ -31,10 +36,10 @@ public class VirusMenuController {
 	
 	@FXML
 	private void initialize() {
-		coldTarget.setItems(model.players);
-		fluTarget.setItems(model.players);
-		poxTarget.setItems(model.players);
-		sarsTarget.setItems(model.players);
+		coldTarget.setItems(model.getPlayers());
+		fluTarget.setItems(model.getPlayers());
+		poxTarget.setItems(model.getPlayers());
+		sarsTarget.setItems(model.getPlayers());
 	}
 	@FXML
 	private void applyVirus() {
@@ -44,8 +49,9 @@ public class VirusMenuController {
 	private void exitMenu(ActionEvent event) {
 		try {
 			clientApp.closeMenu(exitButton);
-		}catch(Exception e) {
-			System.out.println("can't close submenu");
+		}
+		catch(Exception e) {
+			clientLogger.logp(Level.SEVERE, VirusMenuController.class.getName(), "exitMenu", "Exception closing the virus menu");
 		}
 	}
 	

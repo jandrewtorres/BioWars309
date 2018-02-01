@@ -1,28 +1,40 @@
 package client.model;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import client.Client;
 import client.ServerCommunicator;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.ReadOnlyBooleanProperty;
+import javafx.beans.property.ReadOnlyBooleanWrapper;
+import javafx.beans.property.ReadOnlyLongProperty;
+import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import server.model.Player;
 
 public class ClientModel {
+    private static final Logger clientLogger = Logger.getLogger(Client.class.getName());
+
 	private ServerCommunicator communicator;
 	private String clientName;
-	public ObservableList<Player> players;
-	public BooleanProperty gameStarted;
+	private ObservableList<Player> players;
+	private ObservableList<Player> readOnlyPlayers;
+	private ReadOnlyBooleanWrapper gameStarted;
+	private ReadOnlyLongWrapper gameTime;
 	
 	public ClientModel(ServerCommunicator communicator) {
 		this.communicator = communicator;
 		this.players = FXCollections.observableArrayList();
-		this.gameStarted = new SimpleBooleanProperty(false);
+		this.readOnlyPlayers = FXCollections.unmodifiableObservableList(this.players);
+		this.gameStarted = new ReadOnlyBooleanWrapper(false);
+		this.gameTime = new ReadOnlyLongWrapper(0);
 	}
 	
 	public Boolean registerClient(String clientName) {
@@ -43,7 +55,7 @@ public class ClientModel {
 			communicator.transmitMessage(messageDoc);
 			registered = true;
 		} catch (ParserConfigurationException e) {
-			System.out.println("Exception in registering client");
+			clientLogger.logp(Level.SEVERE, ClientModel.class.getName(), "registerClient", "Exception in registering client");
 		}
 		return registered;
 	}
@@ -62,13 +74,13 @@ public class ClientModel {
 			
 			communicator.transmitMessage(messageDoc);
 		} catch (ParserConfigurationException e) {
-			System.out.println("Exception in notifying server of ready status");
+			clientLogger.logp(Level.SEVERE, ClientModel.class.getName(), "setClientStatusReady", "Exception in notifying server of client ready status");
 		}
 	}
 	
 	public Player getPlayerByName(String playerName) {
 		for(Player p : players) {
-			if(p.nameProperty.get().equals(playerName)) {
+			if(p.nameProperty().get().equals(playerName)) {
 				return p;
 			}
 		}
@@ -77,5 +89,29 @@ public class ClientModel {
 	
 	public void addPlayer(Player p) {
 		players.add(p);
+	}
+	
+	public ObservableList<Player> getPlayers() {
+		return readOnlyPlayers;
+	}
+	
+	public void startGame() {
+		gameStarted.set(true);
+	}
+	
+	public ReadOnlyBooleanProperty getGameStartedProperty() {
+		return gameStarted.getReadOnlyProperty();
+	}
+	
+	public void clearPlayers() {
+		players.clear();
+	}
+	
+	public void updateGameTime(Long time) {
+		gameTime.set(time);
+	}
+	
+	public ReadOnlyLongProperty getGameTime() {
+		return gameTime.getReadOnlyProperty();
 	}
 }
