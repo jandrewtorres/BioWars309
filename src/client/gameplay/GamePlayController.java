@@ -63,6 +63,15 @@ public class GamePlayController {
 	@FXML
 	private Label playerFourPopLabel;
 	
+	@FXML
+	private Label popNum;
+	@FXML
+	private Label goldNum;
+	@FXML
+	private Label popRate;
+	@FXML
+	private Label goldRate;
+	
 	private List<PlayerStatusPane> statusPanes;
 	
 	private ClientModel model;
@@ -82,6 +91,7 @@ public class GamePlayController {
 					, model.getGameTime()));
 		initStatusPanes();
 		configureStatusPanes();
+		initMenuPanels();
 	}
 	
 	private void initStatusPanes() {
@@ -93,6 +103,25 @@ public class GamePlayController {
 		statusPanes.add(playerTwoPane);
 		statusPanes.add(playerThreePane);
 		statusPanes.add(playerFourPane);
+	}
+	
+	private void initMenuPanels() {
+		popNum.textProperty().bind(
+				Bindings.createStringBinding(
+						() -> String.format("%d", model.getMyPlayer().populationProperty().intValue()), 
+						model.getMyPlayer().populationProperty()));
+		goldNum.textProperty().bind(
+				Bindings.createStringBinding(
+						() -> String.format("%d", model.getMyPlayer().goldProperty().intValue()), 
+						model.getMyPlayer().goldProperty()));
+		popRate.textProperty().bind(
+				Bindings.createStringBinding(
+						() -> String.format("%d", model.getMyPlayer().populationProperty().intValue()), 
+						model.getMyPlayer().populationProperty()));
+		goldRate.textProperty().bind(
+				Bindings.createStringBinding(
+						() -> String.format("%d", model.getMyPlayer().goldProperty().intValue()), 
+						model.getMyPlayer().goldProperty()));
 	}
 	
 	private void configureStatusPanes() {
