@@ -18,6 +18,9 @@ import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import server.model.Player;
+import server.model.virus.Virus;
+import server.model.virus.VirusFactory;
+import server.model.virus.VirusFactory.VIRUS_TYPE;
 
 public class ClientModel {
     private static final Logger clientLogger = Logger.getLogger(Client.class.getName());
@@ -76,6 +79,36 @@ public class ClientModel {
 		} catch (ParserConfigurationException e) {
 			clientLogger.logp(Level.SEVERE, ClientModel.class.getName(), "setClientStatusReady", "Exception in notifying server of client ready status");
 		}
+	}
+	
+	public Boolean buyVirus(VIRUS_TYPE type) {
+		Virus v = new VirusFactory().createVirus(type);
+		System.out.println(Integer.toString(v.getPrice()));
+		if(v.getPrice() > getMyPlayer().goldProperty().get()) {
+			return false;
+		}
+		
+		Document messageDoc;
+		try {
+			messageDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+			Element buyVirusElem = messageDoc.createElement("BUY_VIRUS");
+			
+			Element nameElem = messageDoc.createElement("NAME");
+			nameElem.appendChild(messageDoc.createTextNode(clientName));
+			buyVirusElem.appendChild(nameElem);
+			
+			Element virusTypeElem = messageDoc.createElement("TYPE");
+			virusTypeElem.appendChild(messageDoc.createTextNode(type.toString()));
+			buyVirusElem.appendChild(virusTypeElem);
+			
+			messageDoc.appendChild(buyVirusElem);
+			
+			communicator.transmitMessage(messageDoc);
+		} catch(ParserConfigurationException e) {
+			clientLogger.logp(Level.SEVERE, ClientModel.class.getName(), "buyVirus", "Exception in trasmitting buy virus message to server");
+			return false;
+		}
+		return true;
 	}
 	
 	public Player getPlayerByName(String playerName) {

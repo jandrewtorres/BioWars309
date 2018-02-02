@@ -9,6 +9,11 @@ import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import server.model.virus.Virus;
+import server.model.virus.VirusFactory;
+import server.model.virus.VirusFactory.VIRUS_TYPE;
 
 public class Player {
 	private ReadOnlyStringWrapper nameProperty;
@@ -19,6 +24,8 @@ public class Player {
 
 	private Integer goldIncreaseIncrement;
 	private Integer populationIncreaseIncrement;
+	
+	private ObservableList<Virus> viruses;
 	
 	public enum PLAYER_STATUS {
 		IN_LOBBY("IN_LOBBY"),
@@ -56,6 +63,8 @@ public class Player {
 		
 		goldIncreaseIncrement = 10;
 		populationIncreaseIncrement = 5;
+		
+		viruses = FXCollections.observableArrayList();
 	}
 	
 	public ReadOnlyIntegerProperty goldProperty() {
@@ -98,5 +107,12 @@ public class Player {
 	public void updateStats(Integer newGold, Integer newPop) {
 		population.set(newPop);
 		gold.set(newGold);
+	}
+	
+	public void buyVirus(VIRUS_TYPE type) {
+		System.out.println("Player: " + nameProperty().get() + " buying a " + type.toString() + "virus");
+		Virus v = new VirusFactory().createVirus(type);
+		viruses.add(v);
+		gold.set(gold.get() - v.getPrice());
 	}
 }

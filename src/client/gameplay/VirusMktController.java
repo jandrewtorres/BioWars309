@@ -8,18 +8,19 @@ import client.model.ClientModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import server.model.virus.VirusFactory.VIRUS_TYPE;
 
 public class VirusMktController {
 
 	
 	@FXML
-	private Button buyCold;
+	private Button buyColdButton;
 	@FXML 
-	private Button buyFlu;
+	private Button buyFluButton;
 	@FXML
-	private Button buyPox;
+	private Button buyPoxButton;
 	@FXML 
-	private Button buySARS;
+	private Button buySARSButton;
     private static final Logger clientLogger = Logger.getLogger(Client.class.getName());
 
 	private ClientModel model;
@@ -36,36 +37,46 @@ public class VirusMktController {
 	private void initialize() {
 		// Nothing here ... yet
 	}
+	
 	@FXML
-	private void getCold(ActionEvent event) {
-		try {
-			clientApp.closeMenu(exitButton);
-		}catch(Exception e) {
-			System.out.println("can't buy Cold");
+	private void buyColdVirus(ActionEvent event) {
+		if(model.buyVirus(VIRUS_TYPE.COLD)) {
+			try {
+				clientApp.closeMenu(exitButton);
+			}catch(Exception e) {
+				System.out.println("can't buy Cold");
+			}
 		}
 	}
 	@FXML
-	private void getFlu(ActionEvent event) {
-		try {
-			clientApp.closeMenu(exitButton);
-		}catch(Exception e) {
-			System.out.println("can't buy Flu");
+	private void buyFluVirus(ActionEvent event) {
+		if(model.buyVirus(VIRUS_TYPE.FLU)) {
+			try {
+				clientApp.closeMenu(exitButton);
+			}catch(Exception e) {
+				System.out.println("can't buy Flu");
+			}
 		}
 	}
 	@FXML
-	private void getPox(ActionEvent event) {
-		try {
-			clientApp.closeMenu(exitButton);
-		}catch(Exception e) {
-			System.out.println("can't buy Pox");
+	private void buyPoxVirus(ActionEvent event) {
+		if(model.buyVirus(VIRUS_TYPE.POX)) {
+			try {
+				clientApp.closeMenu(exitButton);
+			}catch(Exception e) {
+				System.out.println("can't buy Pox");
+			}
 		}
 	}
+	
 	@FXML
-	private void getSARS(ActionEvent event) {
-		try {
-			clientApp.closeMenu(exitButton);
-		}catch(Exception e) {
-			System.out.println("can't buy SARS");
+	private void buySARSVirus(ActionEvent event) {
+		if(model.buyVirus(VIRUS_TYPE.SARS)) {
+			try {
+				clientApp.closeMenu(exitButton);
+			}catch(Exception e) {
+				System.out.println("can't buy SARS");
+			}
 		}
 	}
 	@FXML

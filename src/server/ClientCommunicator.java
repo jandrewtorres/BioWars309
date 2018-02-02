@@ -21,6 +21,7 @@ import javafx.collections.ObservableList;
 import server.model.GameModel;
 import server.model.ObserverMessage;
 import server.model.Player;
+import server.model.virus.VirusFactory.VIRUS_TYPE;
 
 public class ClientCommunicator extends Thread implements Observer {
 	private static Logger serverLogger = Logger.getLogger(ServerApp.class.getName());
@@ -66,6 +67,11 @@ public class ClientCommunicator extends Thread implements Observer {
 			Platform.runLater(() -> 
 				game.setPlayerStatusReady(playerName)
 			);
+		}
+		else if(messageType.equals("BUY_VIRUS")) {
+			Platform.runLater(() -> {
+				associatedPlayer.buyVirus(VIRUS_TYPE.fromString(root.getChildNodes().item(1).getTextContent()));
+			});
 		}
 	}
 	
