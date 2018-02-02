@@ -5,14 +5,13 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import client.gameplay.CureMenuController;
 import client.gameplay.CureMktController;
 import client.gameplay.GamePlayController;
-import client.gameplay.VirusMenuController;
 import client.gameplay.VirusMktController;
 import client.lobby.LobbyController;
 import client.login.LoginController;
 import client.model.ClientModel;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -156,46 +155,11 @@ public class Client extends Application {
 		primaryStage.centerOnScreen();
 	}
 	
-	public void openVirusMenu() throws Exception{
-		VirusMenuController controller = new VirusMenuController(clientModel);
-		controller.setClientApp(this);
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/views/VirusMenu.fxml"));
-		loader.setController(controller);
-		Parent root = (Parent) loader.load();
-		Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.initOwner(primaryStage);
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setX(primaryStage.getX()+Math.abs(primaryStage.getWidth()-scene.getWidth())/4);
-        stage.setY(primaryStage.getY()+Math.abs(primaryStage.getHeight()-scene.getHeight())/4);
-        stage.show();
-	}
-	
 	public void openVirusMkt() throws Exception{
 		VirusMktController controller = new VirusMktController(clientModel);
 		controller.setClientApp(this);
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/views/VirusBuy.fxml"));
-		loader.setController(controller);
-		Parent root = (Parent) loader.load();
-		Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.initOwner(primaryStage);
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setX(primaryStage.getX()+Math.abs(primaryStage.getWidth()-scene.getWidth())/4);
-        stage.setY(primaryStage.getY()+Math.abs(primaryStage.getHeight()-scene.getHeight())/4);
-        stage.show();
-	}
-	public void openCureMenu() throws Exception{
-		CureMenuController controller = new CureMenuController(clientModel);
-		controller.setClientApp(this);
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/views/CureMenu.fxml"));
 		loader.setController(controller);
 		Parent root = (Parent) loader.load();
 		Stage stage = new Stage();
