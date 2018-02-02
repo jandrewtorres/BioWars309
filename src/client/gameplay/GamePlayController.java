@@ -13,8 +13,14 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import server.model.Player;
 
@@ -26,10 +32,6 @@ public class GamePlayController {
 	private Button virusIcon;
 	@FXML
 	private Button cureIcon;
-	@FXML
-	private Button virusBuy;
-	@FXML
-	Button cureBuy;
 	@FXML
 	private Label gameTimeLabel;
 	
@@ -106,7 +108,54 @@ public class GamePlayController {
 			playerCounter += 1;
 		}
 	}
-	
+	@FXML
+	private void dragBegin(MouseEvent e) {
+		Dragboard db =  ((Node) e.getSource()).startDragAndDrop(TransferMode.ANY);
+        ClipboardContent content = new ClipboardContent();
+        content.putString(((Node) e.getSource()).getId());
+        db.setContent(content);
+        
+        e.consume();
+	}
+	@FXML
+	private void attackDone(DragEvent e) {
+		if (e.getTransferMode() == TransferMode.MOVE) {
+            try {
+				//add logic here
+			} catch (Exception error) {
+				clientLogger.logp(Level.WARNING, VirusMenuController.class.getName(), "attackPlayer", "Exception closing the virus menu");
+			}
+        }
+        e.consume();
+	}
+	@FXML
+	private void hoverPlayer(DragEvent e) {
+        if (e.getDragboard().hasString()) {
+            e.acceptTransferModes(TransferMode.ANY);
+        }
+        e.consume();
+	}
+	@FXML
+	private void choosePlayer(DragEvent e) {
+		((Node) e.getSource()).setStyle("-fx-border-color: red;");
+		e.consume();
+	}
+	@FXML
+	private void notChoosePlayer(DragEvent e) {
+		((Node) e.getSource()).setStyle("-fx-border-color: black;");
+		e.consume();
+	}
+	@FXML
+	private void attackPlayer(DragEvent e) {
+		Dragboard db = e.getDragboard();
+        boolean success = false;
+        if (db.hasString()) {
+           //attack logic here
+           success = true;
+        }
+        e.setDropCompleted(success);
+        e.consume();
+	}
 	@FXML
 	private void openCureMenu(ActionEvent event) {
 		try {
