@@ -12,9 +12,16 @@ import client.model.PlayerStatusPane;
 import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import server.model.Player;
 
@@ -26,10 +33,6 @@ public class GamePlayController {
 	private Button virusIcon;
 	@FXML
 	private Button cureIcon;
-	@FXML
-	private Button virusBuy;
-	@FXML
-	Button cureBuy;
 	@FXML
 	private Label gameTimeLabel;
 	
@@ -96,33 +99,76 @@ public class GamePlayController {
 		Integer playerCounter = 0;
 		ObservableList<Player> players = model.getPlayers();
 		
-		for(PlayerStatusPane pane : statusPanes) {
+		for(PlayerStatusPane p : statusPanes) {
 			if(playerCounter < players.size()) {
-				pane.bindValues(players.get(playerCounter));
+				p.bindValues(players.get(playerCounter));
+				p.pane.setOnDragOver(initDrop);
+				p.pane.setOnDragEntered(choosePlayer);
+				p.pane.setOnDragExited(notChoosePlayer);
+				p.pane.setOnDragDropped(attackPlayer);
 			}
 			else {
-				pane.hide();
+				p.hide();
 			}
 			playerCounter += 1;
 		}
 	}
-	
 	@FXML
-	private void openCureMenu(ActionEvent event) {
-		try {
-			clientApp.openCureMenu();
-		}catch(Exception e) {
-			System.out.println("error opening submenu");
-		}
+	private void dragBegin(MouseEvent e) {
+		Dragboard db =  ((Node) e.getSource()).startDragAndDrop(TransferMode.ANY);
+        ClipboardContent content = new ClipboardContent();
+        content.putString(((Node) e.getSource()).getId());
+        db.setContent(content);
+        
+        e.consume();
 	}
 	@FXML
-	private void openVirusMenu(ActionEvent event) {
-		try {
-			clientApp.openVirusMenu();
-		}catch(Exception e) {
-			clientLogger.logp(Level.SEVERE, GamePlayController.class.getName(), "openVirusMenu", "Exception opening virus menu");
-		}
+	private void attackDone(DragEvent e) {
+		if (e.getTransferMode() == TransferMode.MOVE) {
+            try {
+				//remove virus from player inventory
+			} catch (Exception error) {
+				clientLogger.logp(Level.WARNING, GamePlayController.class.getName(), "attackPlayer", "could not attack");
+			}
+        }
+        e.consume();
 	}
+	EventHandler<DragEvent> initDrop = new EventHandler<DragEvent>() {
+		@Override
+		public void handle(DragEvent e) {
+        	if (e.getDragboard().hasString()) {
+        		e.acceptTransferModes(TransferMode.ANY);
+        	}
+        	e.consume();		
+		}
+	};
+	EventHandler<DragEvent> choosePlayer = new EventHandler<DragEvent>() {
+		@Override
+		public void handle(DragEvent e) {
+			((Node) e.getSource()).setStyle("-fx-border-color: red;");
+			e.consume();		
+		}
+	};
+	EventHandler<DragEvent> notChoosePlayer = new EventHandler<DragEvent>() {
+		@Override
+		public void handle(DragEvent e) {
+			((Node) e.getSource()).setStyle("-fx-border-color: transparent;");
+			e.consume();		
+		}
+	};
+	EventHandler<DragEvent> attackPlayer = new EventHandler<DragEvent>() {
+		@Override
+		public void handle(DragEvent e) {
+			Dragboard db = e.getDragboard();
+	        boolean success = false;
+	        if (db.hasString()) {
+	           //attack logic here
+	           success = true;
+	        }
+	        e.setDropCompleted(success);
+	        e.consume();	
+		}
+	};
 	@FXML
 	private void openVirusMkt(ActionEvent event) {
 		try {
