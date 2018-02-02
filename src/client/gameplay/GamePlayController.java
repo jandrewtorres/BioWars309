@@ -1,18 +1,18 @@
 package client.gameplay;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import client.Client;
 import client.model.ClientModel;
+import client.model.PlayerStatusPane;
 import javafx.beans.binding.Bindings;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -59,15 +59,16 @@ public class GamePlayController {
 	private Label playerThreePopLabel;
 	@FXML
 	private Label playerFourPopLabel;
-		
+	
+	private List<PlayerStatusPane> statusPanes;
+	
 	private ClientModel model;
 
 	private Client clientApp;
-	
-	private Map<String, List<Node>> playerHUDMap;
-	
+		
 	public GamePlayController(ClientModel model) {
 		this.model = model;
+		statusPanes = new ArrayList<>();
 	}
 	
 	@FXML
@@ -76,17 +77,34 @@ public class GamePlayController {
 				Bindings.createStringBinding(() -> 
 					formatInterval(model.getGameTime().get())
 					, model.getGameTime()));
-		
-		initPlayerPanes();
+		initStatusPanes();
+		configureStatusPanes();
 	}
 	
-	private void initPlayerPanes() {
-		Integer numPlayers = model.getPlayers().size();
+	private void initStatusPanes() {
+		PlayerStatusPane playerOnePane = new PlayerStatusPane(playerOneAnchorPane, playerOneNameLabel, playerOnePopLabel);
+		PlayerStatusPane playerTwoPane = new PlayerStatusPane(playerTwoAnchorPane, playerTwoNameLabel, playerTwoPopLabel);
+		PlayerStatusPane playerThreePane = new PlayerStatusPane(playerThreeAnchorPane, playerThreeNameLabel, playerThreePopLabel);
+		PlayerStatusPane playerFourPane = new PlayerStatusPane(playerFourAnchorPane, playerFourNameLabel, playerFourPopLabel);
+		statusPanes.add(playerOnePane);
+		statusPanes.add(playerTwoPane);
+		statusPanes.add(playerThreePane);
+		statusPanes.add(playerFourPane);
+	}
+	
+	private void configureStatusPanes() {
+		Integer playerCounter = 0;
+		ObservableList<Player> players = model.getPlayers();
 		
-		Player pOne = model.getPlayers().get(0);
-		playerOneNameLabel.textProperty().bind(pOne.nameProperty());
-		playerOnePopLabel.textProperty().bind(Bindings.createStringBinding(() ->
-			Integer.toString(pOne.populationProperty().asObject().get()), pOne.populationProperty()));
+		for(PlayerStatusPane pane : statusPanes) {
+			if(playerCounter < players.size()) {
+				pane.bindValues(players.get(playerCounter));
+			}
+			else {
+				pane.hide();
+			}
+			playerCounter += 1;
+		}
 	}
 	
 	@FXML

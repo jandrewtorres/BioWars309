@@ -94,6 +94,20 @@ public class ClientModel {
 	public ObservableList<Player> getPlayers() {
 		return readOnlyPlayers;
 	}
+
+	public ObservableList<Player> getOpposingPlayers() {
+		ObservableList<Player> opposingPlayers = FXCollections.observableArrayList();
+		for(Player p : players) {
+			if(!p.nameProperty().get().equals(clientName)) {
+				opposingPlayers.add(p);
+			}
+		}
+		return opposingPlayers;
+	}
+	
+	public Player getMyPlayer() {
+		return getPlayerByName(clientName);
+	}
 	
 	public void startGame() {
 		gameStarted.set(true);
