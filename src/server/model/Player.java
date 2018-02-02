@@ -25,7 +25,8 @@ public class Player {
 	private Integer goldIncreaseIncrement;
 	private Integer populationIncreaseIncrement;
 	
-	private ObservableList<Virus> viruses;
+	private ObservableList<Virus> virusInventory;
+	private ObservableList<Virus> virusApplied;
 	
 	public enum PLAYER_STATUS {
 		IN_LOBBY("IN_LOBBY"),
@@ -64,7 +65,8 @@ public class Player {
 		goldIncreaseIncrement = 10;
 		populationIncreaseIncrement = 5;
 		
-		viruses = FXCollections.observableArrayList();
+		virusInventory = FXCollections.observableArrayList();
+		virusApplied = FXCollections.observableArrayList();
 	}
 	
 	public ReadOnlyIntegerProperty goldProperty() {
@@ -94,6 +96,22 @@ public class Player {
 	public void tick() {
 		updateGold();
 		updatePopulation();
+		
+		Integer virusDecrementFactor = updateVirusApplied();
+		updateVaccinations(virusDecrementFactor);
+	}
+	
+	private Integer updateVirusApplied() {
+		Integer decrementFactor = 0;
+		for(Virus v : virusApplied) {
+			decrementFactor += v.getDecrementToPopulation();
+		}
+		population.set(population.get() - decrementFactor);
+		return decrementFactor;
+	}
+	
+	private void updateVaccinations(Integer decrementFactor) {		
+		// Not done yet
 	}
 	
 	private void updateGold() {
@@ -112,7 +130,7 @@ public class Player {
 	public void buyVirus(VIRUS_TYPE type) {
 		System.out.println("Player: " + nameProperty().get() + " buying a " + type.toString() + "virus");
 		Virus v = new VirusFactory().createVirus(type);
-		viruses.add(v);
+		virusInventory.add(v);
 		gold.set(gold.get() - v.getPrice());
 	}
 }
