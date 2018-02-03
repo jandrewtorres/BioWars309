@@ -7,7 +7,10 @@ import client.Client;
 import client.model.ClientModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.stage.StageStyle;
 import server.model.virus.VirusFactory.VIRUS_TYPE;
 
 public class VirusMktController {
@@ -46,6 +49,13 @@ public class VirusMktController {
 			}catch(Exception e) {
 				System.out.println("can't buy Cold");
 			}
+		}else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initStyle(StageStyle.UTILITY);
+			alert.setHeaderText("Insufficient Funds");
+			alert.setContentText("More gold needed to buy cold virus");
+
+			alert.showAndWait();
 		}
 	}
 	@FXML
@@ -56,6 +66,13 @@ public class VirusMktController {
 			}catch(Exception e) {
 				System.out.println("can't buy Flu");
 			}
+		}else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initStyle(StageStyle.UTILITY);
+			alert.setHeaderText("Insufficient Funds");
+			alert.setContentText("More gold needed to buy flu virus");
+
+			alert.showAndWait();
 		}
 	}
 	@FXML
@@ -66,6 +83,13 @@ public class VirusMktController {
 			}catch(Exception e) {
 				System.out.println("can't buy Pox");
 			}
+		}else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initStyle(StageStyle.UTILITY);
+			alert.setHeaderText("Insufficient Funds");
+			alert.setContentText("More gold needed to buy pox virus");
+
+			alert.showAndWait();
 		}
 	}
 	
@@ -77,6 +101,13 @@ public class VirusMktController {
 			}catch(Exception e) {
 				System.out.println("can't buy SARS");
 			}
+		}else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initStyle(StageStyle.UTILITY);
+			alert.setHeaderText("Insufficient Funds");
+			alert.setContentText("More gold needed to buy sars virus");
+
+			alert.showAndWait();
 		}
 	}
 	@FXML
