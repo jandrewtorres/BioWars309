@@ -63,6 +63,24 @@ public class GamePlayController {
 	@FXML
 	private Label playerFourPopLabel;
 	
+	@FXML
+	private Label inventoryColdCountLabel;
+	@FXML
+	private Label inventoryFluCountLabel;
+	@FXML
+	private Label inventoryPoxCountLabel;
+	@FXML
+	private Label inventorySarsCountLabel;
+	
+	@FXML
+	private AnchorPane coldInventoryPane;
+	@FXML
+	private AnchorPane fluInventoryPane;
+	@FXML
+	private AnchorPane poxInventoryPane;
+	@FXML
+	private AnchorPane sarsInventoryPane;
+	
 	private List<PlayerStatusPane> statusPanes;
 	
 	private ClientModel model;
@@ -76,12 +94,41 @@ public class GamePlayController {
 	
 	@FXML
 	private void initialize() {
+		bindGameClock();
+		bindInventoryLabels();
+		bindInventoryVaccineLabels();
+		initStatusPanes();
+		configureStatusPanes();
+	}
+	
+	private void bindGameClock() {
 		gameTimeLabel.textProperty().bind(
 				Bindings.createStringBinding(() -> 
 					formatInterval(model.getGameTime().get())
 					, model.getGameTime()));
-		initStatusPanes();
-		configureStatusPanes();
+	}
+	
+	private void bindInventoryVaccineLabels() {
+		// Nothing yet
+	}
+	
+	private void bindInventoryLabels() {
+		inventoryColdCountLabel.textProperty().bind(
+				Bindings.createStringBinding(() ->
+						Integer.toString(model.getMyPlayer().getInventory().getColdVirusCount().get()),
+						model.getMyPlayer().getInventory().getColdVirusCount()));
+		inventoryFluCountLabel.textProperty().bind(
+				Bindings.createStringBinding(() ->
+						Integer.toString(model.getMyPlayer().getInventory().getFluVirusCount().get()),
+						model.getMyPlayer().getInventory().getFluVirusCount()));
+		inventoryPoxCountLabel.textProperty().bind(
+				Bindings.createStringBinding(() ->
+						Integer.toString(model.getMyPlayer().getInventory().getPoxVirusCount().get()),
+						model.getMyPlayer().getInventory().getPoxVirusCount()));
+		inventorySarsCountLabel.textProperty().bind(
+				Bindings.createStringBinding(() ->
+						Integer.toString(model.getMyPlayer().getInventory().getSarsVirusCount().get()),
+						model.getMyPlayer().getInventory().getSarsVirusCount()));
 	}
 	
 	private void initStatusPanes() {

@@ -88,6 +88,8 @@ public class ClientModel {
 			return false;
 		}
 		
+		getPlayerByName(clientName).getInventory().buyVirus(type);
+		
 		Document messageDoc;
 		try {
 			messageDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();

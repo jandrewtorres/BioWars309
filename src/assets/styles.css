@@ -40,3 +40,31 @@
 .player-box {
 	-fx-background-color: white;
 }
+
+.cold-inventory {
+	-fx-background-image: url("cold.png");
+	-fx-background-size: 80 80;
+	-fx-background-position: center center;
+	-fx-background-repeat: no-repeat;
+}
+
+.flu-inventory {
+	-fx-background-image: url("flu.png");
+	-fx-background-size: 80 80;
+	-fx-background-position: center center;
+	-fx-background-repeat: no-repeat;
+}
+
+.pox-inventory {
+	-fx-background-image: url("pox.png");
+	-fx-background-size: 80 80;
+	-fx-background-position: center center;
+	-fx-background-repeat: no-repeat;
+}
+
+.sars-inventory {
+	-fx-background-image: url("sars.png");
+	-fx-background-size: 80 80;
+	-fx-background-position: center center;
+	-fx-background-repeat: no-repeat;
+}

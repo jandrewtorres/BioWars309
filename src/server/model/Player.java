@@ -25,7 +25,7 @@ public class Player {
 	private Integer goldIncreaseIncrement;
 	private Integer populationIncreaseIncrement;
 	
-	private ObservableList<Virus> virusInventory;
+	private Inventory playerInventory;
 	private ObservableList<Virus> virusApplied;
 	
 	public enum PLAYER_STATUS {
@@ -65,7 +65,7 @@ public class Player {
 		goldIncreaseIncrement = 10;
 		populationIncreaseIncrement = 5;
 		
-		virusInventory = FXCollections.observableArrayList();
+		playerInventory = new Inventory();
 		virusApplied = FXCollections.observableArrayList();
 	}
 	
@@ -128,9 +128,11 @@ public class Player {
 	}
 	
 	public void buyVirus(VIRUS_TYPE type) {
-		System.out.println("Player: " + nameProperty().get() + " buying a " + type.toString() + "virus");
-		Virus v = new VirusFactory().createVirus(type);
-		virusInventory.add(v);
-		gold.set(gold.get() - v.getPrice());
+		playerInventory.buyVirus(type);
+		gold.set(gold.get() - new VirusFactory().createVirus(type).getPrice());
+	}
+	
+	public Inventory getInventory() {
+		return playerInventory;
 	}
 }

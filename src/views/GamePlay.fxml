@@ -73,6 +73,28 @@
                                               <RowConstraints minHeight="85.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                                 <RowConstraints minHeight="80.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
+                                             <children>
+                                                <AnchorPane fx:id="coldInventoryPane" prefHeight="200.0" prefWidth="200.0" styleClass="cold-inventory">
+                                                   <children>
+                                                      <Label fx:id="inventoryColdCountLabel" layoutX="82.0" layoutY="58.0" text="0" />
+                                                   </children></AnchorPane>
+                                                <AnchorPane fx:id="fluInventoryPane" prefHeight="200.0" prefWidth="200.0" styleClass="flu-inventory" GridPane.rowIndex="1">
+                                                   <children>
+                                                      <Label fx:id="inventoryFluCountLabel" layoutX="82.0" layoutY="56.0" text="0" />
+                                                   </children></AnchorPane>
+                                                <AnchorPane fx:id="poxInventoryPane" prefHeight="200.0" prefWidth="200.0" styleClass="pox-inventory" GridPane.rowIndex="2">
+                                                   <children>
+                                                      <Label fx:id="inventoryPoxCountLabel" layoutX="80.0" layoutY="62.0" text="0" />
+                                                   </children></AnchorPane>
+                                                <AnchorPane fx:id="sarsInventoryPane" prefHeight="200.0" prefWidth="200.0" styleClass="sars-inventory" GridPane.rowIndex="3">
+                                                   <children>
+                                                      <Label fx:id="inventorySarsCountLabel" layoutX="81.0" layoutY="57.0" text="0" />
+                                                   </children></AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                             </children>
                                           </GridPane>
                                        </children>
                                     </AnchorPane>
