@@ -25,7 +25,7 @@ public class VirusMktController {
 	@FXML 
 	private Button buySARSButton;
     private static final Logger clientLogger = Logger.getLogger(Client.class.getName());
-
+    private Alert alert;
 	private ClientModel model;
 	private Client clientApp;
 
@@ -34,6 +34,9 @@ public class VirusMktController {
 	
 	public VirusMktController(ClientModel model) {
 		this.model = model;
+		alert = new Alert(AlertType.WARNING);
+		alert.initStyle(StageStyle.UTILITY);
+		alert.setHeaderText("Insufficient Funds");
 	}
 	
 	@FXML
@@ -47,14 +50,10 @@ public class VirusMktController {
 			try {
 				clientApp.closeMenu(exitButton);
 			}catch(Exception e) {
-				System.out.println("can't buy Cold");
+				clientLogger.logp(Level.WARNING, VirusMktController.class.getName(), "buyColdVirus", "Exception buying cold virus");
 			}
 		}else {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.initStyle(StageStyle.UTILITY);
-			alert.setHeaderText("Insufficient Funds");
 			alert.setContentText("More gold needed to buy cold virus");
-
 			alert.showAndWait();
 		}
 	}
@@ -64,14 +63,10 @@ public class VirusMktController {
 			try {
 				clientApp.closeMenu(exitButton);
 			}catch(Exception e) {
-				System.out.println("can't buy Flu");
+				clientLogger.logp(Level.WARNING, VirusMktController.class.getName(), "buyFluVirus", "Exception buying flu virus");
 			}
 		}else {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.initStyle(StageStyle.UTILITY);
-			alert.setHeaderText("Insufficient Funds");
 			alert.setContentText("More gold needed to buy flu virus");
-
 			alert.showAndWait();
 		}
 	}
@@ -81,14 +76,10 @@ public class VirusMktController {
 			try {
 				clientApp.closeMenu(exitButton);
 			}catch(Exception e) {
-				System.out.println("can't buy Pox");
+				clientLogger.logp(Level.WARNING, VirusMktController.class.getName(), "buyPoxVirus", "Exception buying pox virus");
 			}
 		}else {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.initStyle(StageStyle.UTILITY);
-			alert.setHeaderText("Insufficient Funds");
 			alert.setContentText("More gold needed to buy pox virus");
-
 			alert.showAndWait();
 		}
 	}
@@ -99,14 +90,10 @@ public class VirusMktController {
 			try {
 				clientApp.closeMenu(exitButton);
 			}catch(Exception e) {
-				System.out.println("can't buy SARS");
+				clientLogger.logp(Level.WARNING, VirusMktController.class.getName(), "buySARSVirus", "Exception buying SARS virus");
 			}
 		}else {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.initStyle(StageStyle.UTILITY);
-			alert.setHeaderText("Insufficient Funds");
 			alert.setContentText("More gold needed to buy sars virus");
-
 			alert.showAndWait();
 		}
 	}
