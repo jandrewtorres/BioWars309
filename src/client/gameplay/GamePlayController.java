@@ -91,7 +91,7 @@ public class GamePlayController {
 					, model.getGameTime()));
 		initStatusPanes();
 		configureStatusPanes();
-		initMenuPanels();
+		initStatsPanel();
 	}
 	
 	private void initStatusPanes() {
@@ -105,7 +105,7 @@ public class GamePlayController {
 		statusPanes.add(playerFourPane);
 	}
 	
-	private void initMenuPanels() {
+	private void initStatsPanel() {
 		popNum.textProperty().bind(
 				Bindings.createStringBinding(
 						() -> String.format("%d", model.getMyPlayer().populationProperty().intValue()), 
