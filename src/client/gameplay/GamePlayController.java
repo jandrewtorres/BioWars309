@@ -105,6 +105,7 @@ public class GamePlayController {
 	private void initialize() {
 		bindGameClock();
 		bindInventoryLabels();
+		configureInventoryPanes();
 		bindInventoryVaccineLabels();
 		initStatusPanes();
 		configureStatusPanes();
@@ -189,26 +190,41 @@ public class GamePlayController {
 			playerCounter += 1;
 		}
 	}
-	@FXML
-	private void dragBegin(MouseEvent e) {
-		Dragboard db =  ((Node) e.getSource()).startDragAndDrop(TransferMode.ANY);
-        ClipboardContent content = new ClipboardContent();
-        content.putString(((Node) e.getSource()).getId());
-        db.setContent(content);
-        
-        e.consume();
+	private void configureInventoryPanes() {
+		coldInventoryPane.setOnDragDetected(dragBegin);
+		coldInventoryPane.setOnDragDone(attackDone);
+		fluInventoryPane.setOnDragDetected(dragBegin);
+		fluInventoryPane.setOnDragDone(attackDone);
+		poxInventoryPane.setOnDragDetected(dragBegin);
+		poxInventoryPane.setOnDragDone(attackDone);
+		sarsInventoryPane.setOnDragDetected(dragBegin);
+		sarsInventoryPane.setOnDragDone(attackDone);
+		
 	}
-	@FXML
-	private void attackDone(DragEvent e) {
-		if (e.getTransferMode() == TransferMode.MOVE) {
-            try {
-				//remove virus from player inventory
-			} catch (Exception error) {
-				clientLogger.logp(Level.WARNING, GamePlayController.class.getName(), "attackPlayer", "could not attack");
-			}
-        }
-        e.consume();
-	}
+	EventHandler<MouseEvent> dragBegin = new EventHandler<MouseEvent>() {
+		@Override
+		public void handle(MouseEvent e) {
+			Dragboard db =  ((Node) e.getSource()).startDragAndDrop(TransferMode.ANY);
+	        ClipboardContent content = new ClipboardContent();
+	        content.putString(((Node) e.getSource()).getId());
+	        db.setContent(content);
+	        
+	        e.consume();
+		}
+	};
+	EventHandler<DragEvent> attackDone = new EventHandler<DragEvent>() {
+		@Override
+		public void handle(DragEvent e) {
+			if (e.getTransferMode() == TransferMode.MOVE) {
+	            try {
+					//remove virus from player inventory
+				} catch (Exception error) {
+					clientLogger.logp(Level.WARNING, GamePlayController.class.getName(), "attackPlayer", "could not attack");
+				}
+	        }
+	        e.consume();
+		}
+	};
 	EventHandler<DragEvent> initDrop = new EventHandler<DragEvent>() {
 		@Override
 		public void handle(DragEvent e) {

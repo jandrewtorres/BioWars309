@@ -76,7 +76,12 @@ public class Player {
 	public ReadOnlyIntegerProperty populationProperty() {
 		return population.getReadOnlyProperty();
 	}
-	
+	public Integer populationIncrementProperty() {
+		return populationIncreaseIncrement;
+	}
+	public Integer goldIncrementProperty() {
+		return goldIncreaseIncrement;
+	}
 	public ReadOnlyStringProperty nameProperty() {
 		return nameProperty.getReadOnlyProperty();
 	}
