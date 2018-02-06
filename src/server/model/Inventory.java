@@ -60,4 +60,15 @@ public class Inventory {
 	public ReadOnlyIntegerProperty getSarsVirusCount() {
 		return poxVirusCount.getReadOnlyProperty();
 	}
+	
+	public Boolean hasVirusOfType(VIRUS_TYPE type) {
+		Boolean found = false;
+		for(Virus v : viruses) {
+			if(v.getType().equals(type)) {
+				found = true;
+				break;
+			}
+		}
+		return found;
+	}
 }

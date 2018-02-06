@@ -1,9 +1,12 @@
 package server.model.virus;
 
+import server.model.virus.VirusFactory.VIRUS_TYPE;
+
 public class ColdVirus extends Virus {
 	
 	public ColdVirus() {
-		super(COLD_VIRUS_INFO.RESEARCH_TIME.getVal(), 
+		super(VIRUS_TYPE.COLD,
+				COLD_VIRUS_INFO.RESEARCH_TIME.getVal(), 
 				COLD_VIRUS_INFO.POP_DECREMENT.getVal(), 
 				COLD_VIRUS_INFO.PRICE.getVal());
 	}

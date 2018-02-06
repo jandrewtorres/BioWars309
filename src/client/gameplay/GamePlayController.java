@@ -25,11 +25,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import server.model.Player;
+import server.model.virus.VirusFactory.VIRUS_TYPE;
 
 
 public class GamePlayController {
     private static final Logger clientLogger = Logger.getLogger(Client.class.getName());
-
+    
+    Player currentSelectedDragPlayer;
+    
 	@FXML
 	private Button virusIcon;
 	@FXML
@@ -179,9 +182,10 @@ public class GamePlayController {
 		
 		for(PlayerStatusPane p : statusPanes) {
 			if(playerCounter < players.size()) {
-				p.bindValues(players.get(playerCounter));
+				Player currPlayer = players.get(playerCounter);
+				p.bindValues(currPlayer);
 				p.pane.setOnDragOver(initDrop);
-				p.pane.setOnDragEntered(choosePlayer);
+				p.pane.setOnDragEntered(createDragEnteredHandler(currPlayer));
 				p.pane.setOnDragExited(notChoosePlayer);
 				p.pane.setOnDragDropped(attackPlayer);
 			}
@@ -191,78 +195,74 @@ public class GamePlayController {
 			playerCounter += 1;
 		}
 	}
+	
 	private void configureInventoryPanes() {
-		coldInventoryPane.setOnDragDetected(dragBegin);
-		coldInventoryPane.setOnDragDone(attackDone);
-		fluInventoryPane.setOnDragDetected(dragBegin);
-		fluInventoryPane.setOnDragDone(attackDone);
-		poxInventoryPane.setOnDragDetected(dragBegin);
-		poxInventoryPane.setOnDragDone(attackDone);
-		sarsInventoryPane.setOnDragDetected(dragBegin);
-		sarsInventoryPane.setOnDragDone(attackDone);
-		
+		coldInventoryPane.setOnDragDetected(createVirusDragDetectedHandler(VIRUS_TYPE.COLD));		
+		fluInventoryPane.setOnDragDetected(createVirusDragDetectedHandler(VIRUS_TYPE.FLU));
+		poxInventoryPane.setOnDragDetected(createVirusDragDetectedHandler(VIRUS_TYPE.POX));
+		sarsInventoryPane.setOnDragDetected(createVirusDragDetectedHandler(VIRUS_TYPE.SARS));
 	}
-	EventHandler<MouseEvent> dragBegin = new EventHandler<MouseEvent>() {
-		@Override
-		public void handle(MouseEvent e) {
-			Dragboard db =  ((Node) e.getSource()).startDragAndDrop(TransferMode.ANY);
-	        ClipboardContent content = new ClipboardContent();
-	        content.putString(((Node) e.getSource()).getId());
-	        System.out.println(content.getString());
-	        db.setContent(content);
-	        
-	        e.consume();
-		}
-	};
-	EventHandler<DragEvent> attackDone = new EventHandler<DragEvent>() {
-		@Override
-		public void handle(DragEvent e) {
-			if (e.getTransferMode() == TransferMode.MOVE) {
-	            try {
-					//remove virus from player inventory
-				} catch (Exception error) {
-					clientLogger.logp(Level.WARNING, GamePlayController.class.getName(), "attackPlayer", "could not attack");
+	
+	private EventHandler<MouseEvent> createVirusDragDetectedHandler(VIRUS_TYPE type) {
+		return new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent e) {
+				if(model.getMyPlayer().getInventory().hasVirusOfType(type)) {
+					Dragboard db = ((Node) e.getSource()).startDragAndDrop(TransferMode.ANY);
+					ClipboardContent content = new ClipboardContent();
+					content.putString(type.toString());
+					db.setContent(content);
 				}
-	        }
-	        e.consume();
-		}
-	};
-	EventHandler<DragEvent> initDrop = new EventHandler<DragEvent>() {
-		@Override
-		public void handle(DragEvent e) {
-        	if (e.getDragboard().hasString()) {
-        		e.acceptTransferModes(TransferMode.ANY);
-        	}
-        	e.consume();		
-		}
-	};
-	EventHandler<DragEvent> choosePlayer = new EventHandler<DragEvent>() {
-		@Override
-		public void handle(DragEvent e) {
-			((Node) e.getSource()).setStyle("-fx-border-color: red;");
-			e.consume();		
-		}
-	};
-	EventHandler<DragEvent> notChoosePlayer = new EventHandler<DragEvent>() {
-		@Override
-		public void handle(DragEvent e) {
-			((Node) e.getSource()).setStyle("-fx-border-color: transparent;");
-			e.consume();		
-		}
-	};
+				e.consume();
+			}
+		};
+	}
+	
 	EventHandler<DragEvent> attackPlayer = new EventHandler<DragEvent>() {
 		@Override
 		public void handle(DragEvent e) {
 			Dragboard db = e.getDragboard();
 	        boolean success = false;
 	        if (db.hasString()) {
-	           //attack logic here
+	           VIRUS_TYPE type = VIRUS_TYPE.fromString(db.getString());
+	           System.out.println("Attacking " + currentSelectedDragPlayer.nameProperty().get() + " with " + db.getString() + " virus ");
 	           success = true;
 	        }
 	        e.setDropCompleted(success);
 	        e.consume();	
 		}
 	};
+	
+	EventHandler<DragEvent> initDrop = new EventHandler<DragEvent>() {
+		@Override
+		public void handle(DragEvent e) {
+	        	if (e.getDragboard().hasString()) {
+	        		e.acceptTransferModes(TransferMode.ANY);
+	        	}
+	        	e.consume();		
+		}
+	};
+	
+	private EventHandler<DragEvent> createDragEnteredHandler(Player p) {
+		return new EventHandler<DragEvent>() {
+			@Override
+			public void handle(DragEvent event) {
+				currentSelectedDragPlayer = p;
+				((Node) event.getSource()).setStyle("-fx-border-color: red;");
+				event.consume();	
+			}
+		};
+	}
+	
+	EventHandler<DragEvent> notChoosePlayer = new EventHandler<DragEvent>() {
+		@Override
+		public void handle(DragEvent e) {
+			currentSelectedDragPlayer = null;
+			((Node) e.getSource()).setStyle("-fx-border-color: transparent;");
+			e.consume();		
+		}
+	};
+	
 	@FXML
 	private void openVirusMkt(ActionEvent event) {
 		try {
@@ -270,17 +270,18 @@ public class GamePlayController {
 		}catch(Exception e) {
 			clientLogger.logp(Level.SEVERE, GamePlayController.class.getName(), "openVirusMkt", "Exception opening virus market");
 		}
-
 	}
+	
 	@FXML
 	private void openCureMkt(ActionEvent event) {
 		try {
 			clientApp.openCureMkt();
 		}catch(Exception e) {
-			System.out.println("error opening submenu");
+			clientLogger.logp(Level.SEVERE, GamePlayController.class.getName(), "openCureMkt", "Exception opening cure market");
 		}
 
 	}
+	
 	public void setClientApp(Client app) {
 		this.clientApp = app;
 	}

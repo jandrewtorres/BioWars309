@@ -1,9 +1,12 @@
 package server.model.virus;
 
+import server.model.virus.VirusFactory.VIRUS_TYPE;
+
 public class PoxVirus extends Virus {
 	
 	public PoxVirus() {
-		super(POX_VIRUS_INFO.RESEARCH_TIME.getVal(), 
+		super(VIRUS_TYPE.POX,
+				POX_VIRUS_INFO.RESEARCH_TIME.getVal(), 
 				POX_VIRUS_INFO.POP_DECREMENT.getVal(), 
 				POX_VIRUS_INFO.PRICE.getVal());
 	}
