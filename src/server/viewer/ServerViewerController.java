@@ -2,6 +2,7 @@ package server.viewer;
 
 import java.util.concurrent.TimeUnit;
 
+import common.ClockFormatter;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -41,15 +42,7 @@ public class ServerViewerController {
 		gameStatusLabel.textProperty().bind(game.getGameStatusProperty().asString());
 		gameTimeLabel.textProperty().bind(
 			Bindings.createStringBinding(() -> 
-				formatInterval(game.getCurrentTimeProperty().get())
+				ClockFormatter.formatInterval(game.getCurrentTimeProperty().get())
 				, game.getCurrentTimeProperty()));
 	}
-	
-    private String formatInterval(final long l)
-    {
-        final long hr = TimeUnit.SECONDS.toHours(l);
-        final long min = TimeUnit.SECONDS.toMinutes(l - TimeUnit.HOURS.toSeconds(hr));
-        final long sec = TimeUnit.SECONDS.toSeconds(l - TimeUnit.HOURS.toSeconds(hr) - TimeUnit.MINUTES.toSeconds(min));
-        return String.format("%02d:%02d:%02d", hr, min, sec);
-    }
 }

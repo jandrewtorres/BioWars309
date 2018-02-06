@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import client.Client;
 import client.model.ClientModel;
 import client.model.PlayerStatusPane;
+import common.ClockFormatter;
 import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -115,7 +116,7 @@ public class GamePlayController {
 	private void bindGameClock() {
 		gameTimeLabel.textProperty().bind(
 				Bindings.createStringBinding(() -> 
-					formatInterval(model.getGameTime().get())
+					ClockFormatter.formatInterval(model.getGameTime().get())
 					, model.getGameTime()));
 	}
 	
@@ -283,13 +284,5 @@ public class GamePlayController {
 	public void setClientApp(Client app) {
 		this.clientApp = app;
 	}
-	
-    private String formatInterval(final long l)
-    {
-        final long hr = TimeUnit.SECONDS.toHours(l);
-        final long min = TimeUnit.SECONDS.toMinutes(l - TimeUnit.HOURS.toSeconds(hr));
-        final long sec = TimeUnit.SECONDS.toSeconds(l - TimeUnit.HOURS.toSeconds(hr) - TimeUnit.MINUTES.toSeconds(min));
-        return String.format("%02d:%02d:%02d", hr, min, sec);
-    }
 }
 
