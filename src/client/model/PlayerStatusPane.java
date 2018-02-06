@@ -27,8 +27,4 @@ public class PlayerStatusPane {
 	public void hide() {
 		pane.setVisible(false);
 	}
-	
-	public Player getAssociatedPlayer() {
-		return associatedPlayer;
-	}
 }
