@@ -207,6 +207,7 @@ public class GamePlayController {
 			Dragboard db =  ((Node) e.getSource()).startDragAndDrop(TransferMode.ANY);
 	        ClipboardContent content = new ClipboardContent();
 	        content.putString(((Node) e.getSource()).getId());
+	        System.out.println(content.getString());
 	        db.setContent(content);
 	        
 	        e.consume();
