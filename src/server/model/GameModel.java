@@ -13,6 +13,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import server.model.ObserverMessage.MESSAGE_TYPE;
 import server.model.Player.PLAYER_STATUS;
+import server.model.virus.VirusFactory;
+import server.model.virus.VirusFactory.VIRUS_TYPE;
 
 public class GameModel extends Observable {
 	private ObservableList<Player> players;
@@ -107,7 +109,7 @@ public class GameModel extends Observable {
 		}
 	}
 	
-	private Player getPlayerByName(String playerName) {
+	public Player getPlayerByName(String playerName) {
 		for(Player p : players) {
 			if(p.nameProperty().get().equals(playerName)) {
 				return p;
@@ -137,5 +139,10 @@ public class GameModel extends Observable {
 	
 	public ReadOnlyLongProperty getCurrentTimeProperty() {
 		return currentTimeProperty.getReadOnlyProperty();
+	}
+
+	public void applyVirus(Player associatedPlayer, Player opponent, VIRUS_TYPE vt) {
+		associatedPlayer.getInventory().useVirus(vt);
+		opponent.applyVirus(new VirusFactory().createVirus(vt));
 	}
 }

@@ -73,6 +73,13 @@ public class ClientCommunicator extends Thread implements Observer {
 				associatedPlayer.buyVirus(VIRUS_TYPE.fromString(root.getChildNodes().item(1).getTextContent()));
 			});
 		}
+		else if(messageType.equals("APPLY_VIRUS")) {
+			Platform.runLater(() -> {
+				VIRUS_TYPE vt = VIRUS_TYPE.fromString(root.getChildNodes().item(2).getTextContent());
+				Player opponent = game.getPlayerByName(root.getChildNodes().item(1).getTextContent());
+				game.applyVirus(associatedPlayer, opponent, vt);
+			});
+		}
 	}
 	
 	private void transmitCommand(Object data) {

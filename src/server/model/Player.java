@@ -140,4 +140,8 @@ public class Player {
 	public Inventory getInventory() {
 		return playerInventory;
 	}
+	
+	public void applyVirus(Virus v) {
+		virusApplied.add(v);
+	}
 }

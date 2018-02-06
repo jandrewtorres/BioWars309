@@ -1,9 +1,12 @@
 package server.model.virus;
 
+import server.model.virus.VirusFactory.VIRUS_TYPE;
+
 public class SARSVirus extends Virus {
 
 	public SARSVirus() {
-		super(SARS_VIRUS_INFO.RESEARCH_TIME.getVal(), 
+		super(VIRUS_TYPE.SARS,
+				SARS_VIRUS_INFO.RESEARCH_TIME.getVal(), 
 				SARS_VIRUS_INFO.POP_DECREMENT.getVal(), 
 				SARS_VIRUS_INFO.PRICE.getVal());
 	}

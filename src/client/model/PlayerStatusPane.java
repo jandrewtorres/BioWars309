@@ -9,6 +9,7 @@ public class PlayerStatusPane {
 	public AnchorPane pane;
 	public Label nameLabel;
 	public Label populationLabel;
+	private Player associatedPlayer;
 	
 	public PlayerStatusPane(AnchorPane pane, Label nameLabel, Label populationLabel) {
 		this.pane = pane;
@@ -17,6 +18,7 @@ public class PlayerStatusPane {
 	}
 	
 	public void bindValues(Player p) {
+		associatedPlayer = p;
 		nameLabel.textProperty().bind(p.nameProperty());
 		populationLabel.textProperty().bind(Bindings.createStringBinding(() ->
 			Integer.toString(p.populationProperty().asObject().get()), p.populationProperty()));
