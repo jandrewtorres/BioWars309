@@ -2,7 +2,6 @@ package client.gameplay;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -225,7 +224,9 @@ public class GamePlayController {
 	        boolean success = false;
 	        if (db.hasString()) {
 	           VIRUS_TYPE type = VIRUS_TYPE.fromString(db.getString());
-	           System.out.println("Attacking " + currentSelectedDragPlayer.nameProperty().get() + " with " + db.getString() + " virus ");
+	           System.out.println("Attacking " + currentSelectedDragPlayer.nameProperty().get() 
+	        		   + " with " + db.getString() + " virus ");
+	           model.applyVirusToOpponent(type, currentSelectedDragPlayer);
 	           success = true;
 	        }
 	        e.setDropCompleted(success);

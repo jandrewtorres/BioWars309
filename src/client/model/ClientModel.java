@@ -163,4 +163,32 @@ public class ClientModel {
 	public ReadOnlyLongProperty getGameTime() {
 		return gameTime.getReadOnlyProperty();
 	}
+
+	public void applyVirusToOpponent(VIRUS_TYPE type, Player opponent) {
+		getMyPlayer().getInventory().useVirus(type);
+		
+		Document messageDoc;
+		try {
+			messageDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+			Element applyVirusElem = messageDoc.createElement("APPLY_VIRUS");
+			
+			Element nameElem = messageDoc.createElement("NAME");
+			nameElem.appendChild(messageDoc.createTextNode(clientName));
+			applyVirusElem.appendChild(nameElem);
+			
+			Element opponentElem = messageDoc.createElement("OPPONENT");
+			opponentElem.appendChild(messageDoc.createTextNode(opponent.nameProperty().get()));
+			applyVirusElem.appendChild(opponentElem);
+			
+			Element virusTypeElem = messageDoc.createElement("TYPE");
+			virusTypeElem.appendChild(messageDoc.createTextNode(type.toString()));
+			applyVirusElem.appendChild(virusTypeElem);
+			
+			messageDoc.appendChild(applyVirusElem);
+			
+			communicator.transmitMessage(messageDoc);
+		} catch(ParserConfigurationException e) {
+			clientLogger.logp(Level.SEVERE, ClientModel.class.getName(), "applyVirusToOpponent", "Exception in trasmitting apply virus message to server");
+		}
+	}
 }

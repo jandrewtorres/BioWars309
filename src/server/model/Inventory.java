@@ -24,27 +24,6 @@ public class Inventory {
 		sarsVirusCount = new ReadOnlyIntegerWrapper(0);
 	}
 	
-	public void buyVirus(VIRUS_TYPE type) {
-		Virus v = new VirusFactory().createVirus(type);
-		viruses.add(v);
-		switch(type) {
-			case COLD:
-				coldVirusCount.set(coldVirusCount.get() + 1);
-				break;
-			case FLU:
-				fluVirusCount.set(fluVirusCount.get() + 1);
-				break;
-			case POX:
-				poxVirusCount.set(poxVirusCount.get() + 1);
-				break;
-			case SARS:
-				sarsVirusCount.set(sarsVirusCount.get() + 1);
-				break;
-			default:
-				break;
-		}
-	}
-	
 	public ReadOnlyIntegerProperty getColdVirusCount() {
 		return coldVirusCount.getReadOnlyProperty();
 	}
@@ -70,5 +49,41 @@ public class Inventory {
 			}
 		}
 		return found;
+	}
+	
+	public void buyVirus(VIRUS_TYPE type) {
+		Virus v = new VirusFactory().createVirus(type);
+		viruses.add(v);
+		setVirusCount(type, 1);
+	}
+	
+	public void useVirus(VIRUS_TYPE type) {
+		setVirusCount(type, -1);
+		
+		for(Virus v : viruses) {
+			if(v.getType().equals(type)) {
+				viruses.remove(v);
+				break;
+			}
+		}
+	}
+	
+	private void setVirusCount(VIRUS_TYPE type, Integer amount) {
+		switch(type) {
+			case COLD:
+				coldVirusCount.set(coldVirusCount.get() + amount);
+				break;
+			case FLU:
+				fluVirusCount.set(fluVirusCount.get() + amount);
+				break;
+			case POX:
+				poxVirusCount.set(poxVirusCount.get() + amount);
+				break;
+			case SARS:
+				sarsVirusCount.set(sarsVirusCount.get() + amount);
+				break;
+			default:
+				break;
+		}
 	}
 }
