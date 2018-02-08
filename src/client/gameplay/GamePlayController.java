@@ -83,7 +83,25 @@ public class GamePlayController {
 	private AnchorPane poxInventoryPane;
 	@FXML
 	private AnchorPane sarsInventoryPane;
-
+	
+	@FXML
+	private Label inventoryColdCureCountLabel;
+	@FXML
+	private Label inventoryFluCureCountLabel;
+	@FXML
+	private Label inventoryPoxCureCountLabel;
+	@FXML
+	private Label inventorySarsCureCountLabel;
+	
+	@FXML
+	private AnchorPane coldCureInventoryPane;
+	@FXML
+	private AnchorPane fluCureInventoryPane;
+	@FXML
+	private AnchorPane poxCureInventoryPane;
+	@FXML
+	private AnchorPane sarsCureInventoryPane;
+	
 	@FXML
 	private Label popNum;
 	@FXML

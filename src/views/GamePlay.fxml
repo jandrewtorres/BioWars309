@@ -39,7 +39,7 @@
                                  <children>
                                     <AnchorPane minHeight="200.0" minWidth="200.0" prefHeight="225.0" prefWidth="200.0">
                                        <children>
-                                          <GridPane alignment="BOTTOM_CENTER" gridLinesVisible="true" prefHeight="424.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <GridPane fx:id="inventory" alignment="BOTTOM_CENTER" gridLinesVisible="true" prefHeight="424.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <columnConstraints>
                                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -52,7 +52,7 @@
                                                 <RowConstraints minHeight="80.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                                <AnchorPane fx:id="coldInventoryPane" prefHeight="200.0" prefWidth="200.0" styleClass="cold-inventory" GridPane.rowIndex="1">
+                                                <AnchorPane fx:id="coldInventoryPane" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                                    <children>
                                                       <Label fx:id="inventoryColdCountLabel" layoutX="82.0" layoutY="58.0" text="0" />
                                                    </children></AnchorPane>
@@ -68,10 +68,22 @@
                                                    <children>
                                                       <Label fx:id="inventorySarsCountLabel" layoutX="81.0" layoutY="57.0" text="0" />
                                                    </children></AnchorPane>
-                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                <AnchorPane fx:id="coldCureInventoryPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <children>
+                                                      <Label fx:id="inventoryColdCureCountLabel" layoutX="83.0" layoutY="62.0" prefHeight="17.0" prefWidth="7.0" text="0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0" />
+                                                   </children></AnchorPane>
+                                                <AnchorPane fx:id="fluCureInventoryPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                   <children>
+                                                      <Label fx:id="inventoryFluCureCountLabel" layoutX="79.0" layoutY="62.0" text="0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0" />
+                                                   </children></AnchorPane>
+                                                <AnchorPane fx:id="poxCureInventoryPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                   <children>
+                                                      <Label fx:id="inventoryPoxCureCountLabel" layoutX="72.0" layoutY="67.0" text="0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0" />
+                                                   </children></AnchorPane>
+                                                <AnchorPane fx:id="sarsCureInventoryPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                   <children>
+                                                      <Label fx:id="inventorySarsCureCountLabel" layoutX="72.0" layoutY="52.0" text="0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0" />
+                                                   </children></AnchorPane>
                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                                    <children>
                                                       <Button fx:id="virusIcon" layoutX="-72.0" layoutY="-70.0" mnemonicParsing="false" onAction="#openVirusMkt" prefHeight="84.0" prefWidth="118.0" styleClass="items" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -104,7 +116,7 @@
                                     </AnchorPane>
                                     <AnchorPane fx:id="gameMap" prefHeight="200.0" prefWidth="200.0" styleClass="Map" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <GridPane fx:id="inventory" layoutX="239.0" layoutY="167.0" prefHeight="424.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <GridPane layoutX="239.0" layoutY="167.0" prefHeight="424.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <columnConstraints>
                                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

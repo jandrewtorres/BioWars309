@@ -15,7 +15,7 @@
 	-fx-background-color: #000000;
 }
 .items{
-	-fx-background-color: gray;
+	-fx-background-color: #23282d;
 	
 }
 .items:hover{
@@ -36,12 +36,14 @@
 	-fx-background-size: 800 500;
 	-fx-background-position: center center;
 }
-
+#inventory{
+	-fx-background-color: white;
+}
 .player-box {
 	-fx-background-color: white;
 }
 
-.cold-inventory {
+#coldInventoryPane {
 	-fx-background-image: url("cold.png");
 	-fx-background-size: 80 80;
 	-fx-background-position: center center;
@@ -68,3 +70,28 @@
 	-fx-background-position: center center;
 	-fx-background-repeat: no-repeat;
 }
+#coldCureInventoryPane{
+	-fx-background-image: url("coldCure.png");
+	-fx-background-size: 80 75;
+	-fx-background-position: center center;
+	-fx-background-repeat: no-repeat;
+}
+#fluCureInventoryPane{
+	-fx-background-image: url("fluCure.png");
+	-fx-background-size: 80 75;
+	-fx-background-position: center center;
+	-fx-background-repeat: no-repeat;
+}
+#poxCureInventoryPane{
+	-fx-background-image: url("poxCure.png");
+	-fx-background-size: 80 80;
+	-fx-background-position: center center;
+	-fx-background-repeat: no-repeat;
+}
+#sarsCureInventoryPane{
+	-fx-background-image: url("sarsCure.png");
+	-fx-background-size: 80 75;
+	-fx-background-position: center center;
+	-fx-background-repeat: no-repeat;
+}
+
