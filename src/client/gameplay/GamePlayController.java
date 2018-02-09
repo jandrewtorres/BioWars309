@@ -258,7 +258,7 @@ public class GamePlayController {
 					             ButtonType.CANCEL);
 					alert.setTitle("Vaccine Usage Alert");
 					Optional<ButtonType> result = alert.showAndWait();
-					if (result.get() == ButtonType.OK) {
+					if (result.isPresent() && result.get() == ButtonType.OK) {
 						model.getMyPlayer().getInventory().useCure(type);
 						model.getMyPlayer().applyCure(new CureFactory().createCure(type));
 					}
