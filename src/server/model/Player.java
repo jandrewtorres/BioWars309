@@ -11,6 +11,9 @@ import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import server.model.cure.Cure;
+import server.model.cure.CureFactory;
+import server.model.cure.CureFactory.CURE_TYPE;
 import server.model.virus.Virus;
 import server.model.virus.VirusFactory;
 import server.model.virus.VirusFactory.VIRUS_TYPE;
@@ -137,11 +140,20 @@ public class Player {
 		gold.set(gold.get() - new VirusFactory().createVirus(type).getPrice());
 	}
 	
+	public void buyCure(CURE_TYPE type) {
+		playerInventory.buyCure(type);
+		gold.set(gold.get() - new CureFactory().createCure(type).getPrice());
+	}
+	
 	public Inventory getInventory() {
 		return playerInventory;
 	}
 	
 	public void applyVirus(Virus v) {
 		virusApplied.add(v);
+	}
+	
+	public void applyCure(Cure c) {
+		//add the logic for counterActing virus
 	}
 }

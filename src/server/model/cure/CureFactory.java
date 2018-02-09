@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class CureFactory {
 
-	public Cure createVirus(CURE_TYPE type) {
+	public Cure createCure(CURE_TYPE type) {
 		switch(type) {
 			case COLDCURE:
 				return new ColdCure();
