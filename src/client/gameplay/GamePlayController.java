@@ -2,6 +2,7 @@ package client.gameplay;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,7 +16,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
@@ -24,6 +28,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import server.model.Player;
+import server.model.cure.CureFactory;
+import server.model.cure.CureFactory.CURE_TYPE;
 import server.model.virus.VirusFactory.VIRUS_TYPE;
 
 
@@ -127,6 +133,7 @@ public class GamePlayController {
 		bindGameClock();
 		bindInventoryLabels();
 		configureInventoryPanes();
+		configureVaccinePanes();
 		bindInventoryVaccineLabels();
 		initStatusPanes();
 		configureStatusPanes();
@@ -141,7 +148,22 @@ public class GamePlayController {
 	}
 	
 	private void bindInventoryVaccineLabels() {
-		// Nothing yet
+		inventoryColdCureCountLabel.textProperty().bind(
+				Bindings.createStringBinding(() ->
+						Integer.toString(model.getMyPlayer().getInventory().getColdCureCount().get()),
+						model.getMyPlayer().getInventory().getColdCureCount()));
+		inventoryFluCureCountLabel.textProperty().bind(
+				Bindings.createStringBinding(() ->
+						Integer.toString(model.getMyPlayer().getInventory().getFluCureCount().get()),
+						model.getMyPlayer().getInventory().getFluCureCount()));
+		inventoryPoxCureCountLabel.textProperty().bind(
+				Bindings.createStringBinding(() ->
+						Integer.toString(model.getMyPlayer().getInventory().getPoxCureCount().get()),
+						model.getMyPlayer().getInventory().getPoxCureCount()));
+		inventorySarsCureCountLabel.textProperty().bind(
+				Bindings.createStringBinding(() ->
+						Integer.toString(model.getMyPlayer().getInventory().getSarsCureCount().get()),
+						model.getMyPlayer().getInventory().getSarsCureCount()));
 	}
 	
 	private void bindInventoryLabels() {
@@ -219,7 +241,32 @@ public class GamePlayController {
 		poxInventoryPane.setOnDragDetected(createVirusDragDetectedHandler(VIRUS_TYPE.POX));
 		sarsInventoryPane.setOnDragDetected(createVirusDragDetectedHandler(VIRUS_TYPE.SARS));
 	}
-	
+	private void configureVaccinePanes() {
+		coldCureInventoryPane.setOnMousePressed(applyVaccine(CURE_TYPE.COLDCURE));
+		fluCureInventoryPane.setOnMousePressed(applyVaccine(CURE_TYPE.FLUCURE));
+		poxCureInventoryPane.setOnMousePressed(applyVaccine(CURE_TYPE.POXCURE));
+		sarsCureInventoryPane.setOnMousePressed(applyVaccine(CURE_TYPE.SARSCURE));
+	}
+	private EventHandler<MouseEvent> applyVaccine(CURE_TYPE type){
+		return new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent e) {
+				if(model.getMyPlayer().getInventory().hasCureOfType(type)) {
+					Alert alert = new Alert(AlertType.WARNING, 
+					            "Do you want to use " + type + "?",
+					             ButtonType.OK, 
+					             ButtonType.CANCEL);
+					alert.setTitle("Vaccine Usage Alert");
+					Optional<ButtonType> result = alert.showAndWait();
+					if (result.get() == ButtonType.OK) {
+						model.getMyPlayer().getInventory().useCure(type);
+						model.getMyPlayer().applyCure(new CureFactory().createCure(type));
+					}
+				}
+				e.consume();
+			}
+		};
+	}
 	private EventHandler<MouseEvent> createVirusDragDetectedHandler(VIRUS_TYPE type) {
 		return new EventHandler<MouseEvent>() {
 			@Override

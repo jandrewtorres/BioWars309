@@ -21,6 +21,7 @@ import javafx.collections.ObservableList;
 import server.model.GameModel;
 import server.model.ObserverMessage;
 import server.model.Player;
+import server.model.cure.CureFactory.CURE_TYPE;
 import server.model.virus.VirusFactory.VIRUS_TYPE;
 
 public class ClientCommunicator extends Thread implements Observer {
@@ -71,6 +72,11 @@ public class ClientCommunicator extends Thread implements Observer {
 		else if(messageType.equals("BUY_VIRUS")) {
 			Platform.runLater(() -> {
 				associatedPlayer.buyVirus(VIRUS_TYPE.fromString(root.getChildNodes().item(1).getTextContent()));
+			});
+		}
+		else if(messageType.equals("BUY_CURE")) {
+			Platform.runLater(() -> {
+				associatedPlayer.buyCure(CURE_TYPE.fromString(root.getChildNodes().item(1).getTextContent()));
 			});
 		}
 		else if(messageType.equals("APPLY_VIRUS")) {

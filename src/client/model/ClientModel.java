@@ -18,6 +18,9 @@ import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import server.model.Player;
+import server.model.cure.Cure;
+import server.model.cure.CureFactory;
+import server.model.cure.CureFactory.CURE_TYPE;
 import server.model.virus.Virus;
 import server.model.virus.VirusFactory;
 import server.model.virus.VirusFactory.VIRUS_TYPE;
@@ -83,7 +86,7 @@ public class ClientModel {
 	
 	public Boolean buyVirus(VIRUS_TYPE type) {
 		Virus v = new VirusFactory().createVirus(type);
-		System.out.println(Integer.toString(v.getPrice()));
+		//System.out.println(Integer.toString(v.getPrice()));
 		if(v.getPrice() > getMyPlayer().goldProperty().get()) {
 			return false;
 		}
@@ -113,6 +116,36 @@ public class ClientModel {
 		return true;
 	}
 	
+	public Boolean buyCure(CURE_TYPE type) {
+		Cure c = new CureFactory().createCure(type);
+		if (c.getPrice() > getMyPlayer().goldProperty().get()) {
+			return false;
+		}
+		getPlayerByName(clientName).getInventory().buyCure(type);
+		
+		Document messageDoc;
+		try {
+			messageDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+			Element buyCureElem = messageDoc.createElement("BUY_CURE");
+			
+			Element nameElem = messageDoc.createElement("NAME");
+			nameElem.appendChild(messageDoc.createTextNode(clientName));
+			buyCureElem.appendChild(nameElem);
+			
+			Element cureTypeElem = messageDoc.createElement("TYPE");
+			cureTypeElem.appendChild(messageDoc.createTextNode(type.toString()));
+			buyCureElem.appendChild(cureTypeElem);
+			
+			messageDoc.appendChild(buyCureElem);
+			
+			communicator.transmitMessage(messageDoc);
+		}catch(ParserConfigurationException e) {
+			clientLogger.logp(Level.SEVERE, ClientModel.class.getName(), "buyCure", "Exception in trasmitting buy cure message to server");
+			return false;
+		}
+		
+		return true;
+	}
 	public Player getPlayerByName(String playerName) {
 		for(Player p : players) {
 			if(p.nameProperty().get().equals(playerName)) {
