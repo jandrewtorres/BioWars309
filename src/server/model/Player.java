@@ -11,6 +11,9 @@ import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import server.model.cure.Cure;
+import server.model.cure.CureFactory;
+import server.model.cure.CureFactory.CURE_TYPE;
 import server.model.virus.Virus;
 import server.model.virus.VirusFactory;
 import server.model.virus.VirusFactory.VIRUS_TYPE;
@@ -27,7 +30,7 @@ public class Player {
 	
 	private Inventory playerInventory;
 	private ObservableList<Virus> virusApplied;
-	
+
 	public enum PLAYER_STATUS {
 		IN_LOBBY("IN_LOBBY"),
 		READY("READY"),
@@ -58,7 +61,7 @@ public class Player {
 	
 	public Player(String name) {
 		this.nameProperty = new ReadOnlyStringWrapper(name);
-		this.gold = new ReadOnlyIntegerWrapper(0);
+		this.gold = new ReadOnlyIntegerWrapper(500);
 		this.population = new ReadOnlyIntegerWrapper(10000);
 		this.statusProperty = new ReadOnlyObjectWrapper<>(PLAYER_STATUS.IN_LOBBY);
 		
@@ -137,11 +140,29 @@ public class Player {
 		gold.set(gold.get() - new VirusFactory().createVirus(type).getPrice());
 	}
 	
+	public void buyCure(CURE_TYPE type) {
+		playerInventory.buyCure(type);
+		gold.set(gold.get() - new CureFactory().createCure(type).getPrice());
+	}
+	
 	public Inventory getInventory() {
 		return playerInventory;
 	}
 	
 	public void applyVirus(Virus v) {
 		virusApplied.add(v);
+	}
+	//TODO: FIX THIS
+	public void applyCure(Cure c) {
+		System.out.println(c.getCounterActedVirus().toString());
+		System.out.println(virusApplied.size());
+		for (int i = 0; i < virusApplied.size(); i++) {
+			System.out.println(virusApplied.get(i).getType().toString());
+			if (virusApplied.get(i).getType() == c.getCounterActedVirus()) {
+				if (virusApplied.remove(virusApplied.get(i))) {
+					return;
+				}
+			}
+		}
 	}
 }
