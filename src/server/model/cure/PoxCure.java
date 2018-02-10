@@ -18,15 +18,19 @@ public class PoxCure extends Cure{
 		
 		private Integer val;
 		private VIRUS_TYPE counterActedVirus;
+		
 		private POX_CURE_INFO(Integer i) {
 			val = i;
 		}
+		
 		private POX_CURE_INFO(VIRUS_TYPE v) {
 			counterActedVirus = v;
 		}
+		
 		public Integer getVal() {
 			return val;
 		}
+		
 		public VIRUS_TYPE getCounter() {
 			return counterActedVirus;
 		}

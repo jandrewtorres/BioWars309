@@ -241,12 +241,14 @@ public class GamePlayController {
 		poxInventoryPane.setOnDragDetected(createVirusDragDetectedHandler(VIRUS_TYPE.POX));
 		sarsInventoryPane.setOnDragDetected(createVirusDragDetectedHandler(VIRUS_TYPE.SARS));
 	}
+	
 	private void configureVaccinePanes() {
 		coldCureInventoryPane.setOnMousePressed(applyVaccine(CURE_TYPE.COLDCURE));
 		fluCureInventoryPane.setOnMousePressed(applyVaccine(CURE_TYPE.FLUCURE));
 		poxCureInventoryPane.setOnMousePressed(applyVaccine(CURE_TYPE.POXCURE));
 		sarsCureInventoryPane.setOnMousePressed(applyVaccine(CURE_TYPE.SARSCURE));
 	}
+	
 	private EventHandler<MouseEvent> applyVaccine(CURE_TYPE type){
 		return new EventHandler<MouseEvent>() {
 			@Override
@@ -267,6 +269,7 @@ public class GamePlayController {
 			}
 		};
 	}
+	
 	private EventHandler<MouseEvent> createVirusDragDetectedHandler(VIRUS_TYPE type) {
 		return new EventHandler<MouseEvent>() {
 			@Override

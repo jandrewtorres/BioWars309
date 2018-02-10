@@ -18,15 +18,19 @@ public class SarsCure extends Cure{
 		
 		private Integer val;
 		private VIRUS_TYPE counterActedVirus;
+		
 		private SARS_CURE_INFO(Integer i) {
 			val = i;
 		}
+		
 		private SARS_CURE_INFO(VIRUS_TYPE v) {
 			counterActedVirus = v;
 		}
+		
 		public Integer getVal() {
 			return val;
 		}
+		
 		public VIRUS_TYPE getCounter() {
 			return counterActedVirus;
 		}
