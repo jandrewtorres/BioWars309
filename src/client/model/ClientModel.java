@@ -224,4 +224,28 @@ public class ClientModel {
 			clientLogger.logp(Level.SEVERE, ClientModel.class.getName(), "applyVirusToOpponent", "Exception in trasmitting apply virus message to server");
 		}
 	}
+
+	public void applyCure(CURE_TYPE type) {
+		getMyPlayer().getInventory().useCure(type);
+		
+		Document messageDoc;
+		try {
+			messageDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+			Element applyVaccineElem = messageDoc.createElement("APPLY_CURE");
+			
+			Element nameElem = messageDoc.createElement("NAME");
+			nameElem.appendChild(messageDoc.createTextNode(clientName));
+			applyVaccineElem.appendChild(nameElem);
+			
+			Element virusTypeElem = messageDoc.createElement("TYPE");
+			virusTypeElem.appendChild(messageDoc.createTextNode(type.toString()));
+			applyVaccineElem.appendChild(virusTypeElem);
+			
+			messageDoc.appendChild(applyVaccineElem);
+			
+			communicator.transmitMessage(messageDoc);
+		} catch(ParserConfigurationException e) {
+			clientLogger.logp(Level.SEVERE, ClientModel.class.getName(), "applyCure", "Exception in trasmitting apply cure message to server");
+		}
+	}
 }

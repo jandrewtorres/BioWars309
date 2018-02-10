@@ -86,6 +86,13 @@ public class ClientCommunicator extends Thread implements Observer {
 				game.applyVirus(associatedPlayer, opponent, vt);
 			});
 		}
+		else if(messageType.equals("APPLY_CURE")) {
+			Platform.runLater(() -> {
+				CURE_TYPE ct = CURE_TYPE.fromString(root.getChildNodes().item(1).getTextContent());
+				System.out.println(ct);
+				associatedPlayer.applyCure(ct);
+			});
+		}
 	}
 	
 	private void transmitCommand(Object data) {
