@@ -23,6 +23,8 @@
             <AnchorPane fx:id="logBar" prefHeight="50.0" prefWidth="200.0" VBox.vgrow="NEVER">
                <children>
                   <Label fx:id="gameTimeLabel" alignment="CENTER" text="Timer" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Label fx:id="gameTimeLabel1" alignment="CENTER" layoutX="14.0" layoutY="15.0" text="Hello, " />
+                  <Label fx:id="playerNameLabel" alignment="CENTER" layoutX="63.0" layoutY="15.0" text="Player" />
                </children>
                <styleClass>
                   <String fx:value="HUD" />

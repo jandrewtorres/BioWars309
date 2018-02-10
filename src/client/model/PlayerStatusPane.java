@@ -6,9 +6,9 @@ import javafx.scene.layout.AnchorPane;
 import server.model.Player;
 
 public class PlayerStatusPane {
-	public AnchorPane pane;
-	public Label nameLabel;
-	public Label populationLabel;
+	private AnchorPane pane;
+	private Label nameLabel;
+	private Label populationLabel;
 	private Player associatedPlayer;
 	
 	public PlayerStatusPane(AnchorPane pane, Label nameLabel, Label populationLabel) {
@@ -26,5 +26,9 @@ public class PlayerStatusPane {
 	
 	public void hide() {
 		pane.setVisible(false);
+	}
+
+	public AnchorPane getAnchorPane() {
+		return pane;
 	}
 }

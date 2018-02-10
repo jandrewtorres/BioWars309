@@ -27,7 +27,8 @@ public class Player {
 
 	private Integer goldIncreaseIncrement;
 	private Integer populationIncreaseIncrement;
-	
+	private Integer virusDecrementFactor;
+
 	private Inventory playerInventory;
 	private ObservableList<Virus> virusApplied;
 
@@ -70,6 +71,8 @@ public class Player {
 		
 		playerInventory = new Inventory();
 		virusApplied = FXCollections.observableArrayList();
+		
+		virusDecrementFactor = 0;
 	}
 	
 	public ReadOnlyIntegerProperty goldProperty() {
@@ -104,22 +107,6 @@ public class Player {
 	public void tick() {
 		updateGold();
 		updatePopulation();
-		
-		Integer virusDecrementFactor = updateVirusApplied();
-		updateVaccinations(virusDecrementFactor);
-	}
-	
-	private Integer updateVirusApplied() {
-		Integer decrementFactor = 0;
-		for(Virus v : virusApplied) {
-			decrementFactor += v.getDecrementToPopulation();
-		}
-		population.set(population.get() - decrementFactor);
-		return decrementFactor;
-	}
-	
-	private void updateVaccinations(Integer decrementFactor) {		
-		// Not done yet
 	}
 	
 	private void updateGold() {
@@ -127,7 +114,7 @@ public class Player {
 	}
 	
 	private void updatePopulation() {
-		population.set(population.get() + populationIncreaseIncrement);
+		population.set(population.get() + populationIncreaseIncrement - virusDecrementFactor);
 	}
 	
 	public void updateStats(Integer newGold, Integer newPop) {
@@ -151,17 +138,16 @@ public class Player {
 	
 	public void applyVirus(Virus v) {
 		virusApplied.add(v);
+		virusDecrementFactor = virusDecrementFactor + v.getDecrementToPopulation();
 	}
-	//TODO: FIX THIS
-	public void applyCure(Cure c) {
-		System.out.println(c.getCounterActedVirus().toString());
-		System.out.println(virusApplied.size());
-		for (int i = 0; i < virusApplied.size(); i++) {
-			System.out.println(virusApplied.get(i).getType().toString());
-			if (virusApplied.get(i).getType() == c.getCounterActedVirus()) {
-				if (virusApplied.remove(virusApplied.get(i))) {
-					return;
-				}
+	
+	public void applyCure(CURE_TYPE ct) {
+		Cure c = new CureFactory().createCure(ct);
+		Virus v = new VirusFactory().createVirus(c.getCounterActedVirus());
+		for(Virus va : virusApplied) {
+			if(va.getType() == v.getType()) {
+				virusApplied.remove(v);
+				virusDecrementFactor -= v.getDecrementToPopulation();
 			}
 		}
 	}

@@ -44,6 +44,8 @@ public class GamePlayController {
 	private Button cureIcon;
 	@FXML
 	private Label gameTimeLabel;
+	@FXML
+	private Label playerNameLabel;
 	
 	@FXML
 	private AnchorPane playerOneAnchorPane;
@@ -125,7 +127,7 @@ public class GamePlayController {
 		
 	public GamePlayController(ClientModel model) {
 		this.model = model;
-		statusPanes = new ArrayList<>();
+		this.statusPanes = new ArrayList<>();
 	}
 	
 	@FXML
@@ -138,6 +140,7 @@ public class GamePlayController {
 		initStatusPanes();
 		configureStatusPanes();
 		initStatsPanel();
+		this.playerNameLabel.setText(model.getMyPlayer().nameProperty().get());
 	}
 	
 	private void bindGameClock() {
@@ -223,10 +226,10 @@ public class GamePlayController {
 			if(playerCounter < players.size()) {
 				Player currPlayer = players.get(playerCounter);
 				p.bindValues(currPlayer);
-				p.pane.setOnDragOver(initDrop);
-				p.pane.setOnDragEntered(createDragEnteredHandler(currPlayer));
-				p.pane.setOnDragExited(notChoosePlayer);
-				p.pane.setOnDragDropped(attackPlayer);
+				p.getAnchorPane().setOnDragOver(initDrop);
+				p.getAnchorPane().setOnDragEntered(createDragEnteredHandler(currPlayer));
+				p.getAnchorPane().setOnDragExited(notChoosePlayer);
+				p.getAnchorPane().setOnDragDropped(attackPlayer);
 			}
 			else {
 				p.hide();
@@ -261,8 +264,7 @@ public class GamePlayController {
 					alert.setTitle("Vaccine Usage Alert");
 					Optional<ButtonType> result = alert.showAndWait();
 					if (result.isPresent() && result.get() == ButtonType.OK) {
-						model.getMyPlayer().getInventory().useCure(type);
-						model.getMyPlayer().applyCure(new CureFactory().createCure(type));
+						model.applyCure(type);
 					}
 				}
 				e.consume();
