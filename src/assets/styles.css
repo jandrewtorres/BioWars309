@@ -94,4 +94,9 @@
 	-fx-background-position: center center;
 	-fx-background-repeat: no-repeat;
 }
+#gameOverLbl{
+	-fx-font: 6em Tahoma;
+
+	
+}
 

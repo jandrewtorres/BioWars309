@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane stylesheets="@../assets/styles.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;">
+         <children>
+            <Label fx:id="gameOverLbl" alignment="CENTER" layoutX="50.0" layoutY="61.0" text="GAME OVER" textFill="WHITE" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
+               <effect>
+                  <DropShadow blurType="GAUSSIAN" color="#cc0000" height="54.18" radius="27.130000000000003" spread="0.63" width="56.34" />
+               </effect></Label>
+            <Label alignment="CENTER" layoutX="286.0" layoutY="192.0" text="You have annihilated your opponents!" textFill="WHITE" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+               <font>
+                  <Font size="30.0" />
+               </font>
+               <effect>
+                  <DropShadow blurType="GAUSSIAN" color="#cc0000" height="47.69" radius="24.085" spread="0.8" width="50.65" />
+               </effect>
+            </Label>
+            <Button alignment="CENTER" layoutX="274.0" layoutY="320.0" mnemonicParsing="false" text="Exit game?" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="260.0">
+               <effect>
+                  <DropShadow blurType="GAUSSIAN" color="#cc0000" height="51.89" radius="25.814999999999998" spread="0.42" width="53.37" />
+               </effect>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

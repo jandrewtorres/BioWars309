@@ -20,7 +20,10 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -178,6 +181,48 @@ public class Client extends Application {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/views/CureBuy.fxml"));
 		loader.setController(controller);
+		Parent root = (Parent) loader.load();
+		Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initOwner(primaryStage);
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setX(primaryStage.getX()+Math.abs(primaryStage.getWidth()-scene.getWidth())/4);
+        stage.setY(primaryStage.getY()+Math.abs(primaryStage.getHeight()-scene.getHeight())/4);
+        stage.show();
+	}
+	
+	public void gameOverLoss() throws Exception{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/views/GameOver.fxml"));
+		Canvas overlay = new Canvas(primaryStage.getWidth(),primaryStage.getHeight());
+		overlay.setOpacity(0.5);
+		overlay.getGraphicsContext2D().setFill(Color.DARKGREY);
+		AnchorPane root = new AnchorPane();
+		root.getChildren().add(overlay);
+		Stage overLayStage = new Stage();
+        overLayStage.initModality(Modality.APPLICATION_MODAL);
+        overLayStage.initStyle(StageStyle.UNDECORATED);
+        overLayStage.initOwner(primaryStage);
+        Scene scene = new Scene(root);
+        overLayStage.setScene(scene);
+        overLayStage.show();
+        Parent gameOver = (Parent) loader.load();
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initOwner(overLayStage);
+        Scene sceneOver = new Scene(gameOver);
+        stage.setScene(sceneOver);
+        stage.setX(primaryStage.getX()+Math.abs(primaryStage.getWidth()-sceneOver.getWidth())/4);
+        stage.setY(primaryStage.getY()+Math.abs(primaryStage.getHeight()-sceneOver.getHeight())/4);
+        stage.show();
+	}
+	
+	public void gameOverWin() throws Exception{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/views/GameWin.fxml"));
 		Parent root = (Parent) loader.load();
 		Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
