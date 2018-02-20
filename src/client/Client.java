@@ -158,39 +158,24 @@ public class Client extends Application {
 	}
 	
 	public void openVirusMkt() throws Exception{
-		VirusMktController controller = new VirusMktController(clientModel);
-		controller.setClientApp(this);
+		VirusMktController virusController = new VirusMktController(clientModel);
+		virusController.setClientApp(this);		
+		String viewLocation = "/views/VirusBuy.fxml";
+		
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/views/VirusBuy.fxml"));
-		loader.setController(controller);
-		Parent root = (Parent) loader.load();
-		Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.initOwner(primaryStage);
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setX(primaryStage.getX()+Math.abs(primaryStage.getWidth()-scene.getWidth())/4);
-        stage.setY(primaryStage.getY()+Math.abs(primaryStage.getHeight()-scene.getHeight())/4);
-        stage.show();
+		setLoader(loader,virusController,viewLocation);
+		setStage(loader);			
 	}
 	
 	public void openCureMkt() throws Exception{
-		CureMktController controller = new CureMktController(clientModel);
-		controller.setClientApp(this);
+		CureMktController cureController = new CureMktController(clientModel);
+		cureController.setClientApp(this);
+		String viewLocation = "/views/CureBuy.fxml";
+				
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/views/CureBuy.fxml"));
-		loader.setController(controller);
-		Parent root = (Parent) loader.load();
-		Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.initOwner(primaryStage);
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setX(primaryStage.getX()+Math.abs(primaryStage.getWidth()-scene.getWidth())/4);
-        stage.setY(primaryStage.getY()+Math.abs(primaryStage.getHeight()-scene.getHeight())/4);
-        stage.show();
+		setLoader(loader,cureController,viewLocation);
+		setStage(loader);
+
 	}
 	
 	public void gameOverLoss() throws Exception{
@@ -219,10 +204,21 @@ public class Client extends Application {
         stage.setY(primaryStage.getY()+Math.abs(primaryStage.getHeight()-sceneOver.getHeight())/4);
         stage.show();
 	}
-	
+		
 	public void gameOverWin() throws Exception{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/views/GameWin.fxml"));
+		setStage(loader);
+	}
+		
+	public void setLoader (FXMLLoader loader , Object controller, String viewLocation)
+	{
+		loader.setLocation(getClass().getResource(viewLocation));
+		loader.setController(controller);
+	}
+	
+	public void setStage (FXMLLoader loader) throws Exception
+	{
 		Parent root = (Parent) loader.load();
 		Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
