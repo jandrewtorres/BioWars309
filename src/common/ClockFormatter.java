@@ -3,6 +3,12 @@ package common;
 import java.util.concurrent.TimeUnit;
 
 public class ClockFormatter {
+	
+	private ClockFormatter()
+	{
+		
+	}
+	
     public static String formatInterval(final long l)
     {
         final long hr = TimeUnit.SECONDS.toHours(l);

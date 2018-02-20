@@ -86,7 +86,6 @@ public class ClientModel {
 	
 	public Boolean buyVirus(VIRUS_TYPE type) {
 		Virus v = new VirusFactory().createVirus(type);
-		//System.out.println(Integer.toString(v.getPrice()));
 		if(v.getPrice() > getMyPlayer().goldProperty().get()) {
 			return false;
 		}
@@ -160,7 +159,10 @@ public class ClientModel {
 	}
 	
 	public ObservableList<Player> getPlayers() {
-		return readOnlyPlayers;
+		// Using readOnlyPlayers had a bug in codeSmells for some reason.
+		//Returning players also seems to work for a observableList.
+		
+		return players;
 	}
 
 	public ObservableList<Player> getOpposingPlayers() {
