@@ -8,4 +8,5 @@ addons:
 script:
   # other script steps might be done before running the actual analysis
   - ant build
+  - ant test
   - sonar-scanner
