@@ -7,11 +7,13 @@ import java.net.SocketTimeoutException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import client.ClientSocket;
 import server.model.GameModel;
 
 public class ServerSocketHandler extends Thread {
     private static final Logger serverLogger = Logger.getLogger(ServerApp.class.getName());
-
+    public ClientCommunicator gameClient;
+    
 	private ServerSocket serverSocket;
 	private GameModel game;
 	
@@ -27,6 +29,8 @@ public class ServerSocketHandler extends Thread {
 		}
 	}
 	
+	
+	
 	@Override
 	public void run() {
 		Socket clientSocket;
@@ -36,7 +40,7 @@ public class ServerSocketHandler extends Thread {
 			try {
 				clientSocket = serverSocket.accept();
 				
-				ClientCommunicator gameClient = new ClientCommunicator(game, clientSocket);
+				gameClient = new ClientCommunicator(game, clientSocket);
 				gameClient.start();
 				
 			} catch (SocketTimeoutException ste) { 
@@ -50,6 +54,15 @@ public class ServerSocketHandler extends Thread {
 			serverSocket.close();
 		} catch (IOException e) {
 			serverLogger.logp(Level.SEVERE, ServerSocketHandler.class.getName(), "run", "Exception in closing socket");
+		}
+	}
+	
+	public void closeSocket()
+	{
+		try {
+			serverSocket.close();
+		} catch (IOException e) {
+			serverLogger.logp(Level.SEVERE, ClientSocket.class.getName(), "closeSocket", "Exception closing the client socket");
 		}
 	}
 }
