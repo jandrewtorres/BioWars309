@@ -86,11 +86,6 @@ public class Client extends Application {
 		clientModel = new ClientModel(communicator);
 		communicator.setModel(clientModel);
 		
-		System.out.println(CLIENT_PROPERTIES.HOST.text);
-		System.out.println(CLIENT_PROPERTIES.SOCKET_PORT.text);
-		System.out.println(clientProperties.getProperty(CLIENT_PROPERTIES.HOST.text).trim());
-		System.out.println(clientProperties.getProperty(CLIENT_PROPERTIES.SOCKET_PORT.text).trim());
-		
 		LoginController controller = new LoginController(clientModel);
 		controller.setClientApp(this);
 		

@@ -12,7 +12,7 @@ import server.model.GameModel;
 
 public class ServerSocketHandler extends Thread {
     private static final Logger serverLogger = Logger.getLogger(ServerApp.class.getName());
-    public ClientCommunicator gameClient;
+    private ClientCommunicator gameClient;
     
 	private ServerSocket serverSocket;
 	private GameModel game;
@@ -57,6 +57,10 @@ public class ServerSocketHandler extends Thread {
 		}
 	}
 	
+	public ClientCommunicator getClientCommunicator()
+	{
+		return this.gameClient;
+	}
 	public void closeSocket()
 	{
 		try {

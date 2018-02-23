@@ -28,8 +28,8 @@ public class ClientCommunicator extends Thread implements Observer {
 	private static Logger serverLogger = Logger.getLogger(ServerApp.class.getName());
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
-	public GameModel game;
-	public Player associatedPlayer;
+	private GameModel game;
+	private Player associatedPlayer;
 		
 	public ClientCommunicator(GameModel game, Socket clientSocket) throws IOException {
 		this.game = game;
