@@ -95,8 +95,19 @@
 	-fx-background-repeat: no-repeat;
 }
 #gameOverLbl{
-	-fx-font: 6em Tahoma;
-
-	
+	-fx-font: 6em Tahoma;	
 }
+
+.boostBtn{
+	-fx-background-image: url("add.png");
+	-fx-background-size: 31 31;
+	-fx-background-position: center center;
+
+}
+.boostBtn:hover{
+	-fx-background-image: url("addRed.png");
+	-fx-background-size: 31 31;
+	-fx-background-position: center center;
+}
+
 

@@ -24,7 +24,10 @@ public class Player {
 	
 	private ReadOnlyIntegerWrapper gold;
 	private ReadOnlyIntegerWrapper population;
-
+	
+	private ReadOnlyIntegerWrapper goldBoostLevel;
+	private ReadOnlyIntegerWrapper popBoostLevel;
+	
 	private Integer goldIncreaseIncrement;
 	private Integer populationIncreaseIncrement;
 	private Integer virusDecrementFactor;
@@ -68,7 +71,8 @@ public class Player {
 		
 		goldIncreaseIncrement = 10;
 		populationIncreaseIncrement = 5;
-		
+		this.goldBoostLevel = new ReadOnlyIntegerWrapper(1); 
+		this.popBoostLevel = new ReadOnlyIntegerWrapper(1);
 		playerInventory = new Inventory();
 		virusApplied = FXCollections.observableArrayList();
 		
@@ -81,6 +85,12 @@ public class Player {
 	
 	public ReadOnlyIntegerProperty populationProperty() {
 		return population.getReadOnlyProperty();
+	}
+	public ReadOnlyIntegerProperty goldBoostLevelProperty() {
+		return goldBoostLevel.getReadOnlyProperty();
+	}
+	public ReadOnlyIntegerProperty popBoostLevelProperty() {
+		return popBoostLevel.getReadOnlyProperty();
 	}
 	public Integer populationIncrementProperty() {
 		return populationIncreaseIncrement;
@@ -130,6 +140,26 @@ public class Player {
 	public void buyCure(CURE_TYPE type) {
 		playerInventory.buyCure(type);
 		gold.set(gold.get() - new CureFactory().createCure(type).getPrice());
+	}
+	
+	public boolean buyGoldBoost() {
+		if (gold.get() >500*goldBoostLevel.get()) {
+			gold.set(gold.get() - 500*goldBoostLevel.get());
+			goldBoostLevel.set(goldBoostLevel.get() + 1);
+			goldIncreaseIncrement += 10;
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean buyPopBoost() {
+		if (gold.get() > 500*popBoostLevel.get()) {
+			gold.set(gold.get() - 500*popBoostLevel.get());
+			popBoostLevel.set(popBoostLevel.get() + 1);
+			populationIncreaseIncrement += 5;
+			return true;
+		}
+		return false;
 	}
 	
 	public Inventory getInventory() {

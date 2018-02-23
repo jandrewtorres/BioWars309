@@ -27,6 +27,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.StageStyle;
 import server.model.Player;
 import server.model.cure.CureFactory;
 import server.model.cure.CureFactory.CURE_TYPE;
@@ -118,6 +119,10 @@ public class GamePlayController {
 	private Label popRate;
 	@FXML
 	private Label goldRate;
+	@FXML 
+	private Button goldBoostBtn;
+	@FXML
+	private Button popBoostBtn;
 	
 	private List<PlayerStatusPane> statusPanes;
 	
@@ -137,6 +142,7 @@ public class GamePlayController {
 		configureInventoryPanes();
 		configureVaccinePanes();
 		bindInventoryVaccineLabels();
+		configureBoostButtons();
 		initStatusPanes();
 		configureStatusPanes();
 		initStatsPanel();
@@ -210,12 +216,12 @@ public class GamePlayController {
 						model.getMyPlayer().goldProperty()));
 		popRate.textProperty().bind(
 				Bindings.createStringBinding(
-						() -> String.format("%d", model.getMyPlayer().populationProperty().intValue()), 
-						model.getMyPlayer().populationProperty()));
+						() -> String.format("Level %d", model.getMyPlayer().popBoostLevelProperty().intValue()), 
+						model.getMyPlayer().popBoostLevelProperty()));
 		goldRate.textProperty().bind(
 				Bindings.createStringBinding(
-						() -> String.format("%d", model.getMyPlayer().goldProperty().intValue()), 
-						model.getMyPlayer().goldProperty()));
+						() -> String.format(" Level %d", model.getMyPlayer().goldBoostLevelProperty().intValue()), 
+						model.getMyPlayer().goldBoostLevelProperty()));
 	}
 	
 	private void configureStatusPanes() {
@@ -252,6 +258,44 @@ public class GamePlayController {
 		sarsCureInventoryPane.setOnMousePressed(applyVaccine(CURE_TYPE.SARSCURE));
 	}
 	
+	private void configureBoostButtons() {
+		goldBoostBtn.setOnMousePressed(increaseBoost("gold"));
+		popBoostBtn.setOnMousePressed(increaseBoost("population"));
+	}
+	
+	private EventHandler<MouseEvent> increaseBoost(String type){
+		return new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent e) {
+				int boostLevel = (type == "gold")?
+						model.getMyPlayer().goldBoostLevelProperty().get():
+							model.getMyPlayer().popBoostLevelProperty().get();
+				Alert alert = new Alert(AlertType.WARNING,"Do you want to buy a "+type+" boost for "+ (boostLevel * 500) + " gold?",ButtonType.OK, ButtonType.CANCEL);
+				alert.setTitle("Boost Purchase Alert");
+				Optional<ButtonType> result = alert.showAndWait();
+				if (result.isPresent() && result.get() == ButtonType.OK) {
+					if (type == "gold") {
+						if (!model.getMyPlayer().buyGoldBoost()) {
+							insufficientFunds("Need more gold to buy gold boost");
+						}
+					}else {
+						if (!model.getMyPlayer().buyPopBoost()) {
+							insufficientFunds("Need more gold to buy population boost");
+						}
+					}
+				}
+				e.consume();
+			}
+		};
+	}
+	
+	private void insufficientFunds(String context) {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.initStyle(StageStyle.UTILITY);
+		alert.setHeaderText("Insufficient Funds");
+		alert.setContentText(context);
+		alert.showAndWait();
+	}
 	private EventHandler<MouseEvent> applyVaccine(CURE_TYPE type){
 		return new EventHandler<MouseEvent>() {
 			@Override

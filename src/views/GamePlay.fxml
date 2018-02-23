@@ -242,14 +242,7 @@
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                        <children>
-                                          <Button layoutX="86.0" layoutY="1.0" mnemonicParsing="false" styleClass="add">
-                                             <graphic>
-                                                <ImageView fx:id="goldAdd" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../assets/add.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic></Button>
+                                          <Button fx:id="goldBoostBtn" alignment="BOTTOM_CENTER" layoutX="86.0" layoutY="1.0" minHeight="31.0" minWidth="31.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="31.0" style="-fx-background-color: black;" styleClass="boostBtn" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                           <Label fx:id="goldRate" alignment="CENTER" layoutX="-10.0" layoutY="8.0" text="Boost Lvl" />
                                        </children>
                                     </AnchorPane>
@@ -273,15 +266,7 @@
                                     </Label>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <children>
-                                          <Button layoutX="86.0" mnemonicParsing="false" styleClass="add">
-                                             <graphic>
-                                                <ImageView fx:id="popAdd" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="items">
-                                                   <image>
-                                                      <Image url="@../assets/add.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </Button>
+                                          <Button fx:id="popBoostBtn" alignment="BOTTOM_CENTER" layoutX="86.0" minHeight="31.0" minWidth="31.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="31.0" style="-fx-background-color: black;" styleClass="boostBtn" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                           <Label fx:id="popRate" alignment="CENTER" layoutX="-10.0" layoutY="8.0" text="Boost Lvl" />
                                        </children>
                                     </AnchorPane>
