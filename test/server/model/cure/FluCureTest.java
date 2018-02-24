@@ -1,6 +1,5 @@
 package server.model.cure;
 
-i
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
