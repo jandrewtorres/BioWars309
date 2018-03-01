@@ -144,11 +144,16 @@ public class Player {
 	public void applyCure(CURE_TYPE ct) {
 		Cure c = new CureFactory().createCure(ct);
 		Virus v = new VirusFactory().createVirus(c.getCounterActedVirus());
+		Virus s = null;
 		for(Virus va : virusApplied) {
 			if(va.getType() == v.getType()) {
-				virusApplied.remove(v);
-				virusDecrementFactor -= v.getDecrementToPopulation();
+				s = va;
+				break;
 			}
+		}
+		if (s != null) {
+			virusApplied.remove(s);
+			virusDecrementFactor -= s.getDecrementToPopulation();
 		}
 	}
 }
