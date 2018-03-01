@@ -52,30 +52,22 @@ public class ClientCommunicator extends Thread implements Observer {
 			serverLogger.logp(Level.SEVERE, ClientCommunicator.class.getName(), "run", "Exception receiving object from client");
 		}
 	}
-	//Public for unit Tests
-	public void receiveObject(Object rxData) 
+	
+	private void receiveObject(Object rxData) 
 	{
 		Element root = ((Document)rxData).getDocumentElement();
 		String playerName = root.getChildNodes().item(0).getTextContent();
 		String messageType = root.getNodeName();
 		if(messageType.equals("REGISTER")) {
-			/* Removing These helps easier unit tests because they throw exceptions otherwise.
-			 * Why are they here?
 			Platform.runLater(() -> {
 				associatedPlayer = new Player(playerName);
 				game.addPlayer(associatedPlayer);
 			});
-			*/
-			associatedPlayer = new Player(playerName);
-			game.addPlayer(associatedPlayer);
 		}
 		else if(messageType.equals("PLAYER_READY")) {
-			/*
 			Platform.runLater(() -> 
 				game.setPlayerStatusReady(playerName)
 			);
-			*/
-			game.setPlayerStatusReady(playerName);
 		}
 		else if(messageType.equals("BUY_VIRUS")) {
 			Platform.runLater(() -> {
@@ -103,8 +95,7 @@ public class ClientCommunicator extends Thread implements Observer {
 		}
 	}
 	
-	//public for unitTest
-	public void transmitCommand(Object data) {
+	private void transmitCommand(Object data) {
 			try {
 				out.writeObject(data);
 				out.flush();

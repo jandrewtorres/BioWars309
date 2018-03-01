@@ -38,7 +38,7 @@ public class ServerCommunicator implements Runnable {
 		}
 
 	}
-	// public for unit test
+	
 	public void transmitMessage(Object message) {
 		try {
 			out.writeObject(message);
@@ -49,7 +49,7 @@ public class ServerCommunicator implements Runnable {
 		}
 	}
 	
-	public void receiveMessage(Object rxData) {
+	private void receiveMessage(Object rxData) {
 		Element root = ((Document)rxData).getDocumentElement();
 		String messageType = root.getNodeName();
 		

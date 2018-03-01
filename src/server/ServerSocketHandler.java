@@ -12,7 +12,6 @@ import server.model.GameModel;
 
 public class ServerSocketHandler extends Thread {
     private static final Logger serverLogger = Logger.getLogger(ServerApp.class.getName());
-    private ClientCommunicator gameClient;
     
 	private ServerSocket serverSocket;
 	private GameModel game;
@@ -29,8 +28,6 @@ public class ServerSocketHandler extends Thread {
 		}
 	}
 	
-	
-	
 	@Override
 	public void run() {
 		Socket clientSocket;
@@ -40,7 +37,7 @@ public class ServerSocketHandler extends Thread {
 			try {
 				clientSocket = serverSocket.accept();
 				
-				gameClient = new ClientCommunicator(game, clientSocket);
+				ClientCommunicator gameClient = new ClientCommunicator(game, clientSocket);
 				gameClient.start();
 				
 			} catch (SocketTimeoutException ste) { 
@@ -57,10 +54,6 @@ public class ServerSocketHandler extends Thread {
 		}
 	}
 	
-	public ClientCommunicator getClientCommunicator()
-	{
-		return this.gameClient;
-	}
 	public void closeSocket()
 	{
 		try {

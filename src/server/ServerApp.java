@@ -57,8 +57,7 @@ public class ServerApp extends Application {
 		}
 	}
 	
-	//For Unit testing purposes.
-	public void startListening(GameModel game) {
+	private void startListening(GameModel game) {
 		ServerSocketHandler sockHandler = new ServerSocketHandler(game, Integer.parseInt(serverProperties.getProperty(SERVER_PROPERTIES.CLIENT_PORT.text)));
 		sockHandler.start();
 	}
