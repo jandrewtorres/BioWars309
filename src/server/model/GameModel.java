@@ -58,9 +58,7 @@ public class GameModel extends Observable {
 	}
 	
 	public ObservableList<Player> getPlayers() {
-		// Using readOnlyPlayers had a bug in codeSmells for some reason.
-		//Returning players also seems to work for a observableList.
-		return players;
+		return readOnlyPlayers;
 	}
 	
 	public void removePlayer(Player player) {

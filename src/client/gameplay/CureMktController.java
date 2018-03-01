@@ -12,7 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.StageStyle;
 import server.model.cure.CureFactory.CURE_TYPE;
-import server.model.virus.VirusFactory.VIRUS_TYPE;
 
 public class CureMktController {
 	private ClientModel model;
@@ -101,7 +100,7 @@ public class CureMktController {
 		try {
 			clientApp.closeMenu(exitButton);
 		}catch(Exception e) {
-			System.out.println("can't close submenu");
+			clientLogger.logp(Level.WARNING, CureMktController.class.getName(), "closeMenu", "Exception in closing cureMktMenu");
 		}
 	}
 	

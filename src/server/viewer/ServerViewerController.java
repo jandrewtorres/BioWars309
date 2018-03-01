@@ -1,7 +1,5 @@
 package server.viewer;
 
-import java.util.concurrent.TimeUnit;
-
 import common.ClockFormatter;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;

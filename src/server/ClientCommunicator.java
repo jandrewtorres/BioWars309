@@ -70,14 +70,14 @@ public class ClientCommunicator extends Thread implements Observer {
 			);
 		}
 		else if(messageType.equals("BUY_VIRUS")) {
-			Platform.runLater(() -> {
-				associatedPlayer.buyVirus(VIRUS_TYPE.fromString(root.getChildNodes().item(1).getTextContent()));
-			});
+			Platform.runLater(() ->
+				associatedPlayer.buyVirus(VIRUS_TYPE.fromString(root.getChildNodes().item(1).getTextContent()))
+			);
 		}
 		else if(messageType.equals("BUY_CURE")) {
-			Platform.runLater(() -> {
-				associatedPlayer.buyCure(CURE_TYPE.fromString(root.getChildNodes().item(1).getTextContent()));
-			});
+			Platform.runLater(() -> 
+				associatedPlayer.buyCure(CURE_TYPE.fromString(root.getChildNodes().item(1).getTextContent()))
+			);
 		}
 		else if(messageType.equals("APPLY_VIRUS")) {
 			Platform.runLater(() -> {
@@ -89,7 +89,6 @@ public class ClientCommunicator extends Thread implements Observer {
 		else if(messageType.equals("APPLY_CURE")) {
 			Platform.runLater(() -> {
 				CURE_TYPE ct = CURE_TYPE.fromString(root.getChildNodes().item(1).getTextContent());
-				System.out.println(ct);
 				associatedPlayer.applyCure(ct);
 			});
 		}

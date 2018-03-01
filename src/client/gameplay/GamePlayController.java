@@ -28,7 +28,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import server.model.Player;
-import server.model.cure.CureFactory;
 import server.model.cure.CureFactory.CURE_TYPE;
 import server.model.virus.VirusFactory.VIRUS_TYPE;
 
@@ -294,8 +293,6 @@ public class GamePlayController {
 	        boolean success = false;
 	        if (db.hasString()) {
 	           VIRUS_TYPE type = VIRUS_TYPE.fromString(db.getString());
-	           System.out.println("Attacking " + currentSelectedDragPlayer.nameProperty().get() 
-	        		   + " with " + db.getString() + " virus ");
 	           model.applyVirusToOpponent(type, currentSelectedDragPlayer);
 	           success = true;
 	        }

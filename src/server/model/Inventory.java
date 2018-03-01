@@ -2,7 +2,6 @@ package server.model;
 
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
-import javafx.beans.value.ObservableIntegerValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import server.model.cure.Cure;
@@ -23,6 +22,7 @@ public class Inventory {
 	private ReadOnlyIntegerWrapper fluCureCount;
 	private ReadOnlyIntegerWrapper poxCureCount;
 	private ReadOnlyIntegerWrapper sarsCureCount;
+	
 	public Inventory() {
 		viruses = FXCollections.observableArrayList();
 		coldVirusCount = new ReadOnlyIntegerWrapper(0);

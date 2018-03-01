@@ -3,8 +3,6 @@ package server.model.virus;
 import java.util.HashMap;
 import java.util.Map;
 
-import server.model.Player.PLAYER_STATUS;
-
 public class VirusFactory {
 	
 	public Virus createVirus(VIRUS_TYPE type) {

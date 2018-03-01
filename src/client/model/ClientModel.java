@@ -159,10 +159,7 @@ public class ClientModel {
 	}
 	
 	public ObservableList<Player> getPlayers() {
-		// Using readOnlyPlayers had a bug in codeSmells for some reason.
-		//Returning players also seems to work for a observableList.
-		
-		return players;
+		return readOnlyPlayers;
 	}
 
 	public ObservableList<Player> getOpposingPlayers() {
