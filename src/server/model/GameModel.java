@@ -57,7 +57,7 @@ public class GameModel extends Observable {
 		currentTimeProperty = new ReadOnlyLongWrapper(0);
 	}
 	
-	public ObservableList<Player> getPlayers() {
+	public ObservableList<Player> getReadOnlyPlayers() {
 		return readOnlyPlayers;
 	}
 	

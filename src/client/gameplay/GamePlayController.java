@@ -219,7 +219,7 @@ public class GamePlayController {
 	
 	private void configureStatusPanes() {
 		Integer playerCounter = 0;
-		ObservableList<Player> players = model.getPlayers();
+		ObservableList<Player> players = model.getReadOnlyPlayers();
 		
 		for(PlayerStatusPane p : statusPanes) {
 			if(playerCounter < players.size()) {

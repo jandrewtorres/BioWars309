@@ -29,7 +29,7 @@ public class LobbyController {
 		playerNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
 		playerStatusColumn.setCellValueFactory(cellData -> cellData.getValue().statusProperty().asString());
 		
-		lobbyTable.setItems(model.getPlayers());
+		lobbyTable.setItems(model.getReadOnlyPlayers());
 	}
 	
 	@FXML

@@ -105,7 +105,7 @@ public class ClientCommunicator extends Thread implements Observer {
 	
 	private void updateLobby() {
 		Document messageDoc;
-		ObservableList<Player> players = game.getPlayers();
+		ObservableList<Player> players = game.getReadOnlyPlayers();
 		try {
 			messageDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
 			Element updateLobbyElem = messageDoc.createElement("LOBBY_UPDATE");
@@ -156,7 +156,7 @@ public class ClientCommunicator extends Thread implements Observer {
 			gameUpdateElem.appendChild(gameTimeElem);
 			
 			Element playersElem = messageDoc.createElement("PLAYERS");
-			for(Player p : game.getPlayers()) {
+			for(Player p : game.getReadOnlyPlayers()) {
 				Element playerElem = messageDoc.createElement("PLAYER");
 				
 				Element nameElem = messageDoc.createElement("NAME");

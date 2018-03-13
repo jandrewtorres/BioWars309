@@ -36,7 +36,7 @@ public class ServerViewerController {
 		goldColumn.setCellValueFactory(cellData -> cellData.getValue().goldProperty().asObject());
 		populationColumn.setCellValueFactory(cellData -> cellData.getValue().populationProperty().asObject());
 		
-		playerTable.setItems(game.getPlayers());
+		playerTable.setItems(game.getReadOnlyPlayers());
 		gameStatusLabel.textProperty().bind(game.getGameStatusProperty().asString());
 		gameTimeLabel.textProperty().bind(
 			Bindings.createStringBinding(() -> 

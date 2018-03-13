@@ -15,7 +15,7 @@ public class GameModelTest {
 		GameModel model = new GameModel();
 		
 		// Number of players == 0
-		assertTrue(model.getPlayers().size() == 0);
+		assertTrue(model.getReadOnlyPlayers().size() == 0);
 		// Current time == 0
 		assertTrue(model.getCurrentTimeProperty().get() == 0);
 		// Game status is "Waiting"
@@ -30,7 +30,7 @@ public class GameModelTest {
 		model.addPlayer(pOne);
 		model.addPlayer(pTwo);
 		
-		assertTrue(model.getPlayers().size() == 2);
+		assertTrue(model.getReadOnlyPlayers().size() == 2);
 	}
 	
 	@Test

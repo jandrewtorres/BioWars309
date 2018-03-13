@@ -158,7 +158,7 @@ public class ClientModel {
 		players.add(p);
 	}
 	
-	public ObservableList<Player> getPlayers() {
+	public ObservableList<Player> getReadOnlyPlayers() {
 		return readOnlyPlayers;
 	}
 
