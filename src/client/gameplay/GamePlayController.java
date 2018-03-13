@@ -207,14 +207,8 @@ public class GamePlayController {
 				Bindings.createStringBinding(
 						() -> String.format("%d", model.getMyPlayer().goldProperty().intValue()), 
 						model.getMyPlayer().goldProperty()));
-		popRate.textProperty().bind(
-				Bindings.createStringBinding(
-						() -> String.format("%d", model.getMyPlayer().populationProperty().intValue()), 
-						model.getMyPlayer().populationProperty()));
-		goldRate.textProperty().bind(
-				Bindings.createStringBinding(
-						() -> String.format("%d", model.getMyPlayer().goldProperty().intValue()), 
-						model.getMyPlayer().goldProperty()));
+		popRate.textProperty().set("0");
+		goldRate.textProperty().set("0");
 	}
 	
 	private void configureStatusPanes() {
