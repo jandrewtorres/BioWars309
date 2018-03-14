@@ -16,7 +16,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import server.model.GameModel;
 import server.model.ObserverMessage;
@@ -59,38 +58,26 @@ public class ClientCommunicator extends Thread implements Observer {
 		String playerName = root.getChildNodes().item(0).getTextContent();
 		String messageType = root.getNodeName();
 		if(messageType.equals("REGISTER")) {
-			Platform.runLater(() -> {
 				associatedPlayer = new Player(playerName);
 				game.addPlayer(associatedPlayer);
-			});
 		}
 		else if(messageType.equals("PLAYER_READY")) {
-			Platform.runLater(() -> 
-				game.setPlayerStatusReady(playerName)
-			);
+				game.setPlayerStatusReady(playerName);
 		}
 		else if(messageType.equals("BUY_VIRUS")) {
-			Platform.runLater(() ->
-				associatedPlayer.buyVirus(VIRUS_TYPE.fromString(root.getChildNodes().item(1).getTextContent()))
-			);
+				associatedPlayer.buyVirus(VIRUS_TYPE.fromString(root.getChildNodes().item(1).getTextContent()));
 		}
 		else if(messageType.equals("BUY_CURE")) {
-			Platform.runLater(() -> 
-				associatedPlayer.buyCure(CURE_TYPE.fromString(root.getChildNodes().item(1).getTextContent()))
-			);
+				associatedPlayer.buyCure(CURE_TYPE.fromString(root.getChildNodes().item(1).getTextContent()));
 		}
 		else if(messageType.equals("APPLY_VIRUS")) {
-			Platform.runLater(() -> {
 				VIRUS_TYPE vt = VIRUS_TYPE.fromString(root.getChildNodes().item(2).getTextContent());
 				Player opponent = game.getPlayerByName(root.getChildNodes().item(1).getTextContent());
 				game.applyVirus(associatedPlayer, opponent, vt);
-			});
 		}
 		else if(messageType.equals("APPLY_CURE")) {
-			Platform.runLater(() -> {
 				CURE_TYPE ct = CURE_TYPE.fromString(root.getChildNodes().item(1).getTextContent());
 				associatedPlayer.applyCure(ct);
-			});
 		}
 	}
 	
