@@ -16,7 +16,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import server.model.GameModel;
 import server.model.ObserverMessage;
