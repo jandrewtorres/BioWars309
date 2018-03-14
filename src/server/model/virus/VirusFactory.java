@@ -4,8 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VirusFactory {
-	int neverused;
+	
 	public Virus createVirus(VIRUS_TYPE type) {
+		int neverused;
 		switch(type) {
 			case COLD:
 				return new ColdVirus();
