@@ -59,38 +59,38 @@ public class ClientCommunicator extends Thread implements Observer {
 		String playerName = root.getChildNodes().item(0).getTextContent();
 		String messageType = root.getNodeName();
 		if(messageType.equals("REGISTER")) {
-			Platform.runLater(() -> {
+			/*Platform.runLater(() -> {*/
 				associatedPlayer = new Player(playerName);
 				game.addPlayer(associatedPlayer);
-			});
+			/*});*/
 		}
 		else if(messageType.equals("PLAYER_READY")) {
-			Platform.runLater(() -> 
-				game.setPlayerStatusReady(playerName)
-			);
+			/*Platform.runLater(() -> */
+				game.setPlayerStatusReady(playerName);
+			/*);*/
 		}
 		else if(messageType.equals("BUY_VIRUS")) {
-			Platform.runLater(() ->
-				associatedPlayer.buyVirus(VIRUS_TYPE.fromString(root.getChildNodes().item(1).getTextContent()))
-			);
+			/*Platform.runLater(() ->*/
+				associatedPlayer.buyVirus(VIRUS_TYPE.fromString(root.getChildNodes().item(1).getTextContent()));
+			/*);*/
 		}
 		else if(messageType.equals("BUY_CURE")) {
-			Platform.runLater(() -> 
-				associatedPlayer.buyCure(CURE_TYPE.fromString(root.getChildNodes().item(1).getTextContent()))
-			);
+			/*Platform.runLater(() -> */
+				associatedPlayer.buyCure(CURE_TYPE.fromString(root.getChildNodes().item(1).getTextContent()));
+			/*);*/
 		}
 		else if(messageType.equals("APPLY_VIRUS")) {
-			Platform.runLater(() -> {
+			/*Platform.runLater(() -> {*/
 				VIRUS_TYPE vt = VIRUS_TYPE.fromString(root.getChildNodes().item(2).getTextContent());
 				Player opponent = game.getPlayerByName(root.getChildNodes().item(1).getTextContent());
 				game.applyVirus(associatedPlayer, opponent, vt);
-			});
+			/*});*/
 		}
 		else if(messageType.equals("APPLY_CURE")) {
-			Platform.runLater(() -> {
+			/*Platform.runLater(() -> {*/
 				CURE_TYPE ct = CURE_TYPE.fromString(root.getChildNodes().item(1).getTextContent());
 				associatedPlayer.applyCure(ct);
-			});
+			/*});*/
 		}
 	}
 	

@@ -113,7 +113,7 @@ public class ServerRecieveClientTests
 	@Test
 	public void serverRecieveReg1() throws Exception
 	{		
-		/*
+		
 		loadPropertiesServer(getPropFileServer());		
 		GameModel game = new GameModel();
 		
@@ -126,6 +126,8 @@ public class ServerRecieveClientTests
 		clientSocket = new ClientSocket(clientProperties.getProperty(CLIENT_PROPERTIES.HOST.text).trim(),
 				Integer.parseInt(clientProperties.getProperty(CLIENT_PROPERTIES.SOCKET_PORT.text).trim()));
 		ServerCommunicator communicator = new ServerCommunicator(clientSocket.getOutputStream(), clientSocket.getInputStream());
+		
+		
 				
 		String clientName = "BOBBY";		
 		Document messageDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
@@ -135,19 +137,20 @@ public class ServerRecieveClientTests
 		registerElem.appendChild(nameElem);	
 		messageDoc.appendChild(registerElem);	
 		
-		sockHandler.getClientCommunicator().receiveObject(messageDoc);
+		communicator.transmitMessage(messageDoc);
 		
-		assert(game.getPlayers().size() == 1);
+		Thread.sleep(100);	
+		assert(game.getReadOnlyPlayers().size() == 1);
 		
 		clientSocket.closeSocket();
 		sockHandler.closeSocket();
-		*/		
+		
 	}
 	
 	@Test
 	public void serverRecieveReg2() throws Exception
 	{		
-		/*
+		
 		loadPropertiesServer(getPropFileServer());		
 		GameModel game = new GameModel();
 		
@@ -168,7 +171,8 @@ public class ServerRecieveClientTests
 		nameElem.appendChild(messageDoc.createTextNode(clientName));
 		registerElem.appendChild(nameElem);	
 		messageDoc.appendChild(registerElem);
-		sockHandler.getClientCommunicator().receiveObject(messageDoc);
+		
+		communicator.transmitMessage(messageDoc);
 		
 		String clientName1 = "BILLY";		
 		Document messageDoc1 = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
@@ -178,19 +182,20 @@ public class ServerRecieveClientTests
 		registerElem1.appendChild(nameElem1);	
 		messageDoc1.appendChild(registerElem1);	
 		
-		sockHandler.getClientCommunicator().receiveObject(messageDoc1);
+		communicator.transmitMessage(messageDoc1);
 		
-		assert(game.getPlayers().size() == 2);
+		Thread.sleep(100);
+		assert(game.getReadOnlyPlayers().size() == 2);
 	
 		clientSocket.closeSocket();
 		sockHandler.closeSocket();
-		*/		
+				
 	}
 	
 	@Test
 	public void serverRecieveCheckReady() throws Exception
 	{
-		/*
+		
 		loadPropertiesServer(getPropFileServer());		
 		GameModel game = new GameModel();
 		
@@ -212,7 +217,12 @@ public class ServerRecieveClientTests
 		nameElem.appendChild(messageDoc.createTextNode(clientName));
 		registerElem.appendChild(nameElem);	
 		messageDoc.appendChild(registerElem);
-		sockHandler.getClientCommunicator().receiveObject(messageDoc);
+		
+		
+		communicator.transmitMessage(messageDoc);
+		
+		Thread.sleep(100);
+		System.out.println(game.getReadOnlyPlayers().size());
 		
 		//Register Billy
 		String clientName1 = "BILLY";		
@@ -223,7 +233,7 @@ public class ServerRecieveClientTests
 		registerElem1.appendChild(nameElem1);	
 		messageDoc1.appendChild(registerElem1);	
 		
-		sockHandler.getClientCommunicator().receiveObject(messageDoc1);
+		communicator.transmitMessage(messageDoc1);
 		
 		//Ready up Bobby
 		Document messageDoc3 = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
@@ -231,19 +241,23 @@ public class ServerRecieveClientTests
 		Element name = messageDoc3.createElement("NAME");
 		name.appendChild(messageDoc3.createTextNode("BOBBY"));
 		requestPlayersElem.appendChild(name);
-		messageDoc3.appendChild(requestPlayersElem);		
-		sockHandler.getClientCommunicator().receiveObject(messageDoc3);
+		messageDoc3.appendChild(requestPlayersElem);
+		
+		communicator.transmitMessage(messageDoc3);
 		Player Bobby = game.getPlayerByName("BOBBY");
+		
+		Thread.sleep(100);
 		assert(Bobby.statusProperty().getValue() == PLAYER_STATUS.READY);
+	
 		
 		clientSocket.closeSocket();
 		sockHandler.closeSocket();
-		*/
+		
 	}
 	@Test
 	public void serverRecieveCheckBothReady() throws Exception
 	{
-		/*
+		
 		loadPropertiesServer(getPropFileServer());		
 		GameModel game = new GameModel();
 		
@@ -264,7 +278,8 @@ public class ServerRecieveClientTests
 		nameElem.appendChild(messageDoc.createTextNode(clientName));
 		registerElem.appendChild(nameElem);	
 		messageDoc.appendChild(registerElem);
-		sockHandler.getClientCommunicator().receiveObject(messageDoc);
+		communicator.transmitMessage(messageDoc);
+		Thread.sleep(100);
 		
 		//Register Billy
 		String clientName1 = "BILLY";		
@@ -274,7 +289,7 @@ public class ServerRecieveClientTests
 		nameElem1.appendChild(messageDoc1.createTextNode(clientName1));
 		registerElem1.appendChild(nameElem1);	
 		messageDoc1.appendChild(registerElem1);			
-		sockHandler.getClientCommunicator().receiveObject(messageDoc1);
+		communicator.transmitMessage(messageDoc1);
 		
 		// Bobby Ready
 		Document messageDoc3 = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
@@ -283,7 +298,7 @@ public class ServerRecieveClientTests
 		name.appendChild(messageDoc3.createTextNode(clientName));
 		requestPlayersElem.appendChild(name);
 		messageDoc3.appendChild(requestPlayersElem);		
-		sockHandler.getClientCommunicator().receiveObject(messageDoc3);
+		communicator.transmitMessage(messageDoc3);
 		Player Bobby = game.getPlayerByName("BOBBY");
 		
 		// Billy Ready
@@ -293,14 +308,72 @@ public class ServerRecieveClientTests
 		name1.appendChild(messageDoc4.createTextNode(clientName1));
 		requestPlayersElem1.appendChild(name1);
 		messageDoc4.appendChild(requestPlayersElem1);	
-		sockHandler.getClientCommunicator().receiveObject(messageDoc3);
+		communicator.transmitMessage(messageDoc3);
 		Player Billy = game.getPlayerByName("BOBBY");
 		
+		Thread.sleep(100);
 		assert(Bobby.statusProperty().getValue() == PLAYER_STATUS.READY);
 		assert(Billy.statusProperty().getValue() == PLAYER_STATUS.READY);
 		
 		clientSocket.closeSocket();
 		sockHandler.closeSocket();
-		*/
+		
+	}
+	
+	@Test
+	public void PlayerInventoryCheck() throws Exception
+	{		
+		
+		loadPropertiesServer(getPropFileServer());		
+		GameModel game = new GameModel();
+		
+		ServerSocketHandler sockHandler = new ServerSocketHandler(game, Integer.parseInt(serverProperties.getProperty(SERVER_PROPERTIES.CLIENT_PORT.text)));
+		sockHandler.start();
+		
+		
+		loadProperties(getPropFile());
+		
+		clientSocket = new ClientSocket(clientProperties.getProperty(CLIENT_PROPERTIES.HOST.text).trim(),
+				Integer.parseInt(clientProperties.getProperty(CLIENT_PROPERTIES.SOCKET_PORT.text).trim()));
+		ServerCommunicator communicator = new ServerCommunicator(clientSocket.getOutputStream(), clientSocket.getInputStream());
+			
+				
+		String clientName = "BOBBY";		
+		Document messageDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+		Element registerElem = messageDoc.createElement("REGISTER");		
+		Element nameElem = messageDoc.createElement("NAME");
+		nameElem.appendChild(messageDoc.createTextNode(clientName));
+		registerElem.appendChild(nameElem);	
+		messageDoc.appendChild(registerElem);	
+		
+		communicator.transmitMessage(messageDoc);		
+		
+		Thread.sleep(100);	
+		
+		messageDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+		Element buyVirusElem = messageDoc.createElement("BUY_VIRUS");
+		
+		Element nameElem1 = messageDoc.createElement("NAME");
+		nameElem1.appendChild(messageDoc.createTextNode("BOBBY"));
+		buyVirusElem.appendChild(nameElem1);
+		
+		Element virusTypeElem = messageDoc.createElement("TYPE");
+		virusTypeElem.appendChild(messageDoc.createTextNode("Cold"));
+		buyVirusElem.appendChild(virusTypeElem);
+		
+		messageDoc.appendChild(buyVirusElem);
+		
+		communicator.transmitMessage(messageDoc);
+		
+		Thread.sleep(100);
+		
+		Player Bobby = game.getPlayerByName("BOBBY");
+		
+		assert(Bobby.getInventory().getColdVirusCount().getValue() == 1 );
+				
+		
+		clientSocket.closeSocket();
+		sockHandler.closeSocket();
+		
 	}
 }
